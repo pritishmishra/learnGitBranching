@@ -141,7 +141,7 @@ var parse = function(str) {
         // before our "stuff" we can simply
         // split on space-groups and grab everything after
         // the second:
-        options = str.match(/('.*?'|".*?"|\S+)/g).slice(2);
+        options = str.match(/(&quot;.*?&quot;|'.*?'|".*?"|\S+)/g).slice(2);
       }
     });
   });

@@ -1,6 +1,9 @@
 // Each level is part of a "sequence;" levels within
 // a sequence proceed in the order listed here
 exports.levelSequences = {
+  local: [
+    require('./local/workingLocally').level
+  ],
   intro: [
     require('./intro/commits').level,
     require('./intro/branching').level,
@@ -53,6 +56,14 @@ exports.levelSequences = {
 
 // there are also cute names and such for sequences
 var sequenceInfo = exports.sequenceInfo = {
+  local: {
+    displayName: {
+      'en_US': 'Working Locally'
+    },
+    about: {
+      'en_US': 'Learn the essential local git workflow: configure, create files, stage, and commit'
+    }
+  },
   intro: {
     displayName: {
       'en_US': 'Introduction Sequence',

@@ -111,7 +111,8 @@ class Visualization {
       branches: this.branchCollection,
       tags: this.tagCollection,
       gitVisuals: this.gitVisuals,
-      eventBaton: this.eventBaton
+      eventBaton: this.eventBaton,
+      requireStagedChanges: options.requireStagedChanges
     });
     this.gitEngine.init();
     this.gitVisuals.assignGitEngine(this.gitEngine);

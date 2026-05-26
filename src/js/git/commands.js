@@ -191,6 +191,29 @@ var commandConfig = {
         .replace(/^"/g, '')
         .replace(/"$/g, '');
 
+      // Enforce staging requirement when the level opts in
+      if (engine.requireStagedChanges) {
+        var hasStagedChanges = Object.keys(engine.stagedChanges).length > 0;
+        if (!hasStagedChanges) {
+          var hasWorkingChanges = Object.keys(engine.workingDirectoryChanges).length > 0;
+          if (hasWorkingChanges) {
+            throw new GitError({
+              msg: intl.todo(
+                'no changes added to commit\n\n' +
+                'Use "git add <file>" to stage your changes before committing.'
+              )
+            });
+          } else {
+            throw new GitError({
+              msg: intl.todo(
+                'nothing to commit, working tree clean\n\n' +
+                'Use "git add-file <file>" to create a file, then "git add <file>" to stage it.'
+              )
+            });
+          }
+        }
+      }
+
       var newCommit = engine.commit({
         isAmend: !!commandOptions['--amend'],
         commitMessage: msg
@@ -1167,7 +1190,7 @@ var commandConfig = {
     }
   },
 
-  'add-file': {
+  addfile: {
     regex: /^git +add-file($|\s)/,
     description: 'Add a new file to the working directory',
     execute: function(engine, command) {
@@ -1190,7 +1213,7 @@ var commandConfig = {
     }
   },
 
-  'delete-file': {
+  deletefile: {
     regex: /^git +delete-file($|\s)/,
     description: 'Delete a file from the working directory',
     execute: function(engine, command) {

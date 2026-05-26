@@ -49,6 +49,8 @@ function GitEngine(options) {
   this.stagedChanges = {};
   // Git configuration (user.name, user.email)
   this.gitConfig = {};
+  // When true, git commit requires at least one staged change
+  this.requireStagedChanges = !!options.requireStagedChanges;
 
   this.initUniqueID();
 }
@@ -140,6 +142,13 @@ GitEngine.prototype.defaultInit = function() {
 };
 
 GitEngine.prototype.init = function() {
+  try {
+    var storedName = localStorage.getItem('gitconfig.user.name');
+    var storedEmail = localStorage.getItem('gitconfig.user.email');
+    if (storedName) { this.gitConfig['user.name'] = storedName; }
+    if (storedEmail) { this.gitConfig['user.email'] = storedEmail; }
+  } catch(e) {}
+
   // make an initial commit and a main branch
   this.rootCommit = this.makeCommit(null, null, {rootCommit: true});
   this.commitCollection.add(this.rootCommit);
@@ -2922,13 +2931,15 @@ GitEngine.prototype.resetStagingArea = function() {
 };
 
 GitEngine.prototype.setConfig = function(key, value) {
-  // Set git configuration (e.g., user.name, user.email)
   if (!key || !value) {
     throw new GitError({
       msg: intl.todo('Both key and value are required')
     });
   }
   this.gitConfig[key] = value;
+  if (key === 'user.name' || key === 'user.email') {
+    try { localStorage.setItem('gitconfig.' + key, value); } catch(e) {}
+  }
 };
 
 GitEngine.prototype.getConfig = function(key) {
