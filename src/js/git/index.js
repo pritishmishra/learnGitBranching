@@ -43,6 +43,13 @@ function GitEngine(options) {
   this.animationFactory = (options.animationFactory) ?
     options.animationFactory : AnimationFactory;
 
+  // Track modified files in the working directory
+  this.workingDirectoryChanges = {};
+  // Track staged files (to be committed)
+  this.stagedChanges = {};
+  // Git configuration (user.name, user.email)
+  this.gitConfig = {};
+
   this.initUniqueID();
 }
 
@@ -1600,12 +1607,28 @@ GitEngine.prototype.commit = function(options) {
     id = this.rebaseAltID(this.getCommitFromRef('HEAD').get('id'));
   }
 
-  var newCommit = this.makeCommit([targetCommit], id);
+  // Build author from git config
+  var author = 'Peter Cottle';  // default
+  var userName = this.getConfig('user.name');
+  var userEmail = this.getConfig('user.email');
+  if (userName && userEmail) {
+    author = userName + ' <' + userEmail + '>';
+  }
+
+  var newCommit = this.makeCommit([targetCommit], id, {
+    commitMessage: options.commitMessage || 'Commit message not provided',
+    author: author
+  });
   if (this.getDetachedHead() && this.mode === 'git') {
     this.command.addWarning(intl.str('git-warning-detached'));
   }
 
   this.setTargetLocation(this.HEAD, newCommit);
+  
+  // Clear only staged changes after commit
+  // Working directory changes are independent and should be preserved
+  this.resetStagingArea();
+  
   return newCommit;
 };
 
@@ -2836,6 +2859,115 @@ GitEngine.prototype.show = function(ref) {
   });
 };
 
+GitEngine.prototype.modifyFile = function(filepath, content) {
+  // Mark a file as modified in the working directory
+  if (!filepath) {
+    throw new GitError({
+      msg: intl.todo('filepath required for modifyFile')
+    });
+  }
+  
+  this.workingDirectoryChanges[filepath] = {
+    type: 'modified',
+    content: content || 'Modified content'
+  };
+};
+
+GitEngine.prototype.resetWorkingDirectory = function() {
+  // Clear all working directory changes (e.g., when committing or resetting)
+  this.workingDirectoryChanges = {};
+};
+
+GitEngine.prototype.stageFile = function(filepath) {
+  // Move file from working directory to staging area
+  if (!filepath) {
+    throw new GitError({
+      msg: intl.todo('filepath required for stageFile')
+    });
+  }
+  
+  if (!this.workingDirectoryChanges[filepath]) {
+    throw new GitError({
+      msg: intl.todo('File "' + filepath + '" has no changes to stage')
+    });
+  }
+  
+  // Move from working directory to staged
+  this.stagedChanges[filepath] = this.workingDirectoryChanges[filepath];
+  delete this.workingDirectoryChanges[filepath];
+};
+
+GitEngine.prototype.unstageFile = function(filepath) {
+  // Move file from staging area back to working directory
+  if (!filepath) {
+    throw new GitError({
+      msg: intl.todo('filepath required for unstageFile')
+    });
+  }
+  
+  if (!this.stagedChanges[filepath]) {
+    throw new GitError({
+      msg: intl.todo('File "' + filepath + '" is not staged')
+    });
+  }
+  
+  // Move from staged back to working directory
+  this.workingDirectoryChanges[filepath] = this.stagedChanges[filepath];
+  delete this.stagedChanges[filepath];
+};
+
+GitEngine.prototype.resetStagingArea = function() {
+  // Clear all staged changes
+  this.stagedChanges = {};
+};
+
+GitEngine.prototype.setConfig = function(key, value) {
+  // Set git configuration (e.g., user.name, user.email)
+  if (!key || !value) {
+    throw new GitError({
+      msg: intl.todo('Both key and value are required')
+    });
+  }
+  this.gitConfig[key] = value;
+};
+
+GitEngine.prototype.getConfig = function(key) {
+  // Get git configuration value
+  return this.gitConfig[key];
+};
+
+GitEngine.prototype.hasUserConfig = function() {
+  // Check if both user.name and user.email are set
+  return this.gitConfig['user.name'] && this.gitConfig['user.email'];
+};
+
+GitEngine.prototype.addFile = function(filepath, content) {
+  // Add a new file to the working directory
+  if (!filepath) {
+    throw new GitError({
+      msg: intl.todo('filepath required for addFile')
+    });
+  }
+  
+  this.workingDirectoryChanges[filepath] = {
+    type: 'added',
+    content: content || 'New file content'
+  };
+};
+
+GitEngine.prototype.deleteFile = function(filepath) {
+  // Mark a file as deleted in the working directory
+  if (!filepath) {
+    throw new GitError({
+      msg: intl.todo('filepath required for deleteFile')
+    });
+  }
+  
+  this.workingDirectoryChanges[filepath] = {
+    type: 'deleted'
+  };
+};
+
 GitEngine.prototype.status = function() {
   // UGLY todo
   var lines = [];
@@ -2845,11 +2977,54 @@ GitEngine.prototype.status = function() {
     var branchName = this.resolveNameNoPrefix('HEAD');
     lines.push(intl.str('git-status-onbranch', {branch: branchName}));
   }
-  lines.push('Changes to be committed:');
-  lines.push('');
-  lines.push(TAB + 'modified: cal/OskiCostume.stl');
-  lines.push('');
-  lines.push(intl.str('git-status-readytocommit'));
+
+  // Show changes to be committed (staged changes)
+  var hasStagedChanges = Object.keys(this.stagedChanges).length > 0;
+  
+  if (hasStagedChanges) {
+    lines.push('Changes to be committed:');
+    lines.push(TAB + '(use "git reset HEAD <file>..." to unstage)');
+    lines.push('');
+    
+    var self = this;
+    Object.keys(this.stagedChanges).forEach(function(filepath) {
+      var change = self.stagedChanges[filepath];
+      var typeStr = change.type === 'modified' ? 'modified' :
+                    change.type === 'added' ? 'new file' :
+                    change.type === 'deleted' ? 'deleted' : 'modified';
+      lines.push(TAB + typeStr + ': ' + filepath);
+    });
+    lines.push('');
+  }
+  
+  // Show working directory changes
+  var hasUnstagedChanges = Object.keys(this.workingDirectoryChanges).length > 0;
+  
+  if (hasUnstagedChanges) {
+    lines.push('Changes not staged for commit:');
+    lines.push(TAB + '(use "git add <file>..." to update what will be committed)');
+    lines.push(TAB + '(use "git checkout -- <file>..." to discard changes in working directory)');
+    lines.push('');
+    
+    var self = this;
+    Object.keys(this.workingDirectoryChanges).forEach(function(filepath) {
+      var change = self.workingDirectoryChanges[filepath];
+      var typeStr = change.type === 'modified' ? 'modified' :
+                    change.type === 'added' ? 'new file' :
+                    change.type === 'deleted' ? 'deleted' : 'modified';
+      lines.push(TAB + typeStr + ': ' + filepath);
+    });
+    lines.push('');
+  }
+  
+  // If no changes at all, show the default message
+  if (!hasStagedChanges && !hasUnstagedChanges) {
+    lines.push('Changes to be committed:');
+    lines.push('');
+    lines.push(TAB + 'modified: cal/OskiCostume.stl');
+    lines.push('');
+    lines.push(intl.str('git-status-readytocommit'));
+  }
 
   var msg = '';
   lines.forEach(function (line) {

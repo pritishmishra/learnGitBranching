@@ -168,17 +168,33 @@ var commandConfig = {
         command.validateArgBounds(args, 0, 0, '--amend');
       }
 
-      var newCommit = engine.commit({
-        isAmend: !!commandOptions['--amend']
-      });
-      if (msg) {
-        msg = msg
-          .replace(/&quot;/g, '"')
-          .replace(/^"/g, '')
-          .replace(/"$/g, '');
-
-        newCommit.set('commitMessage', msg);
+      // Require commit message
+      if (!msg) {
+        throw new GitError({
+          msg: intl.todo('Commit message is required. Use: git commit -m "your message"')
+        });
       }
+
+      // Check if user.name and user.email are configured
+      if (!engine.hasUserConfig()) {
+        var missing = [];
+        if (!engine.getConfig('user.name')) missing.push('user.name');
+        if (!engine.getConfig('user.email')) missing.push('user.email');
+        throw new GitError({
+          msg: intl.todo('Please configure git first:\n  git config user.name "Your Name"\n  git config user.email "your@email.com"')
+        });
+      }
+
+      // Clean up the message
+      msg = msg
+        .replace(/&quot;/g, '"')
+        .replace(/^"/g, '')
+        .replace(/"$/g, '');
+
+      var newCommit = engine.commit({
+        isAmend: !!commandOptions['--amend'],
+        commitMessage: msg
+      });
 
       var promise = engine.animationFactory.playCommitBirthPromiseAnimation(
         newCommit,
@@ -596,6 +612,16 @@ var commandConfig = {
         );
         // don't absorb the arg off of --hard
         generalArgs = generalArgs.concat(commandOptions['--hard']);
+      }
+
+      // Check if this is a file unstaging operation (git reset HEAD <file>)
+      if (generalArgs.length >= 2) {
+        // Unstage the file
+        var filepath = generalArgs[1];
+        engine.unstageFile(filepath);
+        throw new CommandResult({
+          msg: ''
+        });
       }
 
       command.validateArgBounds(generalArgs, 1, 1);
@@ -1094,6 +1120,118 @@ var commandConfig = {
       command.validateArgBounds(generalArgs, 1, 1);
 
       engine.checkout(engine.crappyUnescape(generalArgs[0]));
+    }
+  },
+
+  modify: {
+    regex: /^git +modify($|\s)/,
+    description: 'Modify a file in the working directory',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      
+      if (generalArgs.length === 0) {
+        throw new GitError({
+          msg: intl.todo('Usage: git modify <filepath> [content]')
+        });
+      }
+      
+      var filepath = generalArgs[0];
+      var content = generalArgs.length > 1 ? generalArgs.slice(1).join(' ') : undefined;
+      
+      engine.modifyFile(filepath, content);
+      
+      throw new CommandResult({
+        msg: ''
+      });
+    }
+  },
+
+  add: {
+    regex: /^git +add($|\s)/,
+    description: 'Stage changes to a file for commit',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      
+      if (generalArgs.length === 0) {
+        throw new GitError({
+          msg: intl.todo('Usage: git add <filepath>')
+        });
+      }
+      
+      var filepath = generalArgs[0];
+      engine.stageFile(filepath);
+      
+      throw new CommandResult({
+        msg: ''
+      });
+    }
+  },
+
+  'add-file': {
+    regex: /^git +add-file($|\s)/,
+    description: 'Add a new file to the working directory',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      
+      if (generalArgs.length === 0) {
+        throw new GitError({
+          msg: intl.todo('Usage: git add-file <filepath> [content]')
+        });
+      }
+      
+      var filepath = generalArgs[0];
+      var content = generalArgs.length > 1 ? generalArgs.slice(1).join(' ') : undefined;
+      
+      engine.addFile(filepath, content);
+      
+      throw new CommandResult({
+        msg: ''
+      });
+    }
+  },
+
+  'delete-file': {
+    regex: /^git +delete-file($|\s)/,
+    description: 'Delete a file from the working directory',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      
+      if (generalArgs.length === 0) {
+        throw new GitError({
+          msg: intl.todo('Usage: git delete-file <filepath>')
+        });
+      }
+      
+      var filepath = generalArgs[0];
+      
+      engine.deleteFile(filepath);
+      
+      throw new CommandResult({
+        msg: ''
+      });
+    }
+  },
+
+  config: {
+    regex: /^git +config($|\s)/,
+    description: 'Get and set repository or global options',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      
+      if (generalArgs.length < 2) {
+        throw new GitError({
+          msg: intl.todo('Usage: git config <key> <value>\nExample: git config user.name "Your Name"')
+        });
+      }
+      
+      var key = generalArgs[0];
+      var value = generalArgs.slice(1).join(' ');
+      
+      engine.setConfig(key, value);
+      
+      throw new CommandResult({
+        msg: ''
+      });
     }
   }
 };

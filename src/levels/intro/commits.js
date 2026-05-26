@@ -26,7 +26,7 @@ exports.level = {
     "hu_HU": "Bevezetés a Git commitokba"
   },
   "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C3\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
-  "solutionCommand": "git commit;git commit",
+  "solutionCommand": "git config user.name 'Pan Chen';git config user.email 'me@chenpan.xyz';git commit -m 'hello';git commit -m 'hello'",
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
   "hint": {
     "en_US": "Just type in 'git commit' twice to finish!",
