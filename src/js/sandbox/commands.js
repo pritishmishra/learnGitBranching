@@ -15,6 +15,21 @@ var GitError = Errors.GitError;
 var Warning = Errors.Warning;
 var CommandResult = Errors.CommandResult;
 
+var hiddenCommands = [
+  'level',
+  'levels',
+  'build level',
+  'export tree',
+  'importTreeNow',
+  'importLevelNow',
+  'import tree',
+  'import level'
+];
+
+var isCommandHidden = function(command) {
+  return command.startsWith('hg ') || hiddenCommands.indexOf(command) !== -1;
+};
+
 var instantCommands = [
   // Add a third and fourth item in the tuple if you want this to show
   // up in the `show commands` function
@@ -165,19 +180,8 @@ var instantCommands = [
     ];
     // Commands that are learning tools with no official docs
     var customCommands = ['fakeTeamwork', 'mergeMR'];
-    var hiddenCommands = [
-      'level',
-      'levels',
-      'build level',
-      'export tree',
-      'importTreeNow',
-      'importLevelNow',
-      'import tree',
-      'import level'
-    ];
     Object.keys(allCommands)
-      .filter(command => !command.startsWith('hg '))
-      .filter(command => hiddenCommands.indexOf(command) === -1)
+      .filter(command => !isCommandHidden(command))
       .forEach(function(command) {
         if (selectedInstantCommands[command]) {
           lines.push('<br/>');
@@ -258,6 +262,8 @@ var getAllCommands = function() {
 };
 
 exports.getAllCommands = getAllCommands;
+exports.hiddenCommands = hiddenCommands;
+exports.isCommandHidden = isCommandHidden;
 exports.instantCommands = instantCommands;
 exports.parse = util.genParseCommand(regexMap, 'processSandboxCommand');
 

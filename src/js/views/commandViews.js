@@ -1,6 +1,6 @@
 // CommandPromptView - converted from Backbone.View to ES6 class
 
-const {getAllCommands} = require('../sandbox/commands');
+const {getAllCommands, isCommandHidden} = require('../sandbox/commands');
 
 var Main = require('../app');
 var CommandLineStore = require('../stores/CommandLineStore');
@@ -9,7 +9,7 @@ var CommandLineActions = require('../actions/CommandLineActions');
 var log = require('../log');
 var keyboard = require('../util/keyboard');
 
-const allCommands = Object.keys(getAllCommands());
+const allCommands = Object.keys(getAllCommands()).filter(command => !isCommandHidden(command));
 // Lets push a few commands up in the suggestion order,
 // which overrides the order from the exportj
 const autoCompleteSuggestionOrder = [
@@ -29,7 +29,9 @@ const autoCompleteSuggestionOrder = [
   "git pull",
 ];
 
-const allCommandsSorted = autoCompleteSuggestionOrder.concat(
+const allCommandsSorted = autoCompleteSuggestionOrder
+  .filter(command => !isCommandHidden(command))
+  .concat(
   // add the rest that aren't in the list above
   allCommands.map(command => autoCompleteSuggestionOrder.indexOf(command) > 0 ? null : command)
   .filter(command => !!command)
