@@ -165,8 +165,19 @@ var instantCommands = [
     ];
     // Commands that are learning tools with no official docs
     var customCommands = ['fakeTeamwork', 'mergeMR'];
+    var hiddenCommands = [
+      'level',
+      'levels',
+      'build level',
+      'export tree',
+      'importTreeNow',
+      'importLevelNow',
+      'import tree',
+      'import level'
+    ];
     Object.keys(allCommands)
       .filter(command => !command.startsWith('hg '))
+      .filter(command => hiddenCommands.indexOf(command) === -1)
       .forEach(function(command) {
         if (selectedInstantCommands[command]) {
           lines.push('<br/>');
