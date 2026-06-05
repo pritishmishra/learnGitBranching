@@ -166,6 +166,7 @@ var instantCommands = [
     // Commands that are learning tools with no official docs
     var customCommands = ['fakeTeamwork', 'mergeMR'];
     Object.keys(allCommands)
+      .filter(command => !command.startsWith('hg '))
       .forEach(function(command) {
         if (selectedInstantCommands[command]) {
           lines.push('<br/>');
