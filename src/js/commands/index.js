@@ -96,6 +96,15 @@ var commands = {
     });
     return map;
   },
+
+  getStandaloneCommandMap: function() {
+    var map = this.blankMap();
+    this.loop(function(config, name, vcs) {
+      var displayName = config.displayName || name;
+      map[vcs][displayName] = !!config.standalone;
+    });
+    return map;
+  },
   /**
    * which commands count for the git golf game
    */
@@ -135,13 +144,9 @@ var parse = function(str) {
       if (regex.exec(str)) {
         vcs = thisVCS;
         method = thisMethod;
-        // every valid regex has to have the parts of
-        // <vcs> <command> <stuff>
-        // because there are always two space-groups
-        // before our "stuff" we can simply
-        // split on space-groups and grab everything after
-        // the second:
-        options = str.match(/(&quot;.*?&quot;|'.*?'|".*?"|\S+)/g).slice(2);
+        var parts = str.match(/(&quot;.*?&quot;|'.*?'|".*?"|\S+)/g) || [];
+        var standalone = commands.getStandaloneCommandMap()[vcs][method];
+        options = parts.slice(standalone ? 1 : 2);
       }
     });
   });

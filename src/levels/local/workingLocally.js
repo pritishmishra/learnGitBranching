@@ -3,10 +3,10 @@ exports.level = {
     "en_US": "Level 1: Working on a Local Repository"
   },
   "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
-  "solutionCommand": "git config user.name 'Student';git config user.email 'student@example.com';git add-file hello.txt;git add hello.txt;git commit -m 'Add hello.txt'",
+  "solutionCommand": "git config user.name 'Student';git config user.email 'student@example.com';touch hello.txt;git add hello.txt;git commit -m 'Add hello.txt'",
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
   "hint": {
-    "en_US": "Run: git config user.name \"...\", git config user.email \"...\", git add-file hello.txt, git add hello.txt, git commit -m \"...\""
+    "en_US": "Run: git config user.name \"...\", git config user.email \"...\", touch hello.txt, git add hello.txt, git commit -m \"...\""
   },
   "requireStagedChanges": true,
   "disabledMap": {
@@ -32,7 +32,7 @@ exports.level = {
               "In this level you'll practice the complete local workflow:",
               "",
               "1. `git config` — identify yourself to git",
-              "2. `git add-file` — create a new file in your working directory",
+              "2. `touch` — create a new file in your working directory",
               "3. `git add` — move it to the staging area",
               "4. `git commit -m` — save a permanent snapshot"
             ]
@@ -54,7 +54,7 @@ exports.level = {
               "Then create and stage a file, and commit:",
               "",
               "```",
-              "git add-file hello.txt",
+              "touch hello.txt",
               "git add hello.txt",
               "git commit -m \"Add hello.txt\"",
               "```",
@@ -69,7 +69,7 @@ exports.level = {
               "Now try it yourself — the commands are the same, just use your own name, email, and message."
             ],
             "command": "git commit -m 'Add hello.txt'",
-            "beforeCommand": "git config user.name 'Student';git config user.email 'student@example.com';git add-file hello.txt;git add hello.txt"
+            "beforeCommand": "git config user.name 'Student';git config user.email 'student@example.com';touch hello.txt;git add hello.txt"
           }
         },
         {
@@ -88,7 +88,7 @@ exports.level = {
               "",
               "**2. Create a file**",
               "```",
-              "git add-file hello.txt",
+              "touch hello.txt",
               "```",
               "",
               "**3. Stage it**",

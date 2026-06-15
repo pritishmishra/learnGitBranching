@@ -207,7 +207,7 @@ var commandConfig = {
             throw new GitError({
               msg: intl.todo(
                 'nothing to commit, working tree clean\n\n' +
-                'Use "git add-file <file>" to create a file, then "git add <file>" to stage it.'
+                'Use "touch <file>" to create a file, then "git add <file>" to stage it.'
               )
             });
           }
@@ -1190,15 +1190,16 @@ var commandConfig = {
     }
   },
 
-  addfile: {
-    regex: /^git +add-file($|\s)/,
+  touch: {
+    standalone: true,
+    regex: /^touch($|\s)/,
     description: 'Add a new file to the working directory',
     execute: function(engine, command) {
       var generalArgs = command.getGeneralArgs();
       
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git add-file <filepath> [content]')
+          msg: intl.todo('Usage: touch <filepath> [content]')
         });
       }
       
@@ -1213,15 +1214,16 @@ var commandConfig = {
     }
   },
 
-  deletefile: {
-    regex: /^git +delete-file($|\s)/,
+  rm: {
+    standalone: true,
+    regex: /^rm($|\s)/,
     description: 'Delete a file from the working directory',
     execute: function(engine, command) {
       var generalArgs = command.getGeneralArgs();
       
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git delete-file <filepath>')
+          msg: intl.todo('Usage: rm <filepath>')
         });
       }
       

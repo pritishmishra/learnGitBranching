@@ -149,6 +149,7 @@ var instantCommands = [
     );
     var allOptions = Commands.commands.getOptionMap();
     var allDescriptions = Commands.commands.getDescriptionMap();
+    var standaloneCommands = Commands.commands.getStandaloneCommandMap();
     var commandToOptions = {};
     var commandToDescriptions = {};
 
@@ -157,7 +158,8 @@ var instantCommands = [
       Object.keys(vcsMap).forEach(function(method) {
         var options = vcsMap[method];
         if (options) {
-          commandToOptions[vcs + ' ' + method] = Object.keys(options).filter(option => option.length > 1);
+          var commandName = standaloneCommands[vcs][method] ? method : vcs + ' ' + method;
+          commandToOptions[commandName] = Object.keys(options).filter(option => option.length > 1);
         }
       });
     });
@@ -167,7 +169,8 @@ var instantCommands = [
       Object.keys(vcsMap).forEach(function(method) {
         var description = vcsMap[method];
         if (description) {
-          commandToDescriptions[vcs + ' ' + method] = description;
+          var commandName = standaloneCommands[vcs][method] ? method : vcs + ' ' + method;
+          commandToDescriptions[commandName] = description;
         }
       });
     });
@@ -259,11 +262,13 @@ var getAllCommands = function() {
     regexMap
   );
   var mRegexMap = Commands.commands.getRegexMap();
+  var standaloneCommands = Commands.commands.getStandaloneCommandMap();
   Object.keys(mRegexMap).forEach(function(vcs) {
     var map = mRegexMap[vcs];
     Object.keys(map).forEach(function(method) {
       var regex = map[method];
-      allCommands[vcs + ' ' + method] = regex;
+      var commandName = standaloneCommands[vcs][method] ? method : vcs + ' ' + method;
+      allCommands[commandName] = regex;
     });
   });
   toDelete.forEach(function(key) {
