@@ -1,12 +1,12 @@
 exports.level = {
   "name": {
-    "en_US": "Level 1: Working on a Local Repository"
+    "en_US": "Your First Snapshot"
   },
   "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
-  "solutionCommand": "touch hello.txt;git add hello.txt;git commit -m 'Add hello.txt'",
+  "solutionCommand": "touch hello.txt;git status;git add hello.txt;git status;git commit -m 'Add hello.txt'",
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
   "hint": {
-    "en_US": "Run: touch hello.txt, git add hello.txt, git commit -m \"...\""
+    "en_US": "Run: touch hello.txt, git status, git add hello.txt, git status, git commit -m \"...\""
   },
   "requireStagedChanges": true,
   "disabledMap": {
@@ -19,7 +19,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Level 1: Working on a Local Repository",
+              "## Your First Snapshot",
               "",
               "In a real git workflow, every change you make goes through three areas:",
               "",
@@ -32,8 +32,10 @@ exports.level = {
               "In this level you'll practice the complete local workflow:",
               "",
               "1. `touch` — create a new file in your working directory",
-              "2. `git add` — move it to the staging area",
-              "3. `git commit -m` — save a permanent snapshot"
+              "2. `git status` — inspect what Git sees in your working directory",
+              "3. `git add` — move it to the staging area",
+              "4. `git status` — confirm the change is staged",
+              "5. `git commit -m` — save a permanent snapshot"
             ]
           }
         },
@@ -47,7 +49,9 @@ exports.level = {
               "",
               "```",
               "touch hello.txt",
+              "git status",
               "git add hello.txt",
+              "git status",
               "git commit -m \"Add hello.txt\"",
               "```",
               "",
@@ -61,7 +65,7 @@ exports.level = {
               "Now try it yourself — create a file, stage it, and commit it with a message."
             ],
             "command": "git commit -m 'Add hello.txt'",
-            "beforeCommand": "touch hello.txt;git add hello.txt"
+            "beforeCommand": "touch hello.txt;git status;git add hello.txt;git status"
           }
         },
         {
@@ -77,12 +81,22 @@ exports.level = {
               "touch hello.txt",
               "```",
               "",
-              "**2. Stage it**",
+              "**2. Check the working directory**",
+              "```",
+              "git status",
+              "```",
+              "",
+              "**3. Stage it**",
               "```",
               "git add hello.txt",
               "```",
               "",
-              "**3. Commit it**",
+              "**4. Check the staging area**",
+              "```",
+              "git status",
+              "```",
+              "",
+              "**5. Commit it**",
               "```",
               "git commit -m \"Add hello.txt\"",
               "```",
