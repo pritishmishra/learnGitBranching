@@ -23,7 +23,11 @@ var hiddenCommands = [
   'importTreeNow',
   'importLevelNow',
   'import tree',
-  'import level'
+  'import level',
+  'alias',
+  'unalias',
+  'flip',
+  'disableLevelInstructions'
 ];
 
 var isCommandHidden = function(command) {
