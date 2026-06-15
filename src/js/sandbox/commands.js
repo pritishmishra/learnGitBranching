@@ -30,8 +30,16 @@ var hiddenCommands = [
   'disableLevelInstructions'
 ];
 
+var hiddenGitCommands = [
+  'git gc',
+  'git show',
+  'git describe'
+];
+
 var isCommandHidden = function(command) {
-  return command.startsWith('hg ') || hiddenCommands.indexOf(command) !== -1;
+  return command.startsWith('hg ') ||
+    hiddenCommands.indexOf(command) !== -1 ||
+    hiddenGitCommands.indexOf(command) !== -1;
 };
 
 var instantCommands = [
@@ -267,6 +275,7 @@ var getAllCommands = function() {
 
 exports.getAllCommands = getAllCommands;
 exports.hiddenCommands = hiddenCommands;
+exports.hiddenGitCommands = hiddenGitCommands;
 exports.isCommandHidden = isCommandHidden;
 exports.instantCommands = instantCommands;
 exports.parse = util.genParseCommand(regexMap, 'processSandboxCommand');
