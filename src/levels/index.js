@@ -3,6 +3,7 @@
 exports.levelSequences = {
   local: [
     require('./remote/clone').level,
+    require('./local/setupIdentity').level,
     require('./local/workingLocally').level
   ],
   intro: [
@@ -58,7 +59,7 @@ exports.levelSequences = {
 var sequenceInfo = exports.sequenceInfo = {
   local: {
     displayName: {
-      'en_US': 'Working Locally'
+      'en_US': 'Basic Git Workflow'
     },
     about: {
       'en_US': 'Learn the essential local git workflow: configure, create files, stage, and commit'

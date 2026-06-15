@@ -459,6 +459,11 @@ class Level extends Sandbox {
       return;
     }
 
+    if (this.level.requireUserConfig && !this.mainVis.gitEngine.hasUserConfig()) {
+      defer.resolve();
+      return;
+    }
+
     var current = this.mainVis.gitEngine.printTree();
     var solved = TreeCompare.dispatchFromLevel(this.level, current);
 
