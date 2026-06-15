@@ -78,9 +78,11 @@ exports.level = {
             "markdowns": [
               "## Our Command to create remotes",
               "",
-              "Up until this point, Learn Git Branching has focused on teaching the basics of _local_ repository work (branching, merging, rebasing, etc). However now that we want to learn about remote repository work, we need a command to set up the environment for those lessons. `git clone` will be that command.",
+              "This first lesson starts with one of the most common ways developers begin working on a project: `git clone`.",
               "",
-              "Technically, `git clone` in the real world is the command you'll use to create _local_ copies of remote repositories (from github for example). We use this command a bit differently in Learn Git Branching though -- `git clone` actually makes a remote repository out of your local one. Sure it's technically the opposite meaning of the real command, but it helps build the connection between cloning and remote repository work, so let's just run with it for now.",
+              "In real projects, `git clone` creates a local copy of a remote repository, such as one hosted on GitHub. After cloning, you have your own local repository to work in, while the remote repository still exists separately.",
+              "",
+              "In this exercise, you'll see both copies at the same time: your local repository and the remote repository it came from. For most exercises after this, the clone step will already be done for you so you can focus on the next Git concept.",
               ""
             ]
           }
@@ -93,7 +95,7 @@ exports.level = {
               ""
             ],
             "afterMarkdowns": [
-              "There it is! Now we have a remote repository of our project. It looks pretty similar except for some visual changes to make the distinction apparent -- in later levels you'll get to see how we share work across these repositories."
+              "There it is! The visualization now shows two copies of the repository. The tree on the left is your local version, and the tree on the right is the remote version. They look similar right now because cloning starts by copying the same commits locally."
             ],
             "command": "git clone",
             "beforeCommand": ""

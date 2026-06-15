@@ -26,6 +26,7 @@ function GitVisuals(options) {
   this.visBranchCollection = new VisBranchCollection();
   this.visTagCollection = new VisTagCollection();
   this.commitMap = {};
+  this.repoLabel = null;
 
   this.rootCommit = null;
   this.branchStackMap = null;
@@ -93,6 +94,58 @@ GitVisuals.prototype.resetAll = function() {
   this.visNodeMap = {};
   this.rootCommit = null;
   this.commitMap = {};
+  this.removeRepoLabel();
+};
+
+GitVisuals.prototype.removeRepoLabel = function() {
+  if (this.repoLabel) {
+    this.repoLabel.remove();
+    this.repoLabel = null;
+  }
+};
+
+GitVisuals.prototype.getRepoLabelText = function() {
+  if (this.gitEngine.hasOrigin()) {
+    return 'Local';
+  }
+  if (this.gitEngine.isOrigin()) {
+    return 'Remote';
+  }
+  return null;
+};
+
+GitVisuals.prototype.getRepoLabelX = function() {
+  var bounds = this.getPosBoundaries();
+  return this.paper.width * (bounds.min + bounds.max) / 2;
+};
+
+GitVisuals.prototype.updateRepoLabel = function() {
+  if (!this.paper || !this.gitEngine) {
+    return;
+  }
+
+  var labelText = this.getRepoLabelText();
+  if (!labelText) {
+    this.removeRepoLabel();
+    return;
+  }
+
+  var attrs = {
+    x: this.getRepoLabelX(),
+    y: 24,
+    text: labelText,
+    fill: '#d8e2ea',
+    'font-family': 'Menlo, Monaco, Consolas, \'Droid Sans Mono\', monospace',
+    'font-size': '15px',
+    'font-weight': 700,
+    opacity: 0.9
+  };
+
+  if (!this.repoLabel) {
+    this.repoLabel = this.paper.text(attrs.x, attrs.y, attrs.text);
+  }
+  this.repoLabel.attr(attrs);
+  this.repoLabel.toFront();
 };
 
 GitVisuals.prototype.tearDown = function() {
@@ -430,6 +483,7 @@ GitVisuals.prototype.refreshTreeHarsh = function() {
 
 GitVisuals.prototype.animateAll = function(speed) {
   this.zIndexReflow();
+  this.updateRepoLabel();
 
   this.animateEdges(speed);
   this.animateNodePositions(speed);
@@ -927,6 +981,7 @@ GitVisuals.prototype.drawTreeFromReload = function() {
   this.deferFlush();
 
   this.calcTreeCoords();
+  this.updateRepoLabel();
 };
 
 GitVisuals.prototype.drawTreeFirstTime = function() {
@@ -950,6 +1005,7 @@ GitVisuals.prototype.drawTreeFirstTime = function() {
   }, this);
 
   this.zIndexReflow();
+  this.updateRepoLabel();
 };
 
 
