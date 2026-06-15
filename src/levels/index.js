@@ -2,6 +2,7 @@
 // a sequence proceed in the order listed here
 exports.levelSequences = {
   local: [
+    require('./remote/clone').level,
     require('./local/workingLocally').level
   ],
   intro: [
@@ -33,7 +34,6 @@ exports.levelSequences = {
     require('./rebase/selectiveRebase').level
   ],
   remote: [
-    require('./remote/clone').level,
     require('./remote/remoteBranches').level,
     require('./remote/fetch').level,
     require('./remote/pull').level,
