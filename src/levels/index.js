@@ -5,7 +5,9 @@ exports.levelSequences = {
     require('./remote/clone').level,
     require('./local/setupIdentity').level,
     require('./local/workingLocally').level,
-    require('./local/whatDidIChange').level
+    require('./local/whatDidIChange').level,
+    require('./local/buildingCommitHistory').level,
+    require('./local/publishingYourWork').level
   ],
   intro: [
     require('./intro/commits').level,
@@ -63,7 +65,7 @@ var sequenceInfo = exports.sequenceInfo = {
       'en_US': 'Basic Git Workflow'
     },
     about: {
-      'en_US': 'Learn the essential local git workflow: configure, create files, inspect changes, stage, and commit'
+      'en_US': 'Learn the essential local git workflow: configure, create files, inspect changes, stage, commit, read history, and publish work'
     }
   },
   intro: {
