@@ -546,18 +546,12 @@ class Level extends Sandbox {
     this.solved = true;
 
     if (!this.isShowingSolution) {
-      var numCommands = this.gitCommandsIssued.length;
-      var best = this.getNumSolutionCommands();
-      var isBest = numCommands <= best;
-
-      LevelActions.setLevelSolved(this.level.id, isBest);
+      LevelActions.setLevelSolved(this.level.id, false);
       log.levelSolved(this.getEnglishName());
     }
     this.hideGoal();
 
     var nextLevel = LevelStore.getNextLevel(this.level.id);
-    var numCommands = this.gitCommandsIssued.length;
-    var best = this.getNumSolutionCommands();
 
     var skipFinishDialog = this.testOption('noFinishDialog') ||
       this.wasResetAfterSolved;
@@ -611,9 +605,7 @@ class Level extends Sandbox {
         // we want to ask if they will move onto the next level
         // while giving them their results...
         var nextDialog = new NextLevelConfirm({
-          nextLevel: nextLevel,
-          numCommands: numCommands,
-          best: best
+          nextLevel: nextLevel
         });
 
         return nextDialog.getPromise();

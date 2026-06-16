@@ -2,9 +2,9 @@ exports.level = {
   "name": {
     "en_US": "What did I change?"
   },
-  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
+  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "solutionCommand": "touch notes.txt;git status;git diff;git add notes.txt;git status;git diff --staged",
-  "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
+  "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "hint": {
     "en_US": "Run: touch notes.txt, git status, git diff, git add notes.txt, git status, git diff --staged"
   },
@@ -25,6 +25,8 @@ exports.level = {
           "options": {
             "markdowns": [
               "## What did I change?",
+              "",
+              "The GitHub repository has already been cloned for you, so you can focus on inspecting local changes.",
               "",
               "Before you commit, Git gives you tools to inspect your work.",
               "",
@@ -47,45 +49,12 @@ exports.level = {
           }
         },
         {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "### Inspect Before and After Staging",
-              "",
-              "First create a file. Then use `git status` and `git diff` to see the unstaged change:",
-              "",
-              "```",
-              "touch notes.txt",
-              "git status",
-              "git diff",
-              "```",
-              "",
-              "After staging the file, `git diff --staged` shows what will go into the next commit:",
-              "",
-              "```",
-              "git add notes.txt",
-              "git status",
-              "git diff --staged",
-              "```"
-            ],
-            "afterMarkdowns": [
-              "`git status` shows where the file is in the workflow.",
-              "",
-              "`git diff` is useful before staging. `git diff --staged` is useful after staging.",
-              "",
-              "Now try the same inspection flow yourself."
-            ],
-            "command": "git diff --staged",
-            "beforeCommand": "touch notes.txt;git status;git diff;git add notes.txt;git status"
-          }
-        },
-        {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
               "## Your Task",
               "",
-              "Complete these steps in the terminal on the right:",
+              "The GitHub repository has already been cloned for you. Complete these steps in the terminal on the right:",
               "",
               "**1. Create a file**",
               "```",

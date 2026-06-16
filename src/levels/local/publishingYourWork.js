@@ -47,27 +47,13 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "### Push a Local Commit",
+              "### Push Your Work",
               "",
-              "First clone the repository so a remote exists:",
+              "`git push` publishes your local commits to the remote repository.",
               "",
-              "```",
-              "git clone",
-              "```",
+              "Before pushing, you need a local commit that the remote does not have yet.",
               "",
-              "Then create the local commit:",
-              "",
-              "```",
-              "touch publish.txt",
-              "git add publish.txt",
-              "git commit -m \"Add publish.txt\"",
-              "```",
-              "",
-              "Finally, publish that commit:",
-              "",
-              "```",
-              "git push",
-              "```"
+              "Watch how `git push` sends that commit to the remote and brings both sides back in sync:"
             ],
             "afterMarkdowns": [
               "After `git push`, the remote repository has the new commit too.",

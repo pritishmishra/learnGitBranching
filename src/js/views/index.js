@@ -455,20 +455,11 @@ class NextLevelConfirm extends ConfirmCancelTerminal {
       intl.getName(options.nextLevel) :
       '';
 
-    var markdowns = intl.getDialog(require('../dialogs/nextLevel'))[0].options.markdowns;
-    var markdown = markdowns.join('\n');
-    markdown = intl.template(markdown, {
-      numCommands: options.numCommands,
-      best: options.best
-    });
-
-    if (options.numCommands == options.best) {
-      markdown = markdown + '\n\n' + intl.str('finish-dialog-win');
-    } else if (options.numCommands < options.best) {
-      markdown = markdown + '\n\n' + intl.str('finish-dialog-win-exceeded');
-    } else {
-      markdown = markdown + '\n\n' + intl.str('finish-dialog-lose', {best: options.best});
-    }
+    var markdown = [
+      '## Great Job!!!',
+      '',
+      'You completed this exercise.'
+    ].join('\n');
 
     markdown = markdown + '\n\n';
     var extraHTML;
