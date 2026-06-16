@@ -45,19 +45,13 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "### Create, Stage, and Commit",
+              "### Create a Commit",
               "",
-              "Now that Git knows your identity and the GitHub repo has been cloned for you, create and stage a file, then commit it:",
+              "After you create and stage changes, the next step is to commit those changes.",
               "",
-              "```",
-              "touch hello.txt",
-              "git status",
-              "git add hello.txt",
-              "git status",
-              "git commit -m \"Add hello.txt\"",
-              "```",
+              "A commit saves a snapshot of the staged changes into the repository history.",
               "",
-              "Watch a new commit appear on the graph when you hit the button:"
+              "Watch how the new commit appears on the graph:"
             ],
             "afterMarkdowns": [
               "A new commit `C1` has been created on `main`!",
