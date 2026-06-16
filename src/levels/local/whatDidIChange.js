@@ -10,12 +10,12 @@ exports.level = {
   },
   "requireStagedChangesForCompletion": true,
   "requiredCommandPatterns": [
-    "^touch +notes\\.txt($| )",
-    "^git +status$",
-    "^git +diff$",
-    "^git +add +notes\\.txt$",
-    "^git +status$",
-    "^git +diff +(--staged|--cached)$"
+    "^touch +notes\\.txt($| +)",
+    "^git +status *$",
+    "^git +diff *$",
+    "^git +add +notes\\.txt *$",
+    "^git +status *$",
+    "^git +diff +(--staged|--cached) *$"
   ],
   "startDialog": {
     "en_US": {

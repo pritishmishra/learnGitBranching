@@ -426,7 +426,7 @@ class Level extends Sandbox {
   }
 
   afterCommandCB(command) {
-    if (!command.get('error')) {
+    if (this.didCommandSucceed(command)) {
       this.trackRequiredCommand(command);
     }
 
@@ -440,6 +440,11 @@ class Level extends Sandbox {
     }
   }
 
+  didCommandSucceed(command) {
+    var err = command.get('error');
+    return !err || err instanceof Errors.CommandResult;
+  }
+
   trackRequiredCommand(command) {
     var requiredPatterns = this.level.requiredCommandPatterns || [];
     if (!requiredPatterns.length) {
@@ -448,6 +453,8 @@ class Level extends Sandbox {
 
     var rawStr = command.get('rawStr');
     var requiredCommandsIssued = this.requiredCommandsIssued || {};
+    // Required commands are ordered, but they do not need to be adjacent.
+    // Extra exploratory commands between these milestones are allowed.
     var nextPatternIndex = requiredPatterns.findIndex(function(pattern, index) {
       return !requiredCommandsIssued[index];
     });
