@@ -1,8 +1,21 @@
 exports.level = {
-  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C4\",\"id\":\"main\"},\"bugFix\":{\"target\":\"C2\",\"id\":\"bugFix\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C1\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C3\",\"C2\"],\"id\":\"C4\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
-  "solutionCommand": "git checkout -b bugFix;git commit;git checkout main;git commit;git merge bugFix",
+  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C4\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"feature\":{\"target\":\"C2\",\"id\":\"feature\"},\"o/main\":{\"target\":\"C1\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C1\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C3\",\"C2\"],\"id\":\"C4\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
+  "solutionCommand": "git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt';git checkout main;touch main.txt;git add main.txt;git commit -m 'Update main';git merge feature",
+  "startTree": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C1\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
+  "requireStagedChanges": true,
+  "requiredCommandPatterns": [
+    "^git +checkout +-b +feature *$",
+    "^touch +feature\\.txt($| +)",
+    "^git +add +feature\\.txt *$",
+    "^git +commit +.*$",
+    "^git +checkout +main *$",
+    "^touch +main\\.txt($| +)",
+    "^git +add +main\\.txt *$",
+    "^git +commit +.*$",
+    "^git +merge +feature *$"
+  ],
   "name": {
-    "en_US": "Merging in Git",
+    "en_US": "Bringing Work Back Together",
     "fa": "ادغام (Merge) در Git",
     "de_DE": "Mergen in Git",
     "es_AR": "Mergeando en Git",
@@ -28,7 +41,7 @@ exports.level = {
     "hu_HU": "Merge Gitben"
   },
   "hint": {
-    "en_US": "Remember to commit in the order specified (bugFix before main)",
+    "en_US": "Create work on feature, return to main, make one main commit, then run git merge feature",
     "fa": "به یاد داشته باشید که به ترتیب مشخص شده کامیت کنید (bugFix قبل از main)",
     "de_DE": "Denk dran in der angegebenen Reihenfolge zu committen (erst bugFix, dann main)",
     "ja": "指示された順番でコミットすること（mainの前にbugFixで）",
@@ -63,13 +76,13 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Branches and Merging",
+              "## Bringing Work Back Together",
               "",
-              "Great! We now know how to commit and branch. Now we need to learn some kind of way of combining the work from two different branches together. This will allow us to branch off, develop a new feature, and then combine it back in.",
+              "The GitHub repository has already been cloned for you.",
               "",
-              "The first method to combine work that we will examine is `git merge`. Merging in Git creates a special commit that has two unique parents. A commit with two parents essentially means \"I want to include all the work from this parent over here and this one over here, *and* the set of all their parents.\"",
+              "You have learned how to create a branch and publish a branch. Now you will bring branch work back into `main`.",
               "",
-              "It's easier with visuals, let's check it out in the next view."
+              "`git merge` combines work from another branch into your current branch. In this exercise, you will merge `feature` back into `main`."
             ]
           }
         },
@@ -77,50 +90,59 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Here we have two branches; each has one commit that's unique. This means that neither branch includes the entire set of \"work\" in the repository that we have done. Let's fix that with merge.",
+              "Here we have two branches with different commits.",
               "",
-              "We will `merge` the branch `bugFix` into `main`."
+              "`feature` contains one commit from feature work, and `main` contains one separate commit. We will merge `feature` into `main`."
             ],
             "afterMarkdowns": [
-              "Woah! See that? First of all, `main` now points to a commit that has two parents. If you follow the arrows up the commit tree from `main`, you will hit every commit along the way to the root. This means that `main` contains all the work in the repository now.",
+              "`main` now points to a merge commit with two parents.",
               "",
-              "Also, see how the colors of the commits changed? To help with learning, I have included some color coordination. Each branch has a unique color. Each commit turns a color that is the blended combination of all the branches that contain that commit.",
-              "",
-              "So here we see that the `main` branch color is blended into all the commits, but the `bugFix` color is not. Let's fix that..."
+              "Following both parents from that merge commit includes the work from `main` and the work from `feature`."
             ],
-            "command": "git merge bugFix",
-            "beforeCommand": "git checkout -b bugFix; git commit; git checkout main; git commit"
-          }
-        },
-        {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "Let's merge `main` into `bugFix`:"
-            ],
-            "afterMarkdowns": [
-              "Since `bugFix` was an ancestor of `main`, git didn't have to do any work; it simply just moved `bugFix` to the same commit `main` was attached to.",
-              "",
-              "Now all the commits are the same color, which means each branch contains all the work in the repository! Woohoo!"
-            ],
-            "command": "git checkout bugFix; git merge main",
-            "beforeCommand": "git checkout -b bugFix; git commit; git checkout main; git commit; git merge bugFix"
+            "command": "git merge feature",
+            "beforeCommand": "git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt';git checkout main;touch main.txt;git add main.txt;git commit -m 'Update main'"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "To complete this level, do the following steps:",
+              "## Your Task",
               "",
-              "* Make a new branch called `bugFix`",
-              "* Checkout the `bugFix` branch with `git checkout bugFix`",
-              "* Commit once",
-              "* Go back to `main` with `git checkout`",
-              "* Commit another time",
-              "* Merge the branch `bugFix` into `main` with `git merge`",
+              "Complete these steps in the terminal on the right:",
               "",
-              "*Remember, you can always re-display this dialog with \"objective\"!*"
+              "**1. Create and switch to a feature branch**",
+              "```",
+              "git checkout -b feature",
+              "```",
+              "",
+              "**2. Create and commit work on `feature`**",
+              "```",
+              "touch feature.txt",
+              "git add feature.txt",
+              "git commit -m \"Add feature.txt\"",
+              "```",
+              "",
+              "**3. Return to `main`**",
+              "```",
+              "git checkout main",
+              "```",
+              "",
+              "**4. Create and commit separate work on `main`**",
+              "```",
+              "touch main.txt",
+              "git add main.txt",
+              "git commit -m \"Update main\"",
+              "```",
+              "",
+              "**5. Merge the feature branch into `main`**",
+              "```",
+              "git merge feature",
+              "```",
+              "",
+              "The level is complete once `main` points to a merge commit that includes both branches.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }

@@ -11,11 +11,11 @@ exports.levelSequences = {
   ],
   branchMerge: [
     require('./intro/branching').level,
-    require('./branchMerge/publishingBranch').level
+    require('./branchMerge/publishingBranch').level,
+    require('./intro/merging').level
   ],
   intro: [
     require('./intro/commits').level,
-    require('./intro/merging').level,
     require('./intro/rebasing').level
   ],
   rampup: [
