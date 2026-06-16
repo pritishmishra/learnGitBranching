@@ -9,9 +9,12 @@ exports.levelSequences = {
     require('./local/buildingCommitHistory').level,
     require('./local/publishingYourWork').level
   ],
+  branchMerge: [
+    require('./intro/branching').level,
+    require('./branchMerge/publishingBranch').level
+  ],
   intro: [
     require('./intro/commits').level,
-    require('./intro/branching').level,
     require('./intro/merging').level,
     require('./intro/rebasing').level
   ],
@@ -66,6 +69,14 @@ var sequenceInfo = exports.sequenceInfo = {
     },
     about: {
       'en_US': 'Learn the essential local git workflow: configure, create files, inspect changes, stage, commit, read history, and publish work'
+    }
+  },
+  branchMerge: {
+    displayName: {
+      'en_US': 'Branching & Merging'
+    },
+    about: {
+      'en_US': 'Learn how to work on separate timelines and combine changes'
     }
   },
   intro: {

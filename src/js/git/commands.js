@@ -927,7 +927,9 @@ var commandConfig = {
     options: [
       '--force',
       '--delete',
-      '-d'
+      '-d',
+      '-u',
+      '--set-upstream'
     ],
     execute: function(engine, command) {
       if (!engine.hasOrigin()) {
@@ -943,10 +945,18 @@ var commandConfig = {
       var commandOptions = command.getOptionsMap();
       var force = !!commandOptions['--force'];
       var isDelete = commandOptions['-d'] || commandOptions['--delete'];
+      var setUpstream = commandOptions['-u'] || commandOptions['--set-upstream'];
 
       // git push is pretty complex in terms of
       // the arguments it wants as well... get ready!
       var generalArgs = command.getGeneralArgs();
+
+      // -u / --set-upstream is a flag, but the command option parser stores
+      // the following token as an option argument. Put it back with the other
+      // push args so `git push -u origin feature` parses like normal push.
+      if (setUpstream) {
+        generalArgs = setUpstream.concat(generalArgs);
+      }
 
       // put the commandOption of delete back in the generalArgs
       // as it is a flag option
@@ -1033,6 +1043,18 @@ var commandConfig = {
         source: source,
         force: force
       });
+
+      if (setUpstream && source) {
+        var localBranch = engine.resolveID(source);
+        var remoteTrackingBranch = engine.resolveID(ORIGIN_PREFIX + destination);
+        if (localBranch.getRemoteTrackingBranchID &&
+            localBranch.getRemoteTrackingBranchID() !== remoteTrackingBranch.get('id')) {
+          engine.setLocalToTrackRemote(
+            localBranch,
+            remoteTrackingBranch
+          );
+        }
+      }
     }
   },
 
