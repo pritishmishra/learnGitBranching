@@ -9,6 +9,10 @@ exports.level = {
     "en_US": "Run: git config user.name \"...\", then git config user.email \"...\""
   },
   "requireUserConfig": true,
+  "requiredAnyOrderCommandPatterns": [
+    "^git +config +user\\.name +.+$",
+    "^git +config +user\\.email +.+$"
+  ],
   "startDialog": {
     "en_US": {
       "childViews": [
@@ -42,8 +46,13 @@ exports.level = {
               "",
               "The GitHub repository has already been cloned for you. Configure your Git identity in the terminal:",
               "",
+              "**1. Set your name**",
               "```",
               "git config user.name \"Your Name\"",
+              "```",
+              "",
+              "**2. Set your email**",
+              "```",
               "git config user.email \"your@email.com\"",
               "```",
               "",

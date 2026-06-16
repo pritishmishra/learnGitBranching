@@ -447,7 +447,8 @@ class Level extends Sandbox {
 
   trackRequiredCommand(command) {
     var requiredPatterns = this.level.requiredCommandPatterns || [];
-    if (!requiredPatterns.length) {
+    var requiredAnyOrderPatterns = this.level.requiredAnyOrderCommandPatterns || [];
+    if (!requiredPatterns.length && !requiredAnyOrderPatterns.length) {
       return;
     }
 
@@ -463,19 +464,36 @@ class Level extends Sandbox {
       requiredCommandsIssued[nextPatternIndex] = true;
     }
 
+    var requiredAnyOrderCommandsIssued = this.requiredAnyOrderCommandsIssued || {};
+    requiredAnyOrderPatterns.forEach(function(pattern, index) {
+      if (requiredAnyOrderCommandsIssued[index]) {
+        return;
+      }
+
+      if (new RegExp(pattern).test(rawStr)) {
+        requiredAnyOrderCommandsIssued[index] = true;
+      }
+    });
+
     this.requiredCommandsIssued = requiredCommandsIssued;
+    this.requiredAnyOrderCommandsIssued = requiredAnyOrderCommandsIssued;
   }
 
   hasIssuedRequiredCommands() {
     var requiredPatterns = this.level.requiredCommandPatterns || [];
-    if (!requiredPatterns.length) {
-      return true;
-    }
+    var requiredAnyOrderPatterns = this.level.requiredAnyOrderCommandPatterns || [];
 
     var requiredCommandsIssued = this.requiredCommandsIssued || {};
-    return requiredPatterns.every(function(pattern, index) {
+    var orderedCommandsIssued = requiredPatterns.every(function(pattern, index) {
       return !!requiredCommandsIssued[index];
     });
+
+    var requiredAnyOrderCommandsIssued = this.requiredAnyOrderCommandsIssued || {};
+    var anyOrderCommandsIssued = requiredAnyOrderPatterns.every(function(pattern, index) {
+      return !!requiredAnyOrderCommandsIssued[index];
+    });
+
+    return orderedCommandsIssued && anyOrderCommandsIssued;
   }
 
   doesCommandCountTowardsTotal(command) {
