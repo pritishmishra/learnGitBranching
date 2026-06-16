@@ -12,7 +12,8 @@ exports.levelSequences = {
   branchMerge: [
     require('./intro/branching').level,
     require('./branchMerge/publishingBranch').level,
-    require('./intro/merging').level
+    require('./intro/merging').level,
+    require('./branchMerge/divergingMerge').level
   ],
   intro: [
     require('./intro/commits').level,
