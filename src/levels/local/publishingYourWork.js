@@ -113,7 +113,9 @@ exports.level = {
               "git push",
               "```",
               "",
-              "The level is complete once the local and remote repositories both point to the new commit."
+              "The level is complete once the local and remote repositories both point to the new commit.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }

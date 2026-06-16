@@ -91,7 +91,9 @@ exports.level = {
               "git log",
               "```",
               "",
-              "The level is complete once `main` points to the new commit and you have inspected it with `git log`."
+              "The level is complete once `main` points to the new commit and you have inspected it with `git log`.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }

@@ -2,9 +2,9 @@ exports.level = {
   "name": {
     "en_US": "Your First Snapshot"
   },
-  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
+  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "solutionCommand": "touch hello.txt;git status;git add hello.txt;git status;git commit -m 'Add hello.txt'",
-  "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
+  "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "hint": {
     "en_US": "Run: touch hello.txt, git status, git add hello.txt, git status, git commit -m \"...\""
   },
@@ -20,6 +20,8 @@ exports.level = {
           "options": {
             "markdowns": [
               "## Your First Snapshot",
+              "",
+              "The GitHub repository has already been cloned for you, so you can start working in your local copy.",
               "",
               "In a real git workflow, every change you make goes through three areas:",
               "",
@@ -45,7 +47,7 @@ exports.level = {
             "beforeMarkdowns": [
               "### Create, Stage, and Commit",
               "",
-              "Now that Git knows your identity, create and stage a file, then commit it:",
+              "Now that Git knows your identity and the GitHub repo has been cloned for you, create and stage a file, then commit it:",
               "",
               "```",
               "touch hello.txt",
@@ -74,7 +76,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "Complete these steps in the terminal on the right:",
+              "The GitHub repository has already been cloned for you. Complete these steps in the terminal on the right:",
               "",
               "**1. Create a file**",
               "```",
@@ -101,7 +103,9 @@ exports.level = {
               "git commit -m \"Add hello.txt\"",
               "```",
               "",
-              "The level is complete once `main` points to a new commit."
+              "The level is complete once `main` points to a new commit.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }

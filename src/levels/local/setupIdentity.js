@@ -45,7 +45,9 @@ exports.level = {
               "git config user.email \"your@email.com\"",
               "```",
               "",
-              "The level is complete once both values are set."
+              "The level is complete once both values are set.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }

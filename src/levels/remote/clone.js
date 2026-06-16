@@ -105,7 +105,11 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "To finish this level, simply `git clone` your existing repository. The real learning will come in following lessons."
+              "## Your Task",
+              "",
+              "To finish this level, simply `git clone` your existing repository. The real learning will come in following lessons.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }

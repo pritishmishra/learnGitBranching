@@ -117,7 +117,9 @@ exports.level = {
               "git diff --staged",
               "```",
               "",
-              "The level is complete once `notes.txt` is staged and you have inspected the change."
+              "The level is complete once `notes.txt` is staged and you have inspected the change.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }
