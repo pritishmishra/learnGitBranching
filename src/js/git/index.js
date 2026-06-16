@@ -3047,6 +3047,66 @@ GitEngine.prototype.status = function() {
   });
 };
 
+GitEngine.prototype.hasStagedChanges = function() {
+  return Object.keys(this.stagedChanges).length > 0;
+};
+
+GitEngine.prototype.diff = function(options) {
+  options = options || {};
+  var changes = options.staged ? this.stagedChanges : this.workingDirectoryChanges;
+  var filepaths = Object.keys(changes);
+
+  if (!filepaths.length) {
+    throw new CommandResult({
+      msg: ''
+    });
+  }
+
+  var lines = [];
+  var self = this;
+  filepaths.forEach(function(filepath) {
+    var change = changes[filepath];
+    lines = lines.concat(self.getFileDiffLines(filepath, change));
+  });
+
+  throw new CommandResult({
+    msg: lines.join('\n') + '\n'
+  });
+};
+
+GitEngine.prototype.getFileDiffLines = function(filepath, change) {
+  if (change.type === 'deleted') {
+    return [
+      'diff --git a/' + filepath + ' b/' + filepath,
+      'deleted file mode 100644',
+      '--- a/' + filepath,
+      '+++ /dev/null',
+      '@@ -1 +0,0 @@',
+      '- file content'
+    ];
+  }
+
+  if (change.type === 'modified') {
+    return [
+      'diff --git a/' + filepath + ' b/' + filepath,
+      '--- a/' + filepath,
+      '+++ b/' + filepath,
+      '@@ -1 +1 @@',
+      '- old file content',
+      '+ ' + change.content
+    ];
+  }
+
+  return [
+    'diff --git a/' + filepath + ' b/' + filepath,
+    'new file mode 100644',
+    '--- /dev/null',
+    '+++ b/' + filepath,
+    '@@ -0,0 +1 @@',
+    '+ ' + change.content
+  ];
+};
+
 GitEngine.prototype.logWithout = function(ref, omitBranch) {
   // slice off the ^branch
   omitBranch = omitBranch.slice(1);

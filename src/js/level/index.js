@@ -426,6 +426,10 @@ class Level extends Sandbox {
   }
 
   afterCommandCB(command) {
+    if (!command.get('error')) {
+      this.trackRequiredCommand(command);
+    }
+
     if (this.doesCommandCountTowardsTotal(command)) {
       // Count it as a command AND...
       this.gitCommandsIssued.push(command.get('rawStr'));
@@ -434,6 +438,37 @@ class Level extends Sandbox {
       // Ugly inheritance overriding on private implementations ahead!
       this.undoStack.push(this._treeBeforeCommand);
     }
+  }
+
+  trackRequiredCommand(command) {
+    var requiredPatterns = this.level.requiredCommandPatterns || [];
+    if (!requiredPatterns.length) {
+      return;
+    }
+
+    var rawStr = command.get('rawStr');
+    var requiredCommandsIssued = this.requiredCommandsIssued || {};
+    var nextPatternIndex = requiredPatterns.findIndex(function(pattern, index) {
+      return !requiredCommandsIssued[index];
+    });
+
+    if (nextPatternIndex !== -1 && new RegExp(requiredPatterns[nextPatternIndex]).test(rawStr)) {
+      requiredCommandsIssued[nextPatternIndex] = true;
+    }
+
+    this.requiredCommandsIssued = requiredCommandsIssued;
+  }
+
+  hasIssuedRequiredCommands() {
+    var requiredPatterns = this.level.requiredCommandPatterns || [];
+    if (!requiredPatterns.length) {
+      return true;
+    }
+
+    var requiredCommandsIssued = this.requiredCommandsIssued || {};
+    return requiredPatterns.every(function(pattern, index) {
+      return !!requiredCommandsIssued[index];
+    });
   }
 
   doesCommandCountTowardsTotal(command) {
@@ -460,6 +495,16 @@ class Level extends Sandbox {
     }
 
     if (this.level.requireUserConfig && !this.mainVis.gitEngine.hasUserConfig()) {
+      defer.resolve();
+      return;
+    }
+
+    if (this.level.requireStagedChangesForCompletion && !this.mainVis.gitEngine.hasStagedChanges()) {
+      defer.resolve();
+      return;
+    }
+
+    if (!this.hasIssuedRequiredCommands()) {
       defer.resolve();
       return;
     }

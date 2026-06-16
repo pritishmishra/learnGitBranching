@@ -850,6 +850,24 @@ var commandConfig = {
     }
   },
 
+  diff: {
+    dontCountForGolf: true,
+    regex: /^git +diff($|\s)/,
+    description: 'Show changes between commits, commit and working tree, etc',
+    options: [
+      '--staged',
+      '--cached'
+    ],
+    execute: function(engine, command) {
+      var commandOptions = command.getOptionsMap();
+      command.acceptNoGeneralArgs();
+
+      engine.diff({
+        staged: !!commandOptions['--staged'] || !!commandOptions['--cached']
+      });
+    }
+  },
+
   checkout: {
     sc: /^(go|git co)($|\s)/,
     regex: /^git +checkout($|\s)/,
