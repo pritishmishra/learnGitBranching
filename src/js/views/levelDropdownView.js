@@ -31,14 +31,23 @@ class LevelDropdownView extends ContainedBase {
     var queryParams = util.parseQueryString(
       window.location.href
     );
+    var selectedTab = queryParams.defaultTab || 'lessons';
+    if (selectedTab === 'main') {
+      selectedTab = 'lessons';
+    } else if (selectedTab === 'remote') {
+      selectedTab = 'legacy';
+    }
     this.JSON = {
-      selectedTab: queryParams.defaultTab || 'main',
+      selectedTab: selectedTab,
       tabs: [{
-        id: 'main',
-        name: intl.str('main-levels-tab')
+        id: 'lessons',
+        name: intl.str('lessons-levels-tab')
       }, {
-        id: 'remote',
-        name: intl.str('remote-levels-tab')
+        id: 'exercises',
+        name: intl.str('exercises-levels-tab')
+      }, {
+        id: 'legacy',
+        name: intl.str('legacy-levels-tab')
       }]
     };
 
@@ -95,8 +104,9 @@ class LevelDropdownView extends ContainedBase {
       intl.str('select-a-level')
     );
     this.updateTabNames([
-      intl.str('main-levels-tab'),
-      intl.str('remote-levels-tab')
+      intl.str('lessons-levels-tab'),
+      intl.str('exercises-levels-tab'),
+      intl.str('legacy-levels-tab')
     ]);
     ContainedBase.prototype.render.call(this);
     this.buildSequences();
@@ -116,9 +126,14 @@ class LevelDropdownView extends ContainedBase {
     this.JSON.selectedTab = id;
     this.render();
     if (this.selectedID) {
-      this.selectedSequence = this.getSequencesOnTab()[0];
-      this.selectedIndex = 0;
-      this.updateSelectedIcon();
+      var sequences = this.getSequencesOnTab();
+      if (sequences.length) {
+        this.selectedSequence = sequences[0];
+        this.selectedIndex = 0;
+        this.updateSelectedIcon();
+      } else {
+        this.turnOffKeyboardSelection();
+      }
     }
   }
 
@@ -269,18 +284,26 @@ class LevelDropdownView extends ContainedBase {
   }
 
   selectFirst() {
-    var firstID = this.sequenceToLevels[this.getSequencesOnTab()[0]][0].id;
+    var sequences = this.getSequencesOnTab();
+    if (!sequences.length) {
+      return;
+    }
+    var firstID = this.sequenceToLevels[sequences[0]][0].id;
     this.selectIconByID(firstID);
     this.selectedIndex = 0;
-    this.selectedSequence = this.getSequencesOnTab()[0];
+    this.selectedSequence = sequences[0];
   }
 
   getCurrentSequence() {
-    return this.sequenceToLevels[this.selectedSequence];
+    return this.sequenceToLevels[this.selectedSequence] || [];
   }
 
   getSelectedID() {
-    return this.sequenceToLevels[this.selectedSequence][this.selectedIndex].id;
+    var sequence = this.getCurrentSequence();
+    if (!sequence.length) {
+      return undefined;
+    }
+    return sequence[this.selectedIndex].id;
   }
 
   selectIconByID(id) {
@@ -292,6 +315,9 @@ class LevelDropdownView extends ContainedBase {
   }
 
   toggleIconSelect(id, value) {
+    if (!id) {
+      return;
+    }
     this.selectedID = id;
     var selector = '#levelIcon-' + id;
     $(selector).toggleClass('selected', value);

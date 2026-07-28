@@ -1165,6 +1165,18 @@ exports.strings = {
     "tr_TR": "Uzak(Remote)",
     "hu_HU": "Távoli"
   },
+  "lessons-levels-tab": {
+    "__desc__": "The name of lessons levels tab on the drop down view",
+    "en_US": "Lessons"
+  },
+  "exercises-levels-tab": {
+    "__desc__": "The name of exercises levels tab on the drop down view",
+    "en_US": "Exercises"
+  },
+  "legacy-levels-tab": {
+    "__desc__": "The name of legacy levels tab on the drop down view",
+    "en_US": "Legacy"
+  },
   "branch-name-short": {
     "__desc__": "When branch names get too long, we need to truncate them. This is the warning for that",
     "en_US": "Sorry, we need to keep branch names short for the visuals. Your branch name was truncated to 9 characters, resulting in \"{branch}\"",

@@ -70,6 +70,7 @@ exports.levelSequences = {
 // there are also cute names and such for sequences
 var sequenceInfo = exports.sequenceInfo = {
   local: {
+    tab: 'lessons',
     displayName: {
       'en_US': 'Basic Git Workflow'
     },
@@ -78,6 +79,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   branchMerge: {
+    tab: 'lessons',
     displayName: {
       'en_US': 'Branching & Merging'
     },
@@ -86,6 +88,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   mistakes: {
+    tab: 'lessons',
     displayName: {
       'en_US': 'Correcting Mistakes'
     },
@@ -94,6 +97,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   intro: {
+    tab: 'legacy',
     displayName: {
       'en_US': 'Introduction Sequence',
       'fa': 'سری مقدماتی',
@@ -146,6 +150,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   rampup: {
+    tab: 'legacy',
     displayName: {
       'en_US': 'Ramping Up',
       'fa': 'افزایش مهارت',
@@ -198,7 +203,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   remote: {
-    tab: 'remote',
+    tab: 'legacy',
     displayName: {
       'en_US': 'Push & Pull -- Git Remotes!',
       'fa': 'Push و Pull -- ریموت‌های Git!',
@@ -252,7 +257,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   remoteAdvanced: {
-    tab: 'remote',
+    tab: 'legacy',
     displayName: {
       'en_US': 'To Origin And Beyond -- Advanced Git Remotes!',
       'fa': 'به سوی Origin و فراتر از آن -- ریموت‌های پیشرفته Git!',
@@ -305,6 +310,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   move: {
+    tab: 'legacy',
     displayName: {
       'en_US': 'Moving Work Around',
       'fa': 'جابجایی کارها',
@@ -357,6 +363,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   mixed: {
+    tab: 'legacy',
     displayName: {
       'en_US': 'A Mixed Bag',
       'fa': 'مجموعه‌ای درهم',
@@ -409,6 +416,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   },
   advanced: {
+    tab: 'legacy',
     displayName: {
       'en_US': 'Advanced Topics',
       'fa': 'مباحث پیشرفته',
@@ -466,5 +474,5 @@ exports.getTabForSequence = function(sequenceName) {
   var info = sequenceInfo[sequenceName];
   return (info.tab) ?
     info.tab :
-    'main';
+    'lessons';
 };
