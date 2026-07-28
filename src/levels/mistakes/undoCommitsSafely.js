@@ -28,7 +28,28 @@ exports.level = {
               "",
               "`git revert <commit>` creates a new commit that undoes the changes from an older commit. It does not erase the old commit from history.",
               "",
-              "That makes revert the safer choice when a commit may already have been shared with other people."
+              "That makes revert the safer choice when a commit may already have been shared with other people.",
+              "",
+              "In this exercise, you will use `git revert HEAD` to keep the task simple. `HEAD` means the current commit, so this reverts the latest commit on the current branch."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "In real projects, you will often choose a specific commit to revert.",
+              "",
+              "Common forms are:",
+              "",
+              "```",
+              "git revert HEAD",
+              "git revert HEAD~1",
+              "git revert HEAD~3",
+              "git revert abc123",
+              "```",
+              "",
+              "`HEAD~1` means one commit before `HEAD`, `HEAD~3` means three commits before `HEAD`, and `abc123` represents a specific commit id from `git log`."
             ]
           }
         },
@@ -78,6 +99,8 @@ exports.level = {
               "```",
               "git revert HEAD",
               "```",
+              "",
+              "We use `HEAD` here because the commit you want to undo is the latest commit. In real projects, you can also use forms like `git revert HEAD~1` or `git revert <commit-id>` when the commit is not the current one.",
               "",
               "The level is complete once `main` points to the new revert commit.",
               "",
