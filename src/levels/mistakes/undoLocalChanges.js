@@ -3,7 +3,7 @@ exports.level = {
     "en_US": "Undo Local Changes"
   },
   "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
-  "solutionCommand": "git status;git restore scratch.txt;git status;git add staged.txt;git status;git unstage staged.txt;git status;git restore staged.txt",
+  "solutionCommand": "git status;git restore scratch.txt;git add staged.txt;git unstage staged.txt;git restore staged.txt",
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "initialWorkingDirectoryChanges": {
     "scratch.txt": {
@@ -22,11 +22,8 @@ exports.level = {
   "requiredCommandPatterns": [
     "^git +status *$",
     "^git +restore +scratch\\.txt *$",
-    "^git +status *$",
     "^git +add +staged\\.txt *$",
-    "^git +status *$",
     "^git +unstage +staged\\.txt *$",
-    "^git +status *$",
     "^git +restore +staged\\.txt *$"
   ],
   "startDialog": {
@@ -78,6 +75,8 @@ exports.level = {
               "",
               "Two files have already been created in your working directory: `scratch.txt` and `staged.txt`. Neither file has been committed.",
               "",
+              "After each command in steps 2-5, run `git status` if you want to check how Git sees the file now.",
+              "",
               "Complete these steps in the terminal on the right:",
               "",
               "**1. Check the current changes**",
@@ -90,21 +89,18 @@ exports.level = {
               "",
               "```",
               "git restore scratch.txt",
-              "git status",
               "```",
               "",
               "**3. Stage the second file**",
               "",
               "```",
               "git add staged.txt",
-              "git status",
               "```",
               "",
               "**4. Unstage it**",
               "",
               "```",
               "git unstage staged.txt",
-              "git status",
               "```",
               "",
               "**5. Discard the unstaged change**",
