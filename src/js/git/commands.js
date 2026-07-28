@@ -1329,6 +1329,27 @@ var commandConfig = {
     }
   },
 
+  resolveConflict: {
+    displayName: 'resolve-conflict',
+    regex: /^git +resolve-conflict($|\s)/,
+    description: 'Simulator-only: mark a mocked merge conflict as resolved',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+
+      if (generalArgs.length === 0) {
+        throw new GitError({
+          msg: intl.todo('Usage: git resolve-conflict <filepath>')
+        });
+      }
+
+      engine.resolveConflict(generalArgs[0]);
+
+      throw new CommandResult({
+        msg: 'Resolved conflict in ' + generalArgs[0] + '. Stage the file and commit the merge.'
+      });
+    }
+  },
+
   config: {
     regex: /^git +config($|\s)/,
     description: 'Get and set repository or global options',
@@ -1368,7 +1389,7 @@ var instantCommands = [
     var commands = require('../commands').commands.getOptionMap()['git'];
     var descriptions = require('../commands').commands.getDescriptionMap()['git'];
     // Commands that are learning tools with no official docs
-    var customCommands = ['fakeTeamwork', 'mergeMR'];    
+    var customCommands = ['fakeTeamwork', 'mergeMR', 'resolve-conflict'];
     // build up a nice display of what we support
     Object.keys(commands).forEach(function(command) {
       var commandOptions = commands[command];      

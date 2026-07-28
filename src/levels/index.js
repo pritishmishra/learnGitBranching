@@ -22,7 +22,9 @@ exports.levelSequences = {
   ],
   team: [
     require('./team/downloadWithoutChanging').level,
-    require('./team/syncYourLocalCopy').level
+    require('./team/syncYourLocalCopy').level,
+    require('./team/collaboratingWithoutConflicting').level,
+    require('./team/replayYourWorkOnLatestMain').level
   ],
   intro: [
     require('./intro/commits').level,
@@ -106,7 +108,7 @@ var sequenceInfo = exports.sequenceInfo = {
       'en_US': 'Working with a Team'
     },
     about: {
-      'en_US': 'Learn how to safely download and integrate work from remote repositories'
+      'en_US': 'Learn how to safely download, integrate, resolve, and publish team work'
     }
   },
   intro: {

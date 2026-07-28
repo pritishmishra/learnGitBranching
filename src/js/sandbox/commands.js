@@ -194,7 +194,7 @@ var instantCommands = [
       '<br/>'
     ];
     // Commands that are learning tools with no official docs
-    var customCommands = ['fakeTeamwork', 'mergeMR'];
+    var customCommands = ['fakeTeamwork', 'mergeMR', 'resolve-conflict'];
     Object.keys(allCommands)
       .filter(command => !isCommandHidden(command))
       .forEach(function(command) {

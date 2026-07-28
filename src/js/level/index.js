@@ -202,7 +202,8 @@ class Level extends Sandbox {
       treeString: options.level.startTree,
       requireStagedChanges: !!options.level.requireStagedChanges,
       initialWorkingDirectoryChanges: options.level.initialWorkingDirectoryChanges,
-      initialStagedChanges: options.level.initialStagedChanges
+      initialStagedChanges: options.level.initialStagedChanges,
+      mockConflictOnPull: options.level.mockConflictOnPull
     });
   }
 

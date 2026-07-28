@@ -47,6 +47,8 @@ The current Lessons tab contains:
 - **Working with a Team**
   - Download without Changing
   - Sync Your Local Copy
+  - Collaborating Without Conflicting
+  - Replay Your Work on the Latest Main
 
 ### Exercises
 
@@ -135,6 +137,9 @@ Common fields used by this fork:
 - `initialWorkingDirectoryChanges`: seed local unstaged file changes at level
   start.
 - `initialStagedChanges`: seed staged file changes at level start.
+- `mockConflictOnPull`: lesson-scoped teaching hook that makes `git pull`
+  fetch remote work, pause before the merge, and create a simulated conflict in
+  the configured file.
 
 When adding a new level:
 
@@ -161,6 +166,9 @@ Examples from this fork:
 - `git restore <file>` discards an unstaged local change.
 - `git restore --staged <file>` and `git unstage <file>` move a staged change
   back to the working directory.
+- `git resolve-conflict <file>` is a simulator-only teaching command. It marks a
+  mocked merge conflict as resolved so the student can stage and commit the
+  merge in conflict-focused lessons.
 - `git reset --soft <target>` rewinds the branch and keeps rewound changes
   staged.
 - `git reset --hard <target>` rewinds the branch and discards staged/unstaged

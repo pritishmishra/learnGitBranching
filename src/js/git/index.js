@@ -51,6 +51,10 @@ function GitEngine(options) {
   this.gitConfig = {};
   // When true, git commit requires at least one staged change
   this.requireStagedChanges = !!options.requireStagedChanges;
+  // Lesson-scoped teaching hook for showing a pull conflict.
+  this.mockConflictOnPull = options.mockConflictOnPull;
+  this.mockPullConflictConsumed = false;
+  this.activeConflict = null;
 
   this.initUniqueID();
 }
@@ -935,6 +939,7 @@ GitEngine.prototype.reset = function(target, options) {
   if (options.mode === 'hard') {
     this.resetStagingArea();
     this.resetWorkingDirectory();
+    this.activeConflict = null;
   }
 };
 
@@ -1442,6 +1447,7 @@ GitEngine.prototype.fetchCore = function(sourceDestPairs, options) {
 
 GitEngine.prototype.pull = function(options) {
   options = options || {};
+  this.assertNoActiveConflict();
   var localBranch = this.getOneBeforeCommit('HEAD');
 
   // no matter what fetch
@@ -1544,6 +1550,17 @@ GitEngine.prototype.pullFinishWithMerge = function(
       }));
       throw SHORT_CIRCUIT_CHAIN;
     }
+  }.bind(this));
+
+  chain = chain.then(function() {
+    if (!this.shouldMockPullConflict(remoteBranch, localBranch)) {
+      return;
+    }
+
+    this.command.set('error', new CommandResult({
+      msg: this.startMockPullConflict(remoteBranch)
+    }));
+    throw SHORT_CIRCUIT_CHAIN;
   }.bind(this));
 
   // delay a bit after the intense refresh animation from
@@ -1650,7 +1667,18 @@ GitEngine.prototype.commit = function(options) {
     author = userName + ' <' + userEmail + '>';
   }
 
-  var newCommit = this.makeCommit([targetCommit], id, {
+  if (this.activeConflict && !this.activeConflict.resolved) {
+    throw new GitError({
+      msg: intl.todo('Resolve the conflict before committing. Try git resolve-conflict ' + this.activeConflict.filepath)
+    });
+  }
+
+  var commitParents = [targetCommit];
+  if (this.activeConflict && this.activeConflict.resolved) {
+    commitParents.push(this.getCommitFromRef(this.activeConflict.remoteBranch));
+  }
+
+  var newCommit = this.makeCommit(commitParents, id, {
     commitMessage: options.commitMessage || 'Commit message not provided',
     author: author,
     fileChanges: JSON.parse(JSON.stringify(this.stagedChanges || {}))
@@ -1664,6 +1692,7 @@ GitEngine.prototype.commit = function(options) {
   // Clear only staged changes after commit
   // Working directory changes are independent and should be preserved
   this.resetStagingArea();
+  this.activeConflict = null;
   
   return newCommit;
 };
@@ -2200,6 +2229,8 @@ GitEngine.prototype.hgRebase = function(destination, base) {
 };
 
 GitEngine.prototype.rebase = function(targetSource, currentLocation, options) {
+  this.assertNoActiveConflict();
+
   // first some conditions
   if (this.isUpstreamOf(targetSource, currentLocation)) {
     this.command.setResult(intl.str('git-result-uptodate'));
@@ -2558,6 +2589,7 @@ GitEngine.prototype.mergeCheck = function(targetSource, currentLocation) {
 
 GitEngine.prototype.merge = function(targetSource, options) {
   options = options || {};
+  this.assertNoActiveConflict();
   var currentLocation = 'HEAD';
 
   // first some conditions
@@ -2919,6 +2951,78 @@ GitEngine.prototype.setLocalChangeState = function(workingDirectoryChanges, stag
   this.stagedChanges = JSON.parse(JSON.stringify(stagedChanges || {}));
 };
 
+GitEngine.prototype.shouldMockPullConflict = function(remoteBranch, localBranch) {
+  return !!this.mockConflictOnPull &&
+    !this.mockPullConflictConsumed &&
+    !this.activeConflict &&
+    !this.isUpstreamOf(remoteBranch, localBranch) &&
+    !this.isUpstreamOf(localBranch, remoteBranch);
+};
+
+GitEngine.prototype.getMockConflictFilepath = function() {
+  if (typeof this.mockConflictOnPull === 'string') {
+    return this.mockConflictOnPull;
+  }
+  return (this.mockConflictOnPull && this.mockConflictOnPull.filepath) ||
+    'shared.txt';
+};
+
+GitEngine.prototype.startMockPullConflict = function(remoteBranch) {
+  var filepath = this.getMockConflictFilepath();
+  this.mockPullConflictConsumed = true;
+  this.activeConflict = {
+    filepath: filepath,
+    remoteBranch: remoteBranch.get('id'),
+    resolved: false
+  };
+  this.workingDirectoryChanges[filepath] = {
+    type: 'modified',
+    content: 'Conflict markers need to be resolved'
+  };
+
+  return [
+    'CONFLICT (content): Merge conflict in ' + filepath,
+    'Automatic merge failed; fix conflicts and then commit the result.',
+    '',
+    'In this lesson, talk through the teammate change, then use:',
+    'git resolve-conflict ' + filepath
+  ].join('\n');
+};
+
+GitEngine.prototype.resolveConflict = function(filepath) {
+  if (!this.activeConflict) {
+    throw new GitError({
+      msg: intl.todo('No merge conflict is active')
+    });
+  }
+
+  if (filepath !== this.activeConflict.filepath) {
+    throw new GitError({
+      msg: intl.todo('Resolve the active conflict in ' + this.activeConflict.filepath)
+    });
+  }
+
+  this.workingDirectoryChanges[filepath] = {
+    type: 'modified',
+    content: 'Resolved conflict by combining teammate and local changes'
+  };
+  this.activeConflict.resolved = true;
+};
+
+GitEngine.prototype.assertNoActiveConflict = function() {
+  if (!this.activeConflict) {
+    return;
+  }
+
+  var nextStep = this.activeConflict.resolved ?
+    'Stage the resolved file and commit the merge.' :
+    'Try git resolve-conflict ' + this.activeConflict.filepath;
+
+  throw new GitError({
+    msg: intl.todo('Finish the current merge conflict first. ' + nextStep)
+  });
+};
+
 GitEngine.prototype.stageFile = function(filepath) {
   // Move file from working directory to staging area
   if (!filepath) {
@@ -3044,6 +3148,15 @@ GitEngine.prototype.status = function() {
 
   // Show changes to be committed (staged changes)
   var hasStagedChanges = Object.keys(this.stagedChanges).length > 0;
+
+  if (this.activeConflict && !this.activeConflict.resolved) {
+    lines.push('You have unmerged paths.');
+    lines.push(TAB + '(fix conflicts and run "git resolve-conflict <file>")');
+    lines.push('');
+    lines.push('Unmerged paths:');
+    lines.push(TAB + 'both modified: ' + this.activeConflict.filepath);
+    lines.push('');
+  }
   
   if (hasStagedChanges) {
     lines.push('Changes to be committed:');

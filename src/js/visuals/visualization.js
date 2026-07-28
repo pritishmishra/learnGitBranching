@@ -112,7 +112,8 @@ class Visualization {
       tags: this.tagCollection,
       gitVisuals: this.gitVisuals,
       eventBaton: this.eventBaton,
-      requireStagedChanges: options.requireStagedChanges
+      requireStagedChanges: options.requireStagedChanges,
+      mockConflictOnPull: options.mockConflictOnPull
     });
     this.gitEngine.init();
     this.gitVisuals.assignGitEngine(this.gitEngine);
@@ -166,7 +167,8 @@ class Visualization {
         noClick: true,
         treeString: options.treeString,
         initialWorkingDirectoryChanges: undefined,
-        initialStagedChanges: undefined
+        initialStagedChanges: undefined,
+        mockConflictOnPull: undefined
       }
     ));
     // if the z index is set on ours, carry that over
