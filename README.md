@@ -44,6 +44,10 @@ The current Lessons tab contains:
   - Undo Commits Safely
   - Rewind Local History
 
+- **Working with a Team**
+  - Download without Changing
+  - Sync Your Local Copy
+
 ### Exercises
 
 The Exercises tab is intentionally empty for now. The plan is to add independent

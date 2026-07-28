@@ -20,6 +20,10 @@ exports.levelSequences = {
     require('./mistakes/undoCommitsSafely').level,
     require('./mistakes/rewindLocalHistory').level
   ],
+  team: [
+    require('./team/downloadWithoutChanging').level,
+    require('./team/syncYourLocalCopy').level
+  ],
   intro: [
     require('./intro/commits').level,
     require('./intro/rebasing').level
@@ -94,6 +98,15 @@ var sequenceInfo = exports.sequenceInfo = {
     },
     about: {
       'en_US': 'Learn how to undo local changes, revert commits, and rewind local history'
+    }
+  },
+  team: {
+    tab: 'lessons',
+    displayName: {
+      'en_US': 'Working with a Team'
+    },
+    about: {
+      'en_US': 'Learn how to safely download and integrate work from remote repositories'
     }
   },
   intro: {
