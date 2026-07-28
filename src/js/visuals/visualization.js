@@ -132,6 +132,10 @@ class Visualization {
     if (this.treeString) {
       this.gitEngine.loadTreeFromString(this.treeString);
     }
+    this.gitEngine.setLocalChangeState(
+      options.initialWorkingDirectoryChanges,
+      options.initialStagedChanges
+    );
     if (this.options.zIndex) {
       this.setTreeIndex(this.options.zIndex);
     }
@@ -160,7 +164,9 @@ class Visualization {
         // never accept keyboard input or clicks
         noKeyboardInput: true,
         noClick: true,
-        treeString: options.treeString
+        treeString: options.treeString,
+        initialWorkingDirectoryChanges: undefined,
+        initialStagedChanges: undefined
       }
     ));
     // if the z index is set on ours, carry that over

@@ -2887,6 +2887,11 @@ GitEngine.prototype.resetWorkingDirectory = function() {
   this.workingDirectoryChanges = {};
 };
 
+GitEngine.prototype.setLocalChangeState = function(workingDirectoryChanges, stagedChanges) {
+  this.workingDirectoryChanges = JSON.parse(JSON.stringify(workingDirectoryChanges || {}));
+  this.stagedChanges = JSON.parse(JSON.stringify(stagedChanges || {}));
+};
+
 GitEngine.prototype.stageFile = function(filepath) {
   // Move file from working directory to staging area
   if (!filepath) {
