@@ -922,8 +922,34 @@ GitEngine.prototype.revert = function(whichCommits) {
   this.animationQueue.thenFinish(chain);
 };
 
-GitEngine.prototype.reset = function(target) {
-  this.setTargetLocation('HEAD', this.getCommitFromRef(target));
+GitEngine.prototype.reset = function(target, options) {
+  options = options || {};
+  var targetCommit = this.getCommitFromRef(target);
+
+  if (options.mode === 'soft') {
+    this.stageChangesFromRewoundCommits(targetCommit);
+  }
+
+  this.setTargetLocation('HEAD', targetCommit);
+
+  if (options.mode === 'hard') {
+    this.resetStagingArea();
+    this.resetWorkingDirectory();
+  }
+};
+
+GitEngine.prototype.stageChangesFromRewoundCommits = function(targetCommit) {
+  var current = this.getCommitFromRef('HEAD');
+  var targetID = targetCommit.get('id');
+  var changes = {};
+
+  while (current && current.get('id') !== targetID) {
+    Object.assign(changes, current.get('fileChanges') || {});
+    var parents = current.get('parents') || [];
+    current = parents[0];
+  }
+
+  Object.assign(this.stagedChanges, JSON.parse(JSON.stringify(changes)));
 };
 
 GitEngine.prototype.setupCherrypickChain = function(toCherrypick) {
@@ -1626,7 +1652,8 @@ GitEngine.prototype.commit = function(options) {
 
   var newCommit = this.makeCommit([targetCommit], id, {
     commitMessage: options.commitMessage || 'Commit message not provided',
-    author: author
+    author: author,
+    fileChanges: JSON.parse(JSON.stringify(this.stagedChanges || {}))
   });
   if (this.getDetachedHead() && this.mode === 'git') {
     this.command.addWarning(intl.str('git-warning-detached'));

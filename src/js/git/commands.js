@@ -623,11 +623,11 @@ var commandConfig = {
     execute: function(engine, command) {
       var commandOptions = command.getOptionsMap();
       var generalArgs = command.getGeneralArgs();
+      var resetOptions = {};
 
       if (commandOptions['--soft']) {
-        throw new GitError({
-          msg: intl.str('git-error-staging')
-        });
+        generalArgs = generalArgs.concat(commandOptions['--soft']);
+        resetOptions.mode = 'soft';
       }
       if (commandOptions['--hard']) {
         command.addWarning(
@@ -635,6 +635,7 @@ var commandConfig = {
         );
         // don't absorb the arg off of --hard
         generalArgs = generalArgs.concat(commandOptions['--hard']);
+        resetOptions.mode = 'hard';
       }
 
       // Check if this is a file unstaging operation (git reset HEAD <file>)
@@ -655,7 +656,7 @@ var commandConfig = {
         });
       }
 
-      engine.reset(generalArgs[0]);
+      engine.reset(generalArgs[0], resetOptions);
     }
   },
 

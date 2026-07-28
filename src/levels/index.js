@@ -16,7 +16,9 @@ exports.levelSequences = {
     require('./branchMerge/divergingMerge').level
   ],
   mistakes: [
-    require('./mistakes/undoLocalChanges').level
+    require('./mistakes/undoLocalChanges').level,
+    require('./mistakes/undoCommitsSafely').level,
+    require('./mistakes/rewindLocalHistory').level
   ],
   intro: [
     require('./intro/commits').level,
@@ -88,7 +90,7 @@ var sequenceInfo = exports.sequenceInfo = {
       'en_US': 'Correcting Mistakes'
     },
     about: {
-      'en_US': 'Learn how to undo local and staged changes before committing'
+      'en_US': 'Learn how to undo local changes, revert commits, and rewind local history'
     }
   },
   intro: {
