@@ -2925,6 +2925,27 @@ GitEngine.prototype.unstageFile = function(filepath) {
   delete this.stagedChanges[filepath];
 };
 
+GitEngine.prototype.discardWorkingDirectoryChange = function(filepath) {
+  if (!filepath) {
+    throw new GitError({
+      msg: intl.todo('filepath required for discardWorkingDirectoryChange')
+    });
+  }
+
+  if (!this.workingDirectoryChanges[filepath]) {
+    if (this.stagedChanges[filepath]) {
+      throw new GitError({
+        msg: intl.todo('File "' + filepath + '" is staged. Use git unstage first.')
+      });
+    }
+    throw new GitError({
+      msg: intl.todo('File "' + filepath + '" has no local changes to restore')
+    });
+  }
+
+  delete this.workingDirectoryChanges[filepath];
+};
+
 GitEngine.prototype.resetStagingArea = function() {
   // Clear all staged changes
   this.stagedChanges = {};
@@ -2994,7 +3015,7 @@ GitEngine.prototype.status = function() {
   
   if (hasStagedChanges) {
     lines.push('Changes to be committed:');
-    lines.push(TAB + '(use "git reset HEAD <file>..." to unstage)');
+    lines.push(TAB + '(use "git unstage <file>..." to unstage)');
     lines.push('');
     
     var self = this;
@@ -3014,7 +3035,7 @@ GitEngine.prototype.status = function() {
   if (hasUnstagedChanges) {
     lines.push('Changes not staged for commit:');
     lines.push(TAB + '(use "git add <file>..." to update what will be committed)');
-    lines.push(TAB + '(use "git checkout -- <file>..." to discard changes in working directory)');
+    lines.push(TAB + '(use "git restore <file>..." to discard changes in working directory)');
     lines.push('');
     
     var self = this;
@@ -3030,11 +3051,7 @@ GitEngine.prototype.status = function() {
   
   // If no changes at all, show the default message
   if (!hasStagedChanges && !hasUnstagedChanges) {
-    lines.push('Changes to be committed:');
-    lines.push('');
-    lines.push(TAB + 'modified: cal/OskiCostume.stl');
-    lines.push('');
-    lines.push(intl.str('git-status-readytocommit'));
+    lines.push('nothing to commit, working tree clean');
   }
 
   var msg = '';
@@ -3049,6 +3066,14 @@ GitEngine.prototype.status = function() {
 
 GitEngine.prototype.hasStagedChanges = function() {
   return Object.keys(this.stagedChanges).length > 0;
+};
+
+GitEngine.prototype.hasWorkingDirectoryChanges = function() {
+  return Object.keys(this.workingDirectoryChanges).length > 0;
+};
+
+GitEngine.prototype.hasLocalChanges = function() {
+  return this.hasStagedChanges() || this.hasWorkingDirectoryChanges();
 };
 
 GitEngine.prototype.diff = function(options) {

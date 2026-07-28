@@ -529,6 +529,11 @@ class Level extends Sandbox {
       return;
     }
 
+    if (this.level.requireCleanWorkingTreeForCompletion && this.mainVis.gitEngine.hasLocalChanges()) {
+      defer.resolve();
+      return;
+    }
+
     if (!this.hasIssuedRequiredCommands()) {
       defer.resolve();
       return;

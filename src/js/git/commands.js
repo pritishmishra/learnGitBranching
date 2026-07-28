@@ -1277,6 +1277,60 @@ var commandConfig = {
     }
   },
 
+  restore: {
+    regex: /^git +restore($|\s)/,
+    description: 'Restore working tree files',
+    options: [
+      '--staged'
+    ],
+    execute: function(engine, command) {
+      var commandOptions = command.getOptionsMap();
+      var stagedOption = commandOptions['--staged'];
+      var generalArgs = command.getGeneralArgs();
+
+      if (stagedOption) {
+        generalArgs = stagedOption.concat(generalArgs);
+      }
+
+      if (generalArgs.length === 0) {
+        throw new GitError({
+          msg: intl.todo('Usage: git restore <filepath>')
+        });
+      }
+
+      var filepath = generalArgs[0];
+      if (stagedOption) {
+        engine.unstageFile(filepath);
+      } else {
+        engine.discardWorkingDirectoryChange(filepath);
+      }
+
+      throw new CommandResult({
+        msg: ''
+      });
+    }
+  },
+
+  unstage: {
+    regex: /^git +unstage($|\s)/,
+    description: 'Move a staged change back to the working directory',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+
+      if (generalArgs.length === 0) {
+        throw new GitError({
+          msg: intl.todo('Usage: git unstage <filepath>')
+        });
+      }
+
+      engine.unstageFile(generalArgs[0]);
+
+      throw new CommandResult({
+        msg: ''
+      });
+    }
+  },
+
   config: {
     regex: /^git +config($|\s)/,
     description: 'Get and set repository or global options',

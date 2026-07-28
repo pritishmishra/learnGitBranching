@@ -15,6 +15,9 @@ exports.levelSequences = {
     require('./intro/merging').level,
     require('./branchMerge/divergingMerge').level
   ],
+  mistakes: [
+    require('./mistakes/undoLocalChanges').level
+  ],
   intro: [
     require('./intro/commits').level,
     require('./intro/rebasing').level
@@ -78,6 +81,14 @@ var sequenceInfo = exports.sequenceInfo = {
     },
     about: {
       'en_US': 'Learn how to work on separate timelines and combine changes'
+    }
+  },
+  mistakes: {
+    displayName: {
+      'en_US': 'Correcting Mistakes'
+    },
+    about: {
+      'en_US': 'Learn how to undo local and staged changes before committing'
     }
   },
   intro: {
