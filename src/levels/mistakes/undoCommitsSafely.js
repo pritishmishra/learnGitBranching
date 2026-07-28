@@ -28,7 +28,9 @@ exports.level = {
               "",
               "`git revert <commit>` creates a new commit that undoes the changes from an older commit. It does not erase the old commit from history.",
               "",
-              "That makes revert the safer choice when a commit may already have been shared with other people.",
+              "That makes revert the safer choice when a commit may already have been pushed to a remote branch, or when another person may already have pulled it.",
+              "",
+              "This exercise does not ask you to run `git push`; it focuses only on the local revert command. The important real-world habit is: if the commit is already shared, prefer `git revert` over rewriting history with `git reset`.",
               "",
               "In this exercise, you will use `git revert HEAD` to keep the task simple. `HEAD` means the current commit, so this reverts the latest commit on the current branch."
             ]
@@ -42,14 +44,13 @@ exports.level = {
               "",
               "Common forms are:",
               "",
-              "```",
-              "git revert HEAD",
-              "git revert HEAD~1",
-              "git revert HEAD~3",
-              "git revert abc123",
-              "```",
+              "`git revert HEAD` reverts the current commit.",
               "",
-              "`HEAD~1` means one commit before `HEAD`, `HEAD~3` means three commits before `HEAD`, and `abc123` represents a specific commit id from `git log`."
+              "`git revert HEAD~1` reverts one commit before `HEAD`.",
+              "",
+              "`git revert HEAD~3` reverts three commits before `HEAD`.",
+              "",
+              "`git revert abc123` reverts a specific commit id from `git log`."
             ]
           }
         },
