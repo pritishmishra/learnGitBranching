@@ -50,6 +50,10 @@ The current Lessons tab contains:
   - Collaborating Without Conflicting
   - Replay Your Work on the Latest Main
 
+- **Advanced Topics**
+  - The Emergency Override
+  - Pick the Good Parts
+
 ### Exercises
 
 The Exercises tab is intentionally empty for now. The plan is to add independent
@@ -175,6 +179,7 @@ Examples from this fork:
   local changes.
 - `git push -u origin <branch>` is supported for publishing a branch and setting
   upstream tracking.
+- `git push --force` and `git push -f` are supported for force-push lessons.
 
 ### Hidden Commands And Autocomplete
 

@@ -26,6 +26,10 @@ exports.levelSequences = {
     require('./team/collaboratingWithoutConflicting').level,
     require('./team/replayYourWorkOnLatestMain').level
   ],
+  advancedTopics: [
+    require('./advancedTopics/forcePushLastResort').level,
+    require('./advancedTopics/cherryPickGoodParts').level
+  ],
   intro: [
     require('./intro/commits').level,
     require('./intro/rebasing').level
@@ -109,6 +113,15 @@ var sequenceInfo = exports.sequenceInfo = {
     },
     about: {
       'en_US': 'Learn how to safely download, integrate, resolve, and publish team work'
+    }
+  },
+  advancedTopics: {
+    tab: 'lessons',
+    displayName: {
+      'en_US': 'Advanced Topics'
+    },
+    about: {
+      'en_US': 'Learn advanced Git tools for rewriting and moving selected work'
     }
   },
   intro: {

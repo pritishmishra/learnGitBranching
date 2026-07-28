@@ -924,6 +924,7 @@ var commandConfig = {
     description: 'Update remote refs along with associated objects',
     options: [
       '--force',
+      '-f',
       '--delete',
       '-d',
       '-u',
@@ -941,7 +942,7 @@ var commandConfig = {
       var source;
       var sourceObj;
       var commandOptions = command.getOptionsMap();
-      var force = !!commandOptions['--force'];
+      var force = !!(commandOptions['--force'] || commandOptions['-f']);
       var isDelete = commandOptions['-d'] || commandOptions['--delete'];
       var setUpstream = commandOptions['-u'] || commandOptions['--set-upstream'];
 
