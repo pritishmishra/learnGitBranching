@@ -37,6 +37,20 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
+              "You can think of `git pull` as a shortcut for two commands:",
+              "",
+              "`git fetch` downloads the remote commits and updates `o/main`.",
+              "",
+              "`git merge o/main` brings those downloaded commits into your current local branch.",
+              "",
+              "Because that fetch-then-merge workflow is so common, Git gives us `git pull` to do both together."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "To practice team workflows, this app includes a teaching command named `git fakeTeamwork`.",
               "",
               "`git fakeTeamwork` simulates another person pushing commits to the remote repository.",
@@ -68,6 +82,23 @@ exports.level = {
             ],
             "command": "git fakeTeamwork 2",
             "beforeCommand": "git clone"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "### Fetch, Then Merge",
+              "",
+              "First, watch the two-step version: `git fetch` downloads the remote commits, then `git merge o/main` brings them into local `main`."
+            ],
+            "afterMarkdowns": [
+              "That worked: local `main` now includes the remote commits.",
+              "",
+              "`git pull` is the shortcut for this common fetch-then-merge sequence."
+            ],
+            "command": "git fetch;git merge o/main",
+            "beforeCommand": "git clone;git fakeTeamwork 2"
           }
         },
         {
