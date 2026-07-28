@@ -11,8 +11,8 @@ exports.level = {
   "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
-    "^touch +rewind\\.txt($| +)",
-    "^git +add +rewind\\.txt *$",
+    "^touch +\\S+($| +)",
+    "^git +add +\\S+ *$",
     "^git +commit +.*$",
     "^git +reset +--soft +HEAD~1 *$",
     "^git +status *$",
@@ -31,7 +31,7 @@ exports.level = {
               "",
               "`git reset` moves the current branch to another commit. Unlike `git revert`, reset rewrites local history by moving the branch pointer.",
               "",
-              "Use reset carefully. It is best for commits that are still local and have not been shared."
+              "Use reset carefully. It is best for commits that are still local and have not been pushed to a remote branch."
             ]
           }
         },
@@ -53,29 +53,18 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "### Soft Reset",
+              "### Reset Moves the Branch",
               "",
-              "Watch `main` move backward while the file remains staged."
+              "Watch `main` move back one commit with `git reset --soft HEAD~1`.",
+              "",
+              "A hard reset would look the same in this commit graph because `git reset --hard HEAD~1` also moves `main` back one commit."
             ],
             "afterMarkdowns": [
-              "`main` is back where it started, but `git status` still shows the file staged for commit."
-            ],
-            "command": "git reset --soft HEAD~1;git status",
-            "beforeCommand": "touch rewind.txt;git add rewind.txt;git commit -m 'Add rewind.txt'"
-          }
-        },
-        {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "### Hard Reset",
+              "Visually, both soft and hard reset move the branch back.",
               "",
-              "Now watch `git reset --hard HEAD~1` move the branch backward and discard the local changes."
+              "The difference is what happens to the file changes: `--soft` keeps them staged, while `--hard` discards them."
             ],
-            "afterMarkdowns": [
-              "After the hard reset, the branch is rewound and the working tree is clean."
-            ],
-            "command": "git reset --hard HEAD~1;git status",
+            "command": "git reset --soft HEAD~1",
             "beforeCommand": "touch rewind.txt;git add rewind.txt;git commit -m 'Add rewind.txt'"
           }
         },
@@ -90,8 +79,8 @@ exports.level = {
               "**1. Create, stage, and commit a file**",
               "",
               "```",
-              "touch rewind.txt",
-              "git add rewind.txt",
+              "touch rewind.txt;",
+              "git add rewind.txt;",
               "git commit -m \"Add rewind.txt\"",
               "```",
               "",
@@ -99,19 +88,29 @@ exports.level = {
               "",
               "```",
               "git reset --soft HEAD~1",
+              "```",
+              "",
+              "**3. Check that the change is staged**",
+              "",
+              "```",
               "git status",
               "```",
               "",
-              "**3. Commit the staged change again**",
+              "**4. Commit the staged change again**",
               "",
               "```",
               "git commit -m \"Add rewind.txt\"",
               "```",
               "",
-              "**4. Rewind the commit and discard the change**",
+              "**5. Rewind the commit and discard the change**",
               "",
               "```",
               "git reset --hard HEAD~1",
+              "```",
+              "",
+              "**6. Check that the working tree is clean**",
+              "",
+              "```",
               "git status",
               "```",
               "",

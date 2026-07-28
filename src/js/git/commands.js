@@ -630,9 +630,6 @@ var commandConfig = {
         resetOptions.mode = 'soft';
       }
       if (commandOptions['--hard']) {
-        command.addWarning(
-          intl.str('git-warning-hard')
-        );
         // don't absorb the arg off of --hard
         generalArgs = generalArgs.concat(commandOptions['--hard']);
         resetOptions.mode = 'hard';
