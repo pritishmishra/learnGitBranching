@@ -17,7 +17,7 @@ reorganizes the learning experience around a more guided curriculum.
 The level picker now has three top-level tabs:
 
 - **Lessons**: the structured teaching path for students.
-- **Exercises**: reserved for future practice-only exercises.
+- **Exercises**: standalone practice exercises that reinforce the lesson path.
 - **Legacy**: the original Learn Git Branching level sequences that are not part
   of the new guided curriculum.
 
@@ -56,8 +56,17 @@ The current Lessons tab contains:
 
 ### Exercises
 
-The Exercises tab is intentionally empty for now. The plan is to add independent
-practice exercises here after the lesson path stabilizes.
+The Exercises tab contains standalone practice shells. The initial exercise
+buttons and placeholder screens are in place; full challenge instructions and
+validation will be added as the exercises are designed.
+
+- **Practice Exercises**
+  - First Day on the Repo
+  - Two Timelines, One History
+  - Clean Up Before You Commit
+  - Too Soon - Rebuild the Commit
+  - Undo Without Erasing History
+  - Catch Up Without a Merge
 
 ### Legacy
 

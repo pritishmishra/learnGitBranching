@@ -30,6 +30,14 @@ exports.levelSequences = {
     require('./advancedTopics/forcePushLastResort').level,
     require('./advancedTopics/cherryPickGoodParts').level
   ],
+  practiceExercises: [
+    require('./exercises/firstDayOnTheRepo').level,
+    require('./exercises/twoTimelinesOneHistory').level,
+    require('./exercises/cleanUpBeforeYouCommit').level,
+    require('./exercises/tooSoonRebuildTheCommit').level,
+    require('./exercises/undoWithoutErasingHistory').level,
+    require('./exercises/catchUpWithoutAMerge').level
+  ],
   intro: [
     require('./intro/commits').level,
     require('./intro/rebasing').level
@@ -122,6 +130,15 @@ var sequenceInfo = exports.sequenceInfo = {
     },
     about: {
       'en_US': 'Learn advanced Git tools for rewriting and moving selected work'
+    }
+  },
+  practiceExercises: {
+    tab: 'exercises',
+    displayName: {
+      'en_US': 'Practice Exercises'
+    },
+    about: {
+      'en_US': 'Apply the guided Git lessons in standalone practice scenarios'
     }
   },
   intro: {
