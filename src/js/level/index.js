@@ -542,6 +542,11 @@ class Level extends Sandbox {
       return;
     }
 
+    if (!this.hasExpectedFileChangeState()) {
+      defer.resolve();
+      return;
+    }
+
     var current = this.mainVis.gitEngine.printTree();
     var solved = TreeCompare.dispatchFromLevel(this.level, current);
 
@@ -566,6 +571,51 @@ class Level extends Sandbox {
 
   testOptionOnString(str, option) {
     return str && new RegExp('--' + option).test(str);
+  }
+
+  hasExpectedFileChangeState() {
+    var gitEngine = this.mainVis.gitEngine;
+
+    if (this.level.expectedHeadFileChanges &&
+        !this.changeMapsMatch(
+          gitEngine.getCommitFromRef('HEAD').get('fileChanges') || {},
+          this.level.expectedHeadFileChanges
+        )) {
+      return false;
+    }
+
+    if (this.level.expectedWorkingDirectoryChanges &&
+        !this.changeMapsMatch(
+          gitEngine.workingDirectoryChanges || {},
+          this.level.expectedWorkingDirectoryChanges
+        )) {
+      return false;
+    }
+
+    if (this.level.expectedStagedChanges &&
+        !this.changeMapsMatch(
+          gitEngine.stagedChanges || {},
+          this.level.expectedStagedChanges
+        )) {
+      return false;
+    }
+
+    return true;
+  }
+
+  changeMapsMatch(actual, expected) {
+    var actualKeys = Object.keys(actual).sort();
+    var expectedKeys = Object.keys(expected).sort();
+
+    if (actualKeys.length !== expectedKeys.length) {
+      return false;
+    }
+
+    return expectedKeys.every(function(filepath, index) {
+      return actualKeys[index] === filepath &&
+        (!expected[filepath].type ||
+          (actual[filepath] && actual[filepath].type === expected[filepath].type));
+    });
   }
 
   levelSolved(defer) {

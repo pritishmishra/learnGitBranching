@@ -56,7 +56,7 @@ The current Lessons tab contains:
 
 ### Exercises
 
-The Exercises tab contains standalone practice scenarios. Exercises 1 and 2 are
+The Exercises tab contains standalone practice scenarios. Exercises 1-4 are
 implemented; remaining exercises have placeholder screens until their challenge
 instructions and validation are designed.
 
@@ -150,6 +150,12 @@ Common fields used by this fork:
 - `initialWorkingDirectoryChanges`: seed local unstaged file changes at level
   start.
 - `initialStagedChanges`: seed staged file changes at level start.
+- `expectedHeadFileChanges`: require the final `HEAD` commit to contain exactly
+  the listed file changes.
+- `expectedWorkingDirectoryChanges`: require the final unstaged working
+  directory changes to match the listed file changes.
+- `expectedStagedChanges`: require the final staging area to match the listed
+  file changes. Use `{}` to require an empty staging area.
 - `mockConflictOnPull`: lesson-scoped teaching hook that makes `git pull`
   fetch remote work, pause before the merge, and create a simulated conflict in
   the configured file.
