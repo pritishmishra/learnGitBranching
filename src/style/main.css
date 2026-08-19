@@ -944,6 +944,23 @@ div.displayName h3 {
 div.iconHolder {
 }
 
+div.exerciseIconHolder {
+  margin: 4px 0;
+}
+
+div.exerciseLevelRow {
+  min-height: 52px;
+}
+
+div.exerciseLevelRow a.levelIcon {
+  margin: 6px 16px 6px 20px;
+}
+
+span.exerciseLevelTitle {
+  color: #EEE;
+  font-size: 0.9em;
+}
+
 div.seriesView p.levelInfo,
 div.seriesView p.about {
   margin: 0px;

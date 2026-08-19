@@ -134,11 +134,12 @@ var sequenceInfo = exports.sequenceInfo = {
   },
   practiceExercises: {
     tab: 'exercises',
+    renderAsExerciseRows: true,
     displayName: {
-      'en_US': 'Practice Exercises'
+      'en_US': 'Exercises'
     },
     about: {
-      'en_US': 'Apply the guided Git lessons in standalone practice scenarios'
+      'en_US': 'Apply the guided Git lessons in following standalone exercise scenarios'
     }
   },
   intro: {

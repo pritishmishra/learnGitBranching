@@ -20,6 +20,7 @@ var baseTree = JSON.stringify({
 
 exports.makePlaceholderExercise = function(number, title) {
   return {
+    "exerciseNumber": number,
     "name": {
       "en_US": title
     },

@@ -410,12 +410,18 @@ class SeriesView extends BaseView {
     this.levels = LevelStore.getLevelsInSequence(this.name);
 
     this.levelIDs = [];
+    this.levelRows = [];
     var firstLevelInfo = null;
-    this.levels.forEach(function(level) {
+    this.levels.forEach(function(level, index) {
       if (firstLevelInfo === null) {
         firstLevelInfo = this.formatLevelAbout(level.id);
       }
       this.levelIDs.push(level.id);
+      this.levelRows.push({
+        id: level.id,
+        number: this.getLevelNumber(level, index),
+        title: intl.getName(level)
+      });
     }, this);
 
     this.destination = options.destination;
@@ -425,7 +431,9 @@ class SeriesView extends BaseView {
       displayName: intl.getIntlKey(this.info, 'displayName'),
       about: intl.getIntlKey(this.info, 'about') || "&nbsp;",
       levelInfo: firstLevelInfo,
-      ids: this.levelIDs
+      ids: this.levelIDs,
+      levelRows: this.levelRows,
+      renderAsExerciseRows: !!this.info.renderAsExerciseRows
     };
 
     this.render();
@@ -470,14 +478,21 @@ class SeriesView extends BaseView {
 
   formatLevelAbout(id) {
     var level = LevelStore.getLevel(id);
-    return this.getLevelNumberFromID(id) +
+    return this.getLevelNumber(level) +
       ': ' +
       intl.getName(level);
   }
 
-  getLevelNumberFromID(id) {
+  getLevelNumber(level, index) {
+    if (level.exerciseNumber) {
+      return String(level.exerciseNumber);
+    }
+    return this.getLevelNumberFromID(level.id, index);
+  }
+
+  getLevelNumberFromID(id, index) {
     // hack -- parse out the level number from the ID
-    return id.replace(/[^0-9]/g, '');
+    return id.replace(/[^0-9]/g, '') || String(index + 1);
   }
 
   click(ev) {

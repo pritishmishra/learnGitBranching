@@ -60,7 +60,7 @@ The Exercises tab contains standalone practice shells. The initial exercise
 buttons and placeholder screens are in place; full challenge instructions and
 validation will be added as the exercises are designed.
 
-- **Practice Exercises**
+- **Exercises**
   - First Day on the Repo
   - Two Timelines, One History
   - Clean Up Before You Commit
@@ -209,7 +209,8 @@ Autocomplete filtering is wired through
 Notable fork-specific UI behavior:
 
 - The level picker uses **Lessons**, **Exercises**, and **Legacy** tabs.
-- Empty tabs are allowed; Exercises is empty by design.
+- The Exercises tab renders practice placeholders as one exercise per row with
+  numbered buttons.
 - The success dialog was simplified and no longer shows command-count
   calculations.
 - The local/remote visualization can label the two repository views.

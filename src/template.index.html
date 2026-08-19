@@ -142,19 +142,40 @@
     <p class="levelInfo">
       <%= levelInfo %>
     </p>
-    <div class="iconHolder box horizontal">
-      <% for (var i = 0; i < ids.length; i++) { %>
-        <a href="javascript:void(0)" class="levelIcon box center centerAlign vertical" id="levelIcon-<%=ids[i]%>" data-id="<%=ids[i]%>">
-          <div class="index box" data-id="<%=ids[i]%>">
-            <i class="icon-ok-circle" data-id="<%=ids[i]%>"></i>
-            <i class="icon-star" data-id="<%=ids[i]%>"></i>
-            <div class="indexNum" data-id="<%=ids[i]%>">
-              <%= i + 1 %>
-            </div>
+    <% if (renderAsExerciseRows) { %>
+      <div class="iconHolder exerciseIconHolder box vertical">
+        <% for (var i = 0; i < levelRows.length; i++) { %>
+          <div class="exerciseLevelRow box horizontal centerAlign" data-id="<%=levelRows[i].id%>">
+            <a href="javascript:void(0)" class="levelIcon box center centerAlign vertical" id="levelIcon-<%=levelRows[i].id%>" data-id="<%=levelRows[i].id%>">
+              <div class="index box" data-id="<%=levelRows[i].id%>">
+                <i class="icon-ok-circle" data-id="<%=levelRows[i].id%>"></i>
+                <i class="icon-star" data-id="<%=levelRows[i].id%>"></i>
+                <div class="indexNum" data-id="<%=levelRows[i].id%>">
+                  <%= levelRows[i].number %>
+                </div>
+              </div>
+            </a>
+            <span class="exerciseLevelTitle" data-id="<%=levelRows[i].id%>">
+              <%= levelRows[i].title %>
+            </span>
           </div>
-        </a>
-      <% } %>
-    </div>
+        <% } %>
+      </div>
+    <% } else { %>
+      <div class="iconHolder box horizontal">
+        <% for (var i = 0; i < ids.length; i++) { %>
+          <a href="javascript:void(0)" class="levelIcon box center centerAlign vertical" id="levelIcon-<%=ids[i]%>" data-id="<%=ids[i]%>">
+            <div class="index box" data-id="<%=ids[i]%>">
+              <i class="icon-ok-circle" data-id="<%=ids[i]%>"></i>
+              <i class="icon-star" data-id="<%=ids[i]%>"></i>
+              <div class="indexNum" data-id="<%=ids[i]%>">
+                <%= i + 1 %>
+              </div>
+            </div>
+          </a>
+        <% } %>
+      </div>
+    <% } %>
   </script>
 
   <script type="text/html" id="git-demonstration-view">
