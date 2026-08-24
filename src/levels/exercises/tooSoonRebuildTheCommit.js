@@ -130,6 +130,10 @@ exports.level = {
   "goalTreeString": goalTree,
   "solutionCommand": "git reset --soft HEAD~1;touch review.txt;git add review.txt;git commit -m 'Add draft and review'",
   "startTree": startTree,
+  "initialGitConfig": {
+    "user.name": "Student",
+    "user.email": "student@example.com"
+  },
   "expectedHeadFileChanges": {
     "draft.txt": {
       "type": "added"
@@ -183,6 +187,8 @@ exports.level = {
               "`draft.txt` has been created and the change has been committed.",
               "",
               "### Setup already completed",
+              "",
+              "- Repository-local Git identity is already configured.",
               "",
               "1. Commit `C1` is already on `origin/main`.",
               "2. `draft.txt` has been created and its change has been committed.",

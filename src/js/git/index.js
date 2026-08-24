@@ -1142,7 +1142,6 @@ GitEngine.prototype.push = function(options) {
   }
 
   if (!this.origin.doesRefExist(options.destination)) {
-    console.warn('ref', options.destination);
     this.makeBranchOnOriginAndTrack(
       options.destination,
       this.getCommitFromRef(sourceBranch)
@@ -2975,6 +2974,10 @@ GitEngine.prototype.resetWorkingDirectory = function() {
 GitEngine.prototype.setLocalChangeState = function(workingDirectoryChanges, stagedChanges) {
   this.workingDirectoryChanges = JSON.parse(JSON.stringify(workingDirectoryChanges || {}));
   this.stagedChanges = JSON.parse(JSON.stringify(stagedChanges || {}));
+};
+
+GitEngine.prototype.setConfigState = function(gitConfig) {
+  this.gitConfig = Object.assign({}, gitConfig || {});
 };
 
 GitEngine.prototype.shouldMockPullConflict = function(remoteBranch, localBranch) {

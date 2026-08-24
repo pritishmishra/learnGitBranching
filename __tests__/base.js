@@ -138,6 +138,9 @@ var runLevelCommands = function(levelBlob, command) {
   }
 
   headless.gitEngine.requireStagedChanges = !!levelBlob.requireStagedChanges;
+  if (levelBlob.initialGitConfig) {
+    headless.gitEngine.setConfigState(levelBlob.initialGitConfig);
+  }
   if (levelBlob.initialWorkingDirectoryChanges || levelBlob.initialStagedChanges) {
     headless.gitEngine.setLocalChangeState(
       levelBlob.initialWorkingDirectoryChanges,
@@ -181,7 +184,14 @@ var runLevelCommands = function(levelBlob, command) {
 var expectLevelCommandsToSolve = function(levelBlob, command) {
   return runLevelCommands(levelBlob, command).then(function(result) {
     expect(result.solved).toBeTruthy(
-      'Expected "' + levelBlob.name.en_US + '" to be solved'
+      'Expected "' + levelBlob.name.en_US + '" to be solved: ' +
+      JSON.stringify({
+        treeSolved: result.treeSolved,
+        cleanEnough: result.cleanEnough,
+        userConfigOk: result.userConfigOk,
+        fileChangesOk: result.fileChangesOk,
+        issuedRequiredCommands: result.issuedRequiredCommands
+      })
     );
   });
 };

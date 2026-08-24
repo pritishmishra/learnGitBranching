@@ -132,6 +132,10 @@ exports.level = {
   "goalTreeString": goalTree,
   "solutionCommand": "git checkout -b feature-profile;touch profile.txt;git add profile.txt;git commit -m 'Add profile';git checkout main;touch hotfix.txt;git add hotfix.txt;git commit -m 'Add hotfix';git merge feature-profile",
   "startTree": startTree,
+  "initialGitConfig": {
+    "user.name": "Student",
+    "user.email": "student@example.com"
+  },
   "hint": {
     "en_US": "Create feature-profile work, create a separate hotfix on main, then merge feature-profile into main"
   },

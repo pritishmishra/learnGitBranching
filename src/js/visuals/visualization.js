@@ -133,6 +133,9 @@ class Visualization {
     if (this.treeString) {
       this.gitEngine.loadTreeFromString(this.treeString);
     }
+    if (options.initialGitConfig) {
+      this.gitEngine.setConfigState(options.initialGitConfig);
+    }
     this.gitEngine.setLocalChangeState(
       options.initialWorkingDirectoryChanges,
       options.initialStagedChanges

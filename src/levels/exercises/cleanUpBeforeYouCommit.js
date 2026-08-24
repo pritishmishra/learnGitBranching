@@ -120,6 +120,10 @@ exports.level = {
   "goalTreeString": goalTree,
   "solutionCommand": "git restore settings.txt;git unstage notes.txt;touch submission.txt;git add submission.txt;git commit -m 'Add submission'",
   "startTree": startTree,
+  "initialGitConfig": {
+    "user.name": "Student",
+    "user.email": "student@example.com"
+  },
   "initialWorkingDirectoryChanges": {
     "settings.txt": {
       "type": "deleted"
@@ -185,6 +189,8 @@ exports.level = {
               "There are no other uncommitted changes.",
               "",
               "### Setup already completed",
+              "",
+              "- Repository-local Git identity is already configured.",
               "",
               "1. `settings.txt` was committed earlier.",
               "2. `rm settings.txt`",

@@ -90,7 +90,7 @@ var goalTree = JSON.stringify({
     "feature-notifications": {
       "target": "C2'",
       "id": "feature-notifications",
-      "remoteTrackingBranchID": "o/feature-notifications"
+      "remoteTrackingBranchID": "o/feature-n"
     },
     "o/main": {
       "target": "C3",
@@ -98,9 +98,9 @@ var goalTree = JSON.stringify({
       "remoteTrackingBranchID": null,
       "localBranchesThatTrackThis": ["main"]
     },
-    "o/feature-notifications": {
+    "o/feature-n": {
       "target": "C2'",
-      "id": "o/feature-notifications",
+      "id": "o/feature-n",
       "remoteTrackingBranchID": null,
       "localBranchesThatTrackThis": ["feature-notifications"]
     }
@@ -139,9 +139,9 @@ var goalTree = JSON.stringify({
         "id": "main",
         "remoteTrackingBranchID": null
       },
-      "feature-notifications": {
+      "feature-n": {
         "target": "C2'",
-        "id": "feature-notifications",
+        "id": "feature-n",
         "remoteTrackingBranchID": null
       }
     },
@@ -179,6 +179,10 @@ exports.level = {
   "goalTreeString": goalTree,
   "solutionCommand": "git fetch;git rebase o/main;git push -u origin feature-notifications",
   "startTree": startTree,
+  "initialGitConfig": {
+    "user.name": "Student",
+    "user.email": "student@example.com"
+  },
   "expectedHeadFileChanges": {
     "notifications.txt": {
       "type": "added"
@@ -234,6 +238,8 @@ exports.level = {
               "",
               "### Setup already completed",
               "",
+              "- Repository-local Git identity is already configured.",
+              "",
               "1. `git switch -c feature-notifications`",
               "2. `touch notifications.txt`",
               "3. `git add notifications.txt`",
@@ -251,6 +257,7 @@ exports.level = {
               "2. Rebase `feature-notifications` onto the updated `o/main`.",
               "3. Do not create a merge commit.",
               "4. Push `feature-notifications` to `origin` and configure it to track `origin/feature-notifications`.",
+              "   - The visualization shortens that remote-tracking branch to `o/feature-n`.",
               "5. Finish on `feature-notifications` with both `api.txt` and `notifications.txt` present in history.",
               "",
               "To reopen this task screen later, use the command `objective`."

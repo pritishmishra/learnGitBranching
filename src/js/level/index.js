@@ -207,6 +207,7 @@ class Level extends Sandbox {
       requireStagedChanges: !!options.level.requireStagedChanges,
       initialWorkingDirectoryChanges: options.level.initialWorkingDirectoryChanges,
       initialStagedChanges: options.level.initialStagedChanges,
+      initialGitConfig: options.level.initialGitConfig,
       mockConflictOnPull: options.level.mockConflictOnPull
     });
   }

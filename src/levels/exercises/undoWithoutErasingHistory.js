@@ -168,6 +168,10 @@ exports.level = {
   "goalTreeString": goalTree,
   "solutionCommand": "git log;git revert HEAD~1;git push",
   "startTree": startTree,
+  "initialGitConfig": {
+    "user.name": "Student",
+    "user.email": "student@example.com"
+  },
   "expectedHeadFileChanges": {
     "experimental.txt": {
       "type": "deleted"
@@ -218,6 +222,8 @@ exports.level = {
               "You must remove `experimental.txt` while keeping `release-notes.txt`.",
               "",
               "### Setup already completed",
+              "",
+              "- Repository-local Git identity is already configured.",
               "",
               "1. You start on `main`.",
               "2. `touch experimental.txt`",

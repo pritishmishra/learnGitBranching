@@ -99,7 +99,8 @@ Useful package scripts are defined in [package.json](package.json):
 Practice exercise validation tests live in
 [__tests__/exercises](__tests__/exercises).
 They run headless command sequences and check both successful completions and
-intentional failure cases.
+intentional failure cases. The behavior covered by those tests is documented in
+[docs/exercise-tests.md](docs/exercise-tests.md).
 
 This is still a client-side JavaScript application. The main app behavior lives
 under [src/js](src/js), and level definitions live under [src/levels](src/levels).
@@ -154,6 +155,9 @@ Common fields used by this fork:
 - `initialWorkingDirectoryChanges`: seed local unstaged file changes at level
   start.
 - `initialStagedChanges`: seed staged file changes at level start.
+- `initialGitConfig`: seed repository-local Git config, such as `user.name` and
+  `user.email`, when an exercise starts after identity setup has already been
+  completed.
 - `expectedHeadFileChanges`: require the final `HEAD` commit to contain exactly
   the listed file changes.
 - `expectedWorkingDirectoryChanges`: require the final unstaged working
