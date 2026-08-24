@@ -37,6 +37,81 @@ describe('Practice exercise validation', function() {
     );
   });
 
+  it('does not solve exercise 1 when the requested file has the wrong name', function() {
+    return base.expectLevelCommandsNotToSolve(
+      getExercise(1),
+      [
+        'git clone',
+        'git config user.name Student',
+        'git config user.email student@example.com',
+        'touch intro.txt',
+        'git add intro.txt',
+        'git commit -m "Introduce myself"',
+        'git push'
+      ].join(';')
+    );
+  });
+
+  it('solves exercise 2 with separate feature and hotfix commits merged on main', function() {
+    return base.expectLevelCommandsToSolve(
+      getExercise(2),
+      [
+        'git checkout -b feature-profile',
+        'touch profile.txt',
+        'git add profile.txt',
+        'git commit -m "Add profile"',
+        'git checkout main',
+        'touch hotfix.txt',
+        'git add hotfix.txt',
+        'git commit -m "Add hotfix"',
+        'git merge feature-profile'
+      ].join(';')
+    );
+  });
+
+  it('does not solve exercise 2 when the profile file has the wrong name', function() {
+    return base.expectLevelCommandsNotToSolve(
+      getExercise(2),
+      [
+        'git checkout -b feature-profile',
+        'touch user-profile.txt',
+        'git add user-profile.txt',
+        'git commit -m "Add profile"',
+        'git checkout main',
+        'touch hotfix.txt',
+        'git add hotfix.txt',
+        'git commit -m "Add hotfix"',
+        'git merge feature-profile'
+      ].join(';')
+    );
+  });
+
+  it('solves exercise 3 by restoring, unstaging, and committing only submission.txt', function() {
+    return base.expectLevelCommandsToSolve(
+      getExercise(3),
+      [
+        'git restore settings.txt',
+        'git unstage notes.txt',
+        'touch submission.txt',
+        'git add submission.txt',
+        'git commit -m "Submit work"'
+      ].join(';')
+    );
+  });
+
+  it('does not solve exercise 3 when the submission file has the wrong name', function() {
+    return base.expectLevelCommandsNotToSolve(
+      getExercise(3),
+      [
+        'git restore settings.txt',
+        'git unstage notes.txt',
+        'touch final-submission.txt',
+        'git add final-submission.txt',
+        'git commit -m "Submit work"'
+      ].join(';')
+    );
+  });
+
   it('solves exercise 4 with any non-empty replacement commit message', function() {
     return base.expectLevelCommandsToSolve(
       getExercise(4),
@@ -44,6 +119,18 @@ describe('Practice exercise validation', function() {
         'git reset --soft HEAD~1',
         'touch review.txt',
         'git add review.txt',
+        'git commit -m "Ready for review"'
+      ].join(';')
+    );
+  });
+
+  it('does not solve exercise 4 when the follow-up file has the wrong name', function() {
+    return base.expectLevelCommandsNotToSolve(
+      getExercise(4),
+      [
+        'git reset --soft HEAD~1',
+        'touch review-notes.txt',
+        'git add review-notes.txt',
         'git commit -m "Ready for review"'
       ].join(';')
     );

@@ -28,6 +28,29 @@ first-contribution workflow:
 This test also checks that the exercise fails if the student skips the
 `user.email` configuration step, even if the rest of the workflow is completed.
 
+This test also checks that the exercise fails if the student creates and commits
+a file with the wrong name instead of `introduction.txt`.
+
+### Exercise 2: Two Timelines, One History
+
+This test checks that the exercise passes when the student creates
+`feature-profile`, commits `profile.txt` on that branch, returns to `main`,
+commits `hotfix.txt`, and merges `feature-profile` back into `main`.
+
+This test also checks that the exercise fails if the student creates the wrong
+profile filename instead of `profile.txt`, even if the branch, hotfix, and merge
+steps are completed.
+
+### Exercise 3: Clean Up Before You Commit
+
+This test checks that the exercise passes when the student restores the deleted
+`settings.txt` file, unstages `notes.txt` while keeping it in the working
+directory, creates `submission.txt`, stages it, and commits only that intended
+submission file.
+
+This test also checks that the exercise fails if the student creates and commits
+the wrong submission filename instead of `submission.txt`.
+
 ### Exercise 4: Too Soon - Rebuild the Commit
 
 This test checks that the exercise passes when the student uses
@@ -38,6 +61,9 @@ together with any non-empty commit message.
 This test also checks that the exercise fails if the student uses
 `git reset --hard HEAD~1`, because that drops the staged `draft.txt` change
 instead of preserving it for the replacement commit.
+
+This test also checks that the exercise fails if the student creates and commits
+the wrong follow-up filename instead of `review.txt`.
 
 ### Exercise 5: Undo Without Erasing History
 

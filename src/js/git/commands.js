@@ -1330,7 +1330,7 @@ var commandConfig = {
     }
   },
 
-  resolveConflict: {
+  resolveconflict: {
     displayName: 'resolve-conflict',
     regex: /^git +resolve-conflict($|\s)/,
     description: 'Simulator-only: mark a mocked merge conflict as resolved',

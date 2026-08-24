@@ -90,7 +90,7 @@ var goalTree = JSON.stringify({
     "feature-notifications": {
       "target": "C2'",
       "id": "feature-notifications",
-      "remoteTrackingBranchID": "o/feature-n"
+      "remoteTrackingBranchID": "o/feature-notifications"
     },
     "o/main": {
       "target": "C3",
@@ -98,9 +98,9 @@ var goalTree = JSON.stringify({
       "remoteTrackingBranchID": null,
       "localBranchesThatTrackThis": ["main"]
     },
-    "o/feature-n": {
+    "o/feature-notifications": {
       "target": "C2'",
-      "id": "o/feature-n",
+      "id": "o/feature-notifications",
       "remoteTrackingBranchID": null,
       "localBranchesThatTrackThis": ["feature-notifications"]
     }
@@ -139,9 +139,9 @@ var goalTree = JSON.stringify({
         "id": "main",
         "remoteTrackingBranchID": null
       },
-      "feature-n": {
+      "feature-notifications": {
         "target": "C2'",
-        "id": "feature-n",
+        "id": "feature-notifications",
         "remoteTrackingBranchID": null
       }
     },
@@ -257,7 +257,6 @@ exports.level = {
               "2. Rebase `feature-notifications` onto the updated `o/main`.",
               "3. Do not create a merge commit.",
               "4. Push `feature-notifications` to `origin` and configure it to track `origin/feature-notifications`.",
-              "   - The visualization shortens that remote-tracking branch to `o/feature-n`.",
               "5. Finish on `feature-notifications` with both `api.txt` and `notifications.txt` present in history.",
               "",
               "To reopen this task screen later, use the command `objective`."
