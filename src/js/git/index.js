@@ -1205,18 +1205,21 @@ GitEngine.prototype.push = function(options) {
     return !this.origin.refs[commitJSON.id];
   }, this);
 
-  var makeCommit = function(id, parentIDs) {
+  var makeCommit = function(commitJSON) {
     // need to get the parents first. since we order by depth, we know
     // the dependencies are there already
-    var parents = parentIDs.map(function(parentID) {
+    var parents = commitJSON.parents.map(function(parentID) {
       return this.origin.refs[parentID];
     }, this);
-    return this.origin.makeCommit(parents, id);
+    return this.origin.makeCommit(parents, commitJSON.id, {
+      commitMessage: commitJSON.commitMessage,
+      fileChanges: JSON.parse(JSON.stringify(commitJSON.fileChanges || {}))
+    });
   }.bind(this);
 
   // now make the promise chain to make each commit
-  var chainStep = function(id, parents) {
-    var newCommit = makeCommit(id, parents);
+  var chainStep = function(commitJSON) {
+    var newCommit = makeCommit(commitJSON);
     return this.animationFactory.playCommitBirthPromiseAnimation(
       newCommit,
       this.origin.gitVisuals
@@ -1234,10 +1237,7 @@ GitEngine.prototype.push = function(options) {
     }.bind(this));
 
     chain = chain.then(function() {
-      return chainStep(
-        commitJSON.id,
-        commitJSON.parents
-      );
+      return chainStep(commitJSON);
     });
   }, this);
 
@@ -1396,18 +1396,21 @@ GitEngine.prototype.fetchCore = function(sourceDestPairs, options) {
     return !this.refs[commitJSON.id];
   }, this);
 
-  var makeCommit = function(id, parentIDs) {
+  var makeCommit = function(commitJSON) {
     // need to get the parents first. since we order by depth, we know
     // the dependencies are there already
-    var parents = parentIDs.map(function(parentID) {
+    var parents = commitJSON.parents.map(function(parentID) {
       return this.resolveID(parentID);
     }, this);
-    return this.makeCommit(parents, id);
+    return this.makeCommit(parents, commitJSON.id, {
+      commitMessage: commitJSON.commitMessage,
+      fileChanges: JSON.parse(JSON.stringify(commitJSON.fileChanges || {}))
+    });
   }.bind(this);
 
   // now make the promise chain to make each commit
-  var chainStep = function(id, parents) {
-    var newCommit = makeCommit(id, parents);
+  var chainStep = function(commitJSON) {
+    var newCommit = makeCommit(commitJSON);
     return this.animationFactory.playCommitBirthPromiseAnimation(
       newCommit,
       this.gitVisuals
@@ -1437,10 +1440,7 @@ GitEngine.prototype.fetchCore = function(sourceDestPairs, options) {
     }.bind(this));
 
     chain = chain.then(function() {
-      return chainStep(
-        commitJSON.id,
-        commitJSON.parents
-      );
+      return chainStep(commitJSON);
     });
   }, this);
 
@@ -2569,7 +2569,10 @@ GitEngine.prototype.rebaseFinish = function(
         [base];
     }
 
-    var newCommit = this.makeCommit(parents, newId);
+    var newCommit = this.makeCommit(parents, newId, {
+      commitMessage: oldCommit.get('commitMessage'),
+      fileChanges: JSON.parse(JSON.stringify(oldCommit.get('fileChanges') || {}))
+    });
     base = newCommit;
     hasStartedChain = true;
 

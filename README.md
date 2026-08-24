@@ -56,9 +56,7 @@ The current Lessons tab contains:
 
 ### Exercises
 
-The Exercises tab contains standalone practice scenarios. Exercises 1-5 are
-implemented; remaining exercises have placeholder screens until their challenge
-instructions and validation are designed.
+The Exercises tab contains six standalone practice scenarios.
 
 - **Exercises**
   - First Day on the Repo
