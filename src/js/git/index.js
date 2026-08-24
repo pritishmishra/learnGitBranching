@@ -900,7 +900,8 @@ GitEngine.prototype.revert = function(whichCommits) {
       oldMsg: oldCommit.get('commitMessage')
     });
     var newCommit = this.makeCommit([base], newId, {
-      commitMessage: commitMessage
+      commitMessage: commitMessage,
+      fileChanges: this.getInverseFileChanges(oldCommit.get('fileChanges') || {})
     });
     base = newCommit;
 
@@ -924,6 +925,28 @@ GitEngine.prototype.revert = function(whichCommits) {
   }.bind(this));
 
   this.animationQueue.thenFinish(chain);
+};
+
+GitEngine.prototype.getInverseFileChanges = function(fileChanges) {
+  var inverse = {};
+  Object.keys(fileChanges).forEach(function(filepath) {
+    var change = fileChanges[filepath];
+    var invertedType = 'modified';
+    if (change.type === 'added') {
+      invertedType = 'deleted';
+    } else if (change.type === 'deleted') {
+      invertedType = 'added';
+    }
+
+    inverse[filepath] = Object.assign(
+      {},
+      change,
+      {
+        type: invertedType
+      }
+    );
+  });
+  return inverse;
 };
 
 GitEngine.prototype.reset = function(target, options) {

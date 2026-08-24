@@ -56,7 +56,7 @@ The current Lessons tab contains:
 
 ### Exercises
 
-The Exercises tab contains standalone practice scenarios. Exercises 1-4 are
+The Exercises tab contains standalone practice scenarios. Exercises 1-5 are
 implemented; remaining exercises have placeholder screens until their challenge
 instructions and validation are designed.
 
