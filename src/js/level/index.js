@@ -180,10 +180,14 @@ class Level extends Sandbox {
 
   startOffCommand() {
     var method = this.options.command.get('method');
+    var startCommand = this.level.exerciseNumber ?
+      'delay 2000; show goal' :
+      'hint; delay 2000; show goal';
+
     if (GlobalStateStore.getShouldDisableLevelInstructions()) {
       Main.getEventBaton().trigger(
         'commandSubmitted',
-        'hint; show goal'
+        this.level.exerciseNumber ? 'show goal' : 'hint; show goal'
       );
       return;
     }
@@ -191,7 +195,7 @@ class Level extends Sandbox {
     if (!this.testOption('noStartCommand') && method !== 'importLevelNow') {
       Main.getEventBaton().trigger(
         'commandSubmitted',
-        'hint; delay 2000; show goal'
+        startCommand
       );
     }
   }

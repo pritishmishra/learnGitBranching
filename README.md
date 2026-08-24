@@ -219,6 +219,8 @@ Notable fork-specific UI behavior:
   numbered buttons.
 - The success dialog was simplified and no longer shows command-count
   calculations.
+- Practice exercise hints are available through the explicit `hint` command, but
+  are not shown automatically when an exercise starts.
 - The local/remote visualization can label the two repository views.
 - Some promotional links and old external links were removed from the page.
 
