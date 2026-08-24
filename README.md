@@ -95,6 +95,11 @@ Useful package scripts are defined in [package.json](package.json):
 - `yarn test`: run the test suite through Gulp.
 - `yarn test:coverage`: run tests with coverage.
 
+Practice exercise validation tests live in
+[__tests__/exerciseValidation.spec.js](__tests__/exerciseValidation.spec.js).
+They run headless command sequences and check both successful completions and
+intentional failure cases.
+
 This is still a client-side JavaScript application. The main app behavior lives
 under [src/js](src/js), and level definitions live under [src/levels](src/levels).
 
@@ -164,7 +169,9 @@ When adding a new level:
 2. Add it to the right sequence in [src/levels/index.js](src/levels/index.js).
 3. Add focused validation with `requiredCommandPatterns` when graph state alone
    is not enough.
-4. Run at least `git diff --check`; run the app/tests when Node and Yarn are
+4. Add or update exercise command-flow tests when changing standalone practice
+   exercises.
+5. Run at least `git diff --check`; run the app/tests when Node and Yarn are
    available.
 
 ### Command Implementation
