@@ -1,6 +1,6 @@
-var base = require('./base');
+var base = require('../base');
 
-var exercises = require('../src/levels/index').levelSequences.practiceExercises;
+var exercises = require('../../src/levels/index').levelSequences.practiceExercises;
 
 var getExercise = function(number) {
   return exercises[number - 1];

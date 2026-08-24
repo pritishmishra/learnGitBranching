@@ -10,6 +10,7 @@
     "dev": "vite",
     "prepare": "gulp fastBuild",
     "test": "gulp test",
+    "test:exercises": "gulp testExercises",
     "test:coverage": "nyc gulp test"
   },
   "repository": {

@@ -93,10 +93,11 @@ Useful package scripts are defined in [package.json](package.json):
 - `yarn dev`: start the local development server.
 - `yarn prepare`: run `gulp fastBuild`.
 - `yarn test`: run the test suite through Gulp.
+- `yarn test:exercises`: run only the standalone practice exercise tests.
 - `yarn test:coverage`: run tests with coverage.
 
 Practice exercise validation tests live in
-[__tests__/exerciseValidation.spec.js](__tests__/exerciseValidation.spec.js).
+[__tests__/exercises](__tests__/exercises).
 They run headless command sequences and check both successful completions and
 intentional failure cases.
 

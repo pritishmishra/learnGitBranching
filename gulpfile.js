@@ -176,8 +176,8 @@ var style = function() {
     .pipe(dest(destDir));
 };
 
-var jasmine = function() {
-  return src('__tests__/**/*.spec.js')
+var runJasmine = function(files) {
+  return src(files)
     .pipe(gJasmine({
       config: {
         verbose: true,
@@ -185,6 +185,14 @@ var jasmine = function() {
       },
       reporter: new SpecReporter(),
   }));
+};
+
+var jasmine = function() {
+  return runJasmine('__tests__/**/*.spec.js');
+};
+
+var exerciseJasmine = function() {
+  return runJasmine('__tests__/exercises/**/*.spec.js');
 };
 
 var gitAdd = function(done) {
@@ -314,6 +322,7 @@ module.exports = {
   watching,
   build,
   test: jasmine,
+  testExercises: exerciseJasmine,
   deploy,
   generateLevelDocs,
 };
