@@ -93,7 +93,7 @@ exports.level = {
     "^touch +introduction\\.txt *$",
     "^git +add +introduction\\.txt *$",
     "^git +commit +.*-m +(?!['\"]{2})(['\"][^'\"]+['\"]|\\S.*)$",
-    "^git +push *$"
+    "^git +push( +origin +main)? *$"
   ],
   "startDialog": {
     "en_US": {

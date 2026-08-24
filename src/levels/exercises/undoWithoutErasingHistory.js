@@ -185,7 +185,7 @@ exports.level = {
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
     "^git +log *$",
-    "^git +revert +HEAD~1 *$",
+    "^git +revert +(HEAD~1|C1) *$",
     "^git +push( +origin +main)? *$"
   ],
   "startDialog": {
