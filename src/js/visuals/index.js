@@ -863,7 +863,9 @@ GitVisuals.prototype.getDepthIncrement = function(maxDepth) {
 };
 
 GitVisuals.prototype.shouldHaveHeader = function() {
-  return this.gitEngine.isOrigin() || this.gitEngine.hasOrigin();
+  return this.gitEngine.isOrigin() ||
+    this.gitEngine.hasOrigin() ||
+    !!this.getLevelBlob().initialRepoLabel;
 };
 
 GitVisuals.prototype.getHeaderOffset = function() {
