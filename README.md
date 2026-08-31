@@ -156,6 +156,8 @@ Common fields used by this fork:
 - `initialGitConfig`: seed repository-local Git config, such as `user.name` and
   `user.email`, when an exercise starts after identity setup has already been
   completed.
+- `initialRepoLabel`: label the initial single-repository visualization before
+  commands such as `git clone` create the usual local/remote split.
 - `expectedHeadFileChanges`: require the final `HEAD` commit to contain exactly
   the listed file changes.
 - `expectedWorkingDirectoryChanges`: require the final unstaged working

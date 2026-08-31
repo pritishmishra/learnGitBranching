@@ -84,6 +84,7 @@ exports.level = {
   "hint": {
     "en_US": "Use git config with user.name and user.email before committing. The file must be staged before git commit can record it."
   },
+  "initialRepoLabel": "Remote",
   "requireCloneBeforeGitCommands": true,
   "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,
@@ -140,10 +141,8 @@ exports.level = {
               "### Your objectives",
               "",
               "1. Clone the provided starter repository.",
-              "2. Configure the repository-local Git user name as `Student` and email as `student@example.com`.",
-              "3. Create `introduction.txt` using `touch`.",
-              "4. Stage and commit `introduction.txt` using any non-empty commit message.",
-              "5. Push the new commit to `origin/main`.",
+              "2. Configure Git with a user name and email.",
+              "3. Create a file named `introduction.txt`. Commit and push this change.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]

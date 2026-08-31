@@ -111,6 +111,9 @@ GitVisuals.prototype.getRepoLabelText = function() {
   if (this.gitEngine.isOrigin()) {
     return 'Remote';
   }
+  if (this.getLevelBlob().initialRepoLabel) {
+    return this.getLevelBlob().initialRepoLabel;
+  }
   return null;
 };
 

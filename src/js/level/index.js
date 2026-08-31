@@ -205,6 +205,7 @@ class Level extends Sandbox {
   initVisualization(options) {
     this.mainVis = new Visualization({
       el: options.el || this.getDefaultVisEl(),
+      levelBlob: options.level,
       treeString: options.level.startTree,
       requireStagedChanges: !!options.level.requireStagedChanges,
       requireCloneBeforeGitCommands: !!options.level.requireCloneBeforeGitCommands,
