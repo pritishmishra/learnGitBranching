@@ -94,7 +94,7 @@ var sequenceInfo = exports.sequenceInfo = {
       'en_US': 'Exercises'
     },
     about: {
-      'en_US': 'Apply the guided Git lessons in following standalone exercise scenarios'
+      'en_US': 'Apply what you have learned from the Git lessons to complete the following standalone exercises to earn course credit. The exercises are based on common scenarios one would encounter while working on a project.'
     }
   }
 };

@@ -139,9 +139,6 @@
     <p class="about">
       <%= about %>
     </p>
-    <p class="levelInfo">
-      <%= levelInfo %>
-    </p>
     <% if (renderAsExerciseRows) { %>
       <div class="iconHolder exerciseIconHolder box vertical">
         <% for (var i = 0; i < levelRows.length; i++) { %>
@@ -162,6 +159,9 @@
         <% } %>
       </div>
     <% } else { %>
+      <p class="levelInfo">
+        <%= levelInfo %>
+      </p>
       <div class="iconHolder box horizontal">
         <% for (var i = 0; i < ids.length; i++) { %>
           <a href="javascript:void(0)" class="levelIcon box center centerAlign vertical" id="levelIcon-<%=ids[i]%>" data-id="<%=ids[i]%>">

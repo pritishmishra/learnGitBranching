@@ -17,7 +17,8 @@ reorganizes the learning experience around a more guided curriculum.
 The level picker now has two top-level tabs:
 
 - **Lessons**: the structured teaching path for students.
-- **Exercises**: standalone practice exercises that reinforce the lesson path.
+- **Exercises**: standalone practice exercises based on common project
+  scenarios, used for course credit.
 
 The application is English-only for CSC207. The original translation data is
 still present in the source tree from upstream, but the product no longer shows a
