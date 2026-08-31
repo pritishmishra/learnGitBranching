@@ -113,10 +113,10 @@ the wrong follow-up filename instead of `review.txt`.
 
 ### Exercise 5: Undo Without Erasing History
 
-This test checks that the exercise passes when the student views history, reverts
-the second-most-recent commit with `git revert HEAD~1`, and pushes the new revert
-commit. The test allows extra commands, such as `git status`, between the
-required steps.
+This test checks that the exercise passes when the student reverts the
+second-most-recent commit with `git revert HEAD~1`, and pushes the new revert
+commit. `git log` is not required. The test allows extra commands, such as
+`git status`, between the required steps.
 
 This test also checks that the exercise passes when the student reverts the
 specific commit id `C1`.

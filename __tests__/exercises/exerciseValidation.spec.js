@@ -387,12 +387,10 @@ describe('Practice exercise validation', function() {
     );
   });
 
-  it('solves exercise 5 when extra commands appear between required commands', function() {
+  it('solves exercise 5 without requiring git log', function() {
     return base.expectLevelCommandsToSolve(
       getExercise(5),
       [
-        'git status',
-        'git log',
         'git status',
         'git revert HEAD~1',
         'git status',
@@ -405,7 +403,6 @@ describe('Practice exercise validation', function() {
     return base.expectLevelCommandsToSolve(
       getExercise(5),
       [
-        'git log',
         'git revert C1',
         'git push origin main'
       ].join(';')
