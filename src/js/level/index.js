@@ -207,6 +207,7 @@ class Level extends Sandbox {
       el: options.el || this.getDefaultVisEl(),
       treeString: options.level.startTree,
       requireStagedChanges: !!options.level.requireStagedChanges,
+      requireCloneBeforeGitCommands: !!options.level.requireCloneBeforeGitCommands,
       initialWorkingDirectoryChanges: options.level.initialWorkingDirectoryChanges,
       initialStagedChanges: options.level.initialStagedChanges,
       initialGitConfig: options.level.initialGitConfig,

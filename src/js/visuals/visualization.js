@@ -113,6 +113,7 @@ class Visualization {
       gitVisuals: this.gitVisuals,
       eventBaton: this.eventBaton,
       requireStagedChanges: options.requireStagedChanges,
+      requireCloneBeforeGitCommands: options.requireCloneBeforeGitCommands,
       mockConflictOnPull: options.mockConflictOnPull
     });
     this.gitEngine.init();

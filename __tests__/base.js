@@ -138,6 +138,7 @@ var runLevelCommands = function(levelBlob, command) {
   }
 
   headless.gitEngine.requireStagedChanges = !!levelBlob.requireStagedChanges;
+  headless.gitEngine.requireCloneBeforeGitCommands = !!levelBlob.requireCloneBeforeGitCommands;
   if (levelBlob.initialGitConfig) {
     headless.gitEngine.setConfigState(levelBlob.initialGitConfig);
   }
@@ -204,6 +205,20 @@ var expectLevelCommandsNotToSolve = function(levelBlob, command) {
   });
 };
 
+var expectLevelCommandToError = function(levelBlob, command, expectedMessage) {
+  return runLevelCommands(levelBlob, command).then(function(result) {
+    var lastCommand = result.commands[result.commands.length - 1];
+    var error = lastCommand && lastCommand.get('error');
+
+    expect(error).toBeTruthy(
+      'Expected "' + command + '" to fail in "' + levelBlob.name.en_US + '"'
+    );
+    if (expectedMessage) {
+      expect(error.get('msg')).toEqual(expectedMessage);
+    }
+  });
+};
+
 var expectTreeAsync = function(command, expectedJSON, startJSON) {
   var headless = new HeadlessGit();
 
@@ -248,6 +263,7 @@ module.exports = {
   runLevelCommands: runLevelCommands,
   expectLevelCommandsToSolve: expectLevelCommandsToSolve,
   expectLevelCommandsNotToSolve: expectLevelCommandsNotToSolve,
+  expectLevelCommandToError: expectLevelCommandToError,
   TIME: TIME,
   expectTreeAsync: expectTreeAsync,
   expectLevelSolved: expectLevelSolved,

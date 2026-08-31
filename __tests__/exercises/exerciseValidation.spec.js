@@ -1,6 +1,8 @@
 var base = require('../base');
 
 var exercises = require('../../src/levels/index').levelSequences.practiceExercises;
+var CLONE_REQUIRED_MESSAGE =
+  'You need to clone the repository before running Git commands in this exercise.';
 
 var getExercise = function(number) {
   return exercises[number - 1];
@@ -108,6 +110,46 @@ describe('Practice exercise validation', function() {
         'git commit -m ""',
         'git push'
       ].join(';')
+    );
+  });
+
+  it('fails git status before clone in exercise 1', function() {
+    return base.expectLevelCommandToError(
+      getExercise(1),
+      'git status',
+      CLONE_REQUIRED_MESSAGE
+    );
+  });
+
+  it('fails touch before clone in exercise 1', function() {
+    return base.expectLevelCommandToError(
+      getExercise(1),
+      'touch introduction.txt',
+      CLONE_REQUIRED_MESSAGE
+    );
+  });
+
+  it('fails git add before clone in exercise 1', function() {
+    return base.expectLevelCommandToError(
+      getExercise(1),
+      'git add introduction.txt',
+      CLONE_REQUIRED_MESSAGE
+    );
+  });
+
+  it('fails git config before clone in exercise 1', function() {
+    return base.expectLevelCommandToError(
+      getExercise(1),
+      'git config user.name Student',
+      CLONE_REQUIRED_MESSAGE
+    );
+  });
+
+  it('fails git commit before clone in exercise 1', function() {
+    return base.expectLevelCommandToError(
+      getExercise(1),
+      'git commit -m "Introduce myself"',
+      CLONE_REQUIRED_MESSAGE
     );
   });
 

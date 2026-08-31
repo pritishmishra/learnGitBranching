@@ -51,6 +51,8 @@ function GitEngine(options) {
   this.gitConfig = {};
   // When true, git commit requires at least one staged change
   this.requireStagedChanges = !!options.requireStagedChanges;
+  // When true, git clone must run before other git/worktree commands.
+  this.requireCloneBeforeGitCommands = !!options.requireCloneBeforeGitCommands;
   // Lesson-scoped teaching hook for showing a pull conflict.
   this.mockConflictOnPull = options.mockConflictOnPull;
   this.mockPullConflictConsumed = false;

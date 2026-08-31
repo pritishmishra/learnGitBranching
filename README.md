@@ -143,6 +143,8 @@ Common fields used by this fork:
   between required commands.
 - `requiredAnyOrderCommandPatterns`: required command regexes that can appear in
   any order.
+- `requireCloneBeforeGitCommands`: makes `git clone` the only Git/worktree
+  command allowed until the repository has been cloned.
 - `requireStagedChanges`: makes `git commit` require staged file changes.
 - `requireStagedChangesForCompletion`: level passes only when something is
   staged.

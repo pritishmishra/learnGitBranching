@@ -84,6 +84,7 @@ exports.level = {
   "hint": {
     "en_US": "Use git config with user.name and user.email before committing. The file must be staged before git commit can record it."
   },
+  "requireCloneBeforeGitCommands": true,
   "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [

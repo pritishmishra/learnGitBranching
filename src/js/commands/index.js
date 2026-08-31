@@ -6,6 +6,20 @@ var MercurialCommands = require('../mercurial/commands');
 
 var CommandProcessError = Errors.CommandProcessError;
 var CommandResult = Errors.CommandResult;
+var GitError = Errors.GitError;
+
+var assertCloneIsCompleteIfRequired = function(vcs, name, engine) {
+  if (vcs !== 'git' ||
+      name === 'clone' ||
+      !engine.requireCloneBeforeGitCommands ||
+      engine.hasOrigin()) {
+    return;
+  }
+
+  throw new GitError({
+    msg: intl.todo('You need to clone the repository before running Git commands in this exercise.')
+  });
+};
 
 var commandConfigs = {
   'git': GitCommands.commandConfig,
@@ -18,6 +32,8 @@ var commands = {
       throw new Error('i don\'t have a command for ' + name);
     }
     var config = commandConfigs[vcs][name];
+    assertCloneIsCompleteIfRequired(vcs, name, engine);
+
     if (config.delegate) {
       return this.delegateExecute(config, engine, commandObj);
     }

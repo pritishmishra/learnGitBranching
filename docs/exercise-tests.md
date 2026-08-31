@@ -43,6 +43,9 @@ but never pushes it.
 This test also checks that the exercise fails if the student tries to commit
 with an empty commit message.
 
+This test also checks that `git status`, `touch`, `git add`, `git config`, and
+`git commit` fail before the student clones the repository.
+
 ### Exercise 2: Two Timelines, One History
 
 This test checks that the exercise passes when the student creates
