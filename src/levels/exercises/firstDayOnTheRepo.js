@@ -82,7 +82,7 @@ exports.level = {
   "solutionCommand": "git clone;git config user.name Student;git config user.email student@example.com;touch introduction.txt;git add introduction.txt;git commit -m 'Add introduction';git push",
   "startTree": startTree,
   "hint": {
-    "en_US": "Clone, configure Student identity, create introduction.txt, commit it, and push"
+    "en_US": "Use git config with user.name and user.email before committing. The file must be staged before git commit can record it."
   },
   "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,

@@ -767,10 +767,17 @@ class Level extends Sandbox {
         });
       }],
       [/^hint$/, function() {
+        var blockedMessage = SolutionAvailability.getHintBlockedMessage(this.level);
+        if (blockedMessage) {
+          throw new Errors.GitError({
+            msg: intl.todo(blockedMessage)
+          });
+        }
+
         throw new Errors.CommandResult({
           msg: getHint()
         });
-      }]
+      }.bind(this)]
     ];
   }
 

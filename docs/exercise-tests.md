@@ -159,6 +159,17 @@ branch without configuring upstream tracking.
 This test also checks that the exercise fails if the student finishes on `main`
 instead of `feature-notifications`.
 
+## Exercise Command Availability
+
+This test checks that `show solution` is not available while the active level is
+an exercise.
+
+This test also checks that `hint` is not available while the active level is an
+exercise.
+
+The same tests check that lessons outside the Exercises tab can still use both
+commands.
+
 ## Future Lesson Tests
 
 This document covers only the standalone Exercises tab. When we add a similar

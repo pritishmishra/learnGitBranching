@@ -137,7 +137,7 @@ exports.level = {
     "user.email": "student@example.com"
   },
   "hint": {
-    "en_US": "Create feature-profile work, create a separate hotfix on main, then merge feature-profile into main"
+    "en_US": "Create and switch branches in one step with git checkout -b. Make sure you are back on main before creating the hotfix and before merging."
   },
   "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,
