@@ -231,6 +231,7 @@ Notable fork-specific UI behavior:
   calculations.
 - Practice exercise hints are available through the explicit `hint` command, but
   are not shown automatically when an exercise starts.
+- Practice exercises do not show or allow the `show solution` option.
 - The local/remote visualization can label the two repository views.
 - Some promotional links and old external links were removed from the page.
 

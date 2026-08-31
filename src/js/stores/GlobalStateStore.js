@@ -11,6 +11,7 @@ var _flipTreeY = false;
 var _numLevelsSolved = 0;
 var _disableLevelInstructions = false;
 var _isSolvingLevel = false;
+var _isSolvingExercise = false;
 
 var GlobalStateStore = Object.assign(
 {},
@@ -23,6 +24,10 @@ AppConstants.StoreSubscribePrototype,
 
   getIsSolvingLevel: function() {
     return _isSolvingLevel;
+  },
+
+  getIsSolvingExercise: function() {
+    return _isSolvingExercise;
   },
 
   getFlipTreeY: function() {
@@ -44,6 +49,10 @@ AppConstants.StoreSubscribePrototype,
     switch (action.type) {
       case ActionTypes.SET_IS_SOLVING_LEVEL:
         _isSolvingLevel = action.isSolvingLevel;
+        shouldInform = true;
+        break;
+      case ActionTypes.SET_IS_SOLVING_EXERCISE:
+        _isSolvingExercise = action.isSolvingExercise;
         shouldInform = true;
         break;
       case ActionTypes.CHANGE_IS_ANIMATING:

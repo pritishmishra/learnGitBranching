@@ -34,6 +34,7 @@ module.exports = {
      */
     SOLVE_LEVEL: null,
     SET_IS_SOLVING_LEVEL: null,
+    SET_IS_SOLVING_EXERCISE: null,
   }),
 
   PayloadSources: keyMirror({

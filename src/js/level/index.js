@@ -15,6 +15,7 @@ var LevelActions = require('../actions/LevelActions');
 var LevelStore = require('../stores/LevelStore');
 var Visualization = require('../visuals/visualization').Visualization;
 var DisabledMap = require('../level/disabledMap').DisabledMap;
+var SolutionAvailability = require('../level/solutionAvailability');
 var GitShim = require('../git/gitShim').GitShim;
 var Commands = require('../commands');
 
@@ -64,6 +65,7 @@ class Level extends Sandbox {
 
     this.handleOpen(options.deferred);
     LevelActions.setIsSolvingLevel(true);
+    LevelActions.setIsSolvingExercise(!!this.level.exerciseNumber);
   }
 
   getIsGoalExpanded() {
@@ -278,6 +280,15 @@ class Level extends Sandbox {
   }
 
   showSolution(command, deferred) {
+    var blockedMessage = SolutionAvailability.getShowSolutionBlockedMessage(this.level);
+    if (blockedMessage) {
+      command.set('error', new Errors.GitError({
+        msg: intl.todo(blockedMessage)
+      }));
+      deferred.resolve();
+      return;
+    }
+
     var toIssue = this.level.solutionCommand;
     var issueFunc = function() {
       this.isShowingSolution = true;
@@ -736,6 +747,7 @@ class Level extends Sandbox {
     delete this.goalVis;
     delete this.goalCanvasHolder;
     delete this.goalDragHandler;
+    LevelActions.setIsSolvingExercise(false);
     LevelActions.setIsSolvingLevel(false);
   }
 

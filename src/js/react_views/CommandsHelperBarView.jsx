@@ -2,11 +2,27 @@ var React = require('react');
 var PropTypes = require('prop-types');
 var HelperBarView = require('../react_views/HelperBarView.jsx');
 var Main = require('../app');
+var GlobalStateStore = require('../stores/GlobalStateStore');
 
 var log = require('../log');
 var intl = require('../intl');
 
 class CommandsHelperBarView extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      isSolvingExercise: GlobalStateStore.getIsSolvingExercise()
+    };
+    this.onGlobalStateChange = this.onGlobalStateChange.bind(this);
+  }
+
+  componentDidMount() {
+    GlobalStateStore.subscribe(this.onGlobalStateChange);
+  }
+
+  componentWillUnmount() {
+    GlobalStateStore.unsubscribe(this.onGlobalStateChange);
+  }
 
   render() {
     return (
@@ -22,18 +38,30 @@ class CommandsHelperBarView extends React.Component {
     Main.getEventBaton().trigger('commandSubmitted', command);
   }
 
+  onGlobalStateChange() {
+    this.setState({
+      isSolvingExercise: GlobalStateStore.getIsSolvingExercise()
+    });
+  }
+
   getItems() {
-    return [{
+    var items = [{
       text: intl.str('command-helper-bar-levels'),
       onClick: function() {
         this.fireCommand('levels');
       }.bind(this),
-    }, {
-      text: intl.str('command-helper-bar-solution'),
-      onClick: function() {
-        this.fireCommand('show solution');
-      }.bind(this),
-    }, {
+    }];
+
+    if (!this.state.isSolvingExercise) {
+      items.push({
+        text: intl.str('command-helper-bar-solution'),
+        onClick: function() {
+          this.fireCommand('show solution');
+        }.bind(this),
+      });
+    }
+
+    return items.concat([{
       text: intl.str('command-helper-bar-reset'),
       onClick: function() {
         this.fireCommand('reset');
@@ -58,7 +86,7 @@ class CommandsHelperBarView extends React.Component {
       onClick: function() {
         this.props.onExit();
       }.bind(this)
-    }];
+    }]);
   }
 
 };

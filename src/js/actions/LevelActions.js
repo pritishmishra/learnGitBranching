@@ -28,6 +28,13 @@ var LevelActions = {
     });
   },
 
+  setIsSolvingExercise: function(isSolvingExercise) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.SET_IS_SOLVING_EXERCISE,
+      isSolvingExercise: isSolvingExercise,
+    });
+  },
+
 };
 
 module.exports = LevelActions;
