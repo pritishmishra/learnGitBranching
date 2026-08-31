@@ -191,7 +191,7 @@ exports.level = {
   "expectedWorkingDirectoryChanges": {},
   "expectedStagedChanges": {},
   "hint": {
-    "en_US": "Fetch the updated main, rebase feature-notifications onto o/main, then push with -u"
+    "en_US": "Fetch the latest changes, replay your feature branch on the latest downloaded main, then publish it with upstream tracking"
   },
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
@@ -239,12 +239,12 @@ exports.level = {
               "",
               "A teammate has pushed commit `C3` to `origin/main`, adding `api.txt`, but your repository has not downloaded `C3` yet.",
               "",
-              "Your local `o/main` still points at `C1`.",
+              "Your local view of `origin/main` still points at `C1`.",
               "",
               "### Your objectives",
               "",
               "1. Fetch the latest changes from `origin` without merging them into your current branch.",
-              "2. Rebase `feature-notifications` onto the updated `o/main`.",
+              "2. Rebase `feature-notifications` so it is based on the latest downloaded `main` from `origin`.",
               "3. Do not create a merge commit.",
               "4. Push `feature-notifications` to `origin` and configure it to track `origin/feature-notifications`.",
               "5. Finish on `feature-notifications` with both `api.txt` and `notifications.txt` present in history.",
