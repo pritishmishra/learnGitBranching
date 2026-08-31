@@ -206,9 +206,7 @@ exports.level = {
               "",
               "1. Undo only the most recent local commit while keeping its changes staged.",
               "   - `draft.txt` should show as staged.",
-              "2. Create `review.txt` using `touch` and stage it.",
-              "3. Commit `draft.txt` and `review.txt` together using any non-empty commit message.",
-              "4. After you finish, the earlier commit containing only `draft.txt` should be gone.",
+              "2. Create `review.txt`. Commit both files `draft.txt` and `review.txt`.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]
