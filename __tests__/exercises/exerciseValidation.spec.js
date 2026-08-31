@@ -219,8 +219,8 @@ describe('Practice exercise validation', function() {
     );
   });
 
-  it('does not solve exercise 2 when the profile file has the wrong name', function() {
-    return base.expectLevelCommandsNotToSolve(
+  it('solves exercise 2 with arbitrary feature and hotfix filenames', function() {
+    return base.expectLevelCommandsToSolve(
       getExercise(2),
       [
         'git checkout -b feature-profile',
@@ -228,8 +228,8 @@ describe('Practice exercise validation', function() {
         'git add user-profile.txt',
         'git commit -m "Add profile"',
         'git checkout main',
-        'touch hotfix.txt',
-        'git add hotfix.txt',
+        'touch urgent-fix.txt',
+        'git add urgent-fix.txt',
         'git commit -m "Add hotfix"',
         'git merge feature-profile'
       ].join(';')

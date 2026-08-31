@@ -52,6 +52,9 @@ This test checks that the exercise passes when the student creates
 `feature-profile`, commits `profile.txt` on that branch, returns to `main`,
 commits `hotfix.txt`, and merges `feature-profile` back into `main`.
 
+This test also checks that the exercise passes when the student uses different
+filenames for the feature and hotfix commits.
+
 This test also checks that the exercise fails if the student commits
 `profile.txt` on `main` instead of doing that work on `feature-profile`.
 
@@ -61,10 +64,6 @@ but finishes on `feature-profile` instead of `main`.
 This test also checks that the exercise fails if the student only creates one
 line of work instead of creating separate feature and hotfix commits before the
 merge.
-
-This test also checks that the exercise fails if the student creates the wrong
-profile filename instead of `profile.txt`, even if the branch, hotfix, and merge
-steps are completed.
 
 ### Exercise 3: Clean Up Before You Commit
 

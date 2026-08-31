@@ -143,12 +143,12 @@ exports.level = {
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
     "^git +checkout +-b +feature-profile *$",
-    "^touch +profile\\.txt *$",
-    "^git +add +profile\\.txt *$",
+    "^touch +\\S+ *$",
+    "^git +add +\\S+ *$",
     "^git +commit +.*-m +(?!['\"]{2})(['\"][^'\"]+['\"]|\\S.*)$",
     "^git +checkout +main *$",
-    "^touch +hotfix\\.txt *$",
-    "^git +add +hotfix\\.txt *$",
+    "^touch +\\S+ *$",
+    "^git +add +\\S+ *$",
     "^git +commit +.*-m +(?!['\"]{2})(['\"][^'\"]+['\"]|\\S.*)$",
     "^git +merge +feature-profile *$"
   ],
