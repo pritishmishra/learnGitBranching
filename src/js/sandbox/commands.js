@@ -6,8 +6,6 @@ var intl = require('../intl');
 var Commands = require('../commands');
 var Errors = require('../util/errors');
 var CommandProcessError = Errors.CommandProcessError;
-var LocaleStore = require('../stores/LocaleStore');
-var LocaleActions = require('../actions/LocaleActions');
 var LevelStore = require('../stores/LevelStore');
 var GlobalStateStore = require('../stores/GlobalStateStore');
 var GlobalStateActions = require('../actions/GlobalStateActions');
@@ -55,18 +53,6 @@ var instantCommands = [
       msg: intl.str('cd-command')
     });
   }],
-  [/^(locale|locale reset)$/, function(bits) {
-    LocaleActions.changeLocale(
-      LocaleStore.getDefaultLocale()
-    );
-
-    throw new CommandResult({
-      msg: intl.str(
-        'locale-reset-command',
-        { locale: LocaleStore.getDefaultLocale() }
-      )
-    });
-  }, 'locale', 'change locale from the command line, or reset with `locale reset`'],
   [/^show$/, function(bits) {
     var lines = [
       intl.str('show-command'),
@@ -95,15 +81,6 @@ var instantCommands = [
       msg: 'Removed alias "'+alias+'"',
     });
   }, 'unalias', 'Opposite of `alias`'],
-  [/^locale (\w+)$/, function(bits) {
-    LocaleActions.changeLocale(bits[1]);
-    throw new CommandResult({
-      msg: intl.str(
-        'locale-command',
-        { locale: bits[1] }
-      )
-    });
-  }],
   [/^flip$/, function() {
     GlobalStateActions.changeFlipTreeY(
       !GlobalStateStore.getFlipTreeY()

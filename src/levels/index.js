@@ -37,51 +37,6 @@ exports.levelSequences = {
     require('./exercises/tooSoonRebuildTheCommit').level,
     require('./exercises/undoWithoutErasingHistory').level,
     require('./exercises/catchUpWithoutAMerge').level
-  ],
-  intro: [
-    require('./intro/commits').level,
-    require('./intro/rebasing').level
-  ],
-  rampup: [
-    require('./rampup/detachedHead').level,
-    require('./rampup/relativeRefs').level,
-    require('./rampup/relativeRefs2').level,
-    require('./rampup/reversingChanges').level
-  ],
-  move: [
-    require('./rampup/cherryPick').level,
-    require('./rampup/interactiveRebase').level
-  ],
-  mixed: [
-    require('./mixed/grabbingOneCommit').level,
-    require('./mixed/jugglingCommits').level,
-    require('./mixed/jugglingCommits2').level,
-    require('./mixed/tags').level,
-    require('./mixed/describe').level
-  ],
-  advanced: [
-    require('./rebase/manyRebases').level,
-    require('./advanced/multipleParents').level,
-    require('./rebase/selectiveRebase').level
-  ],
-  remote: [
-    require('./remote/remoteBranches').level,
-    require('./remote/fetch').level,
-    require('./remote/pull').level,
-    require('./remote/fakeTeamwork').level,
-    require('./remote/push').level,
-    require('./remote/fetchRebase').level,
-    require('./remote/lockedMain').level
-  ],
-  remoteAdvanced: [
-    require('./remote/pushManyFeatures').level,
-    require('./remote/mergeManyFeatures').level,
-    require('./remote/tracking').level,
-    require('./remote/pushArgs').level,
-    require('./remote/pushArgs2').level,
-    require('./remote/fetchArgs').level,
-    require('./remote/sourceNothing').level,
-    require('./remote/pullArgs').level
   ]
 };
 
@@ -141,7 +96,14 @@ var sequenceInfo = exports.sequenceInfo = {
     about: {
       'en_US': 'Apply the guided Git lessons in following standalone exercise scenarios'
     }
-  },
+  }
+};
+
+/*
+ * Upstream legacy sequence metadata is intentionally excluded from the CSC207
+ * curriculum. Keep the old source files in src/levels for reference, but do not
+ * export these sequences into the level picker.
+var legacySequenceInfo = {
   intro: {
     tab: 'legacy',
     displayName: {
@@ -515,6 +477,7 @@ var sequenceInfo = exports.sequenceInfo = {
     }
   }
 };
+*/
 
 exports.getTabForSequence = function(sequenceName) {
   var info = sequenceInfo[sequenceName];

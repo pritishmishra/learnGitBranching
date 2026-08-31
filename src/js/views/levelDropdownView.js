@@ -35,7 +35,9 @@ class LevelDropdownView extends ContainedBase {
     if (selectedTab === 'main') {
       selectedTab = 'lessons';
     } else if (selectedTab === 'remote') {
-      selectedTab = 'legacy';
+      selectedTab = 'lessons';
+    } else if (selectedTab !== 'lessons' && selectedTab !== 'exercises') {
+      selectedTab = 'lessons';
     }
     this.JSON = {
       selectedTab: selectedTab,
@@ -45,9 +47,6 @@ class LevelDropdownView extends ContainedBase {
       }, {
         id: 'exercises',
         name: intl.str('exercises-levels-tab')
-      }, {
-        id: 'legacy',
-        name: intl.str('legacy-levels-tab')
       }]
     };
 
@@ -105,8 +104,7 @@ class LevelDropdownView extends ContainedBase {
     );
     this.updateTabNames([
       intl.str('lessons-levels-tab'),
-      intl.str('exercises-levels-tab'),
-      intl.str('legacy-levels-tab')
+      intl.str('exercises-levels-tab')
     ]);
     ContainedBase.prototype.render.call(this);
     this.buildSequences();

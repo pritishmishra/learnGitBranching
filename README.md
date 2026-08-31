@@ -14,12 +14,14 @@ details.
 This fork keeps the interactive Git visualization from Learn Git Branching, but
 reorganizes the learning experience around a more guided curriculum.
 
-The level picker now has three top-level tabs:
+The level picker now has two top-level tabs:
 
 - **Lessons**: the structured teaching path for students.
 - **Exercises**: standalone practice exercises that reinforce the lesson path.
-- **Legacy**: the original Learn Git Branching level sequences that are not part
-  of the new guided curriculum.
+
+The application is English-only for CSC207. The original translation data is
+still present in the source tree from upstream, but the product no longer shows a
+language picker or accepts locale changes through the terminal.
 
 ### Lessons
 
@@ -65,12 +67,6 @@ The Exercises tab contains six standalone practice scenarios.
   - Too Soon - Rebuild the Commit
   - Undo Without Erasing History
   - Catch Up Without a Merge
-
-### Legacy
-
-Legacy contains the remaining original local and remote Learn Git Branching
-sections. These are kept available for reference and advanced exploration, but
-they are not the primary student path in this fork.
 
 ## Developer Notes
 
@@ -118,7 +114,6 @@ Current tab values are:
 
 - `lessons`
 - `exercises`
-- `legacy`
 
 The level dropdown UI is in
 [src/js/views/levelDropdownView.js](src/js/views/levelDropdownView.js). The tab
@@ -226,7 +221,9 @@ Notable fork-specific UI behavior:
 
 - The browser title, terminal title, and launch dialog are branded as
   **CSC207 - Git Learning**.
-- The level picker uses **Lessons**, **Exercises**, and **Legacy** tabs.
+- The level picker uses **Lessons** and **Exercises** tabs.
+- The language selector and `locale` terminal commands are disabled; this fork
+  supports English only.
 - The Exercises tab renders practice placeholders as one exercise per row with
   numbered buttons.
 - The success dialog was simplified and no longer shows command-count

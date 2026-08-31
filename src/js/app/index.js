@@ -6,7 +6,6 @@ var ReactDOM = require('react-dom');
 var util = require('../util');
 var intl = require('../intl');
 var LocaleStore = require('../stores/LocaleStore');
-var LocaleActions = require('../actions/LocaleActions');
 
 /**
  * Globals
@@ -66,7 +65,6 @@ var init = function() {
   initDemo(sandbox);
   // unfortunate global export for casper tests
   window.LocaleStore = LocaleStore;
-  window.LocaleActions = LocaleActions;
   window.intl = intl;
 
   $(window).on('beforeunload', function(e) {
@@ -92,23 +90,6 @@ var vcsModeRefresh = function(eventData) {
 
   $('body').toggleClass('gitMode', isGit);
   $('body').toggleClass('hgMode', !isGit);
-};
-
-var insertAlternateLinks = function(pageId) {
-  // For now pageId is null, which would link to the main page.
-  // In future if pageId is provided this method should link to a specific page
-
-  // The value of the hreflang attribute identifies the language (in ISO 639-1 format)
-  // and optionally a region (in ISO 3166-1 Alpha 2 format) of an alternate URL
-
-  var altLinks = LocaleStore.getSupportedLocales().map(function(langCode) {
-    var url = "https://learngitbranching.js.org/?locale=" + langCode;
-    return '<link rel="alternate" hreflang="'+langCode+'" href="' + url +'" />';
-  });
-  var defaultUrl = "https://learngitbranching.js.org/?locale=" + LocaleStore.getDefaultLocale();
-  altLinks.push('<link rel="alternate" hreflang="x-default" href="' + defaultUrl +'" />');
-  $('head').prepend(altLinks);
-
 };
 
 var intlRefresh = function() {
@@ -275,14 +256,6 @@ var initDemo = function(sandbox) {
     });
   }
 
-  if (params.locale !== undefined && params.locale.length) {
-    LocaleActions.changeLocaleFromURI(params.locale);
-  } else {
-    tryLocaleDetect();
-  }
-
-  insertAlternateLinks();
-
   if (params.command) {
     var command = unescape(params.command);
     sandbox.mainVis.customEvents.on('gitEngineReady', function() {
@@ -291,15 +264,6 @@ var initDemo = function(sandbox) {
   }
 
 };
-
-function tryLocaleDetect() {
-  // use navigator to get the locale setting
-  changeLocaleFromHeaders(navigator.language || navigator.browserLanguage);
-}
-
-function changeLocaleFromHeaders(langString) {
-  LocaleActions.changeLocaleFromHeader(langString);
-}
 
 if (require('../util').isBrowser()) {
   // this file gets included via node sometimes as well

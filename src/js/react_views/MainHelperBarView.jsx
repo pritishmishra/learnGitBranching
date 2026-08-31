@@ -1,6 +1,4 @@
 var HelperBarView = require('../react_views/HelperBarView.jsx');
-var IntlHelperBarView =
-  require('../react_views/IntlHelperBarView.jsx');
 var CommandsHelperBarView =
   require('../react_views/CommandsHelperBarView.jsx');
 var React = require('react');
@@ -10,7 +8,6 @@ var log = require('../log');
 
 var BARS = keyMirror({
   SELF: null,
-  INTL: null,
   COMMANDS: null
 });
 
@@ -35,10 +32,6 @@ class MainHelperBarView extends React.Component {
           shown={this.state.shownBar === BARS.COMMANDS}
           onExit={this.showSelf.bind(this)}
         />
-        <IntlHelperBarView
-          shown={this.state.shownBar === BARS.INTL}
-          onExit={this.showSelf.bind(this)}
-        />
       </div>
     );
   }
@@ -58,14 +51,6 @@ class MainHelperBarView extends React.Component {
         });
       }.bind(this),
       title: 'Show commands'
-    }, {
-      icon: 'fa-solid fa-language',
-      onClick: function() {
-        this.setState({
-          shownBar: BARS.INTL
-        });
-      }.bind(this),
-      title: 'Show available languages'
     }];
   }
 

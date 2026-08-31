@@ -8,29 +8,20 @@ describe('LocaleStore', function() {
       .toEqual(LocaleStore.getDefaultLocale());
   });
 
-  it('changes locales', function() {
+  it('stays on English when locale changes are requested', function() {
     expect(LocaleStore.getLocale()).toEqual('en_US');
     LocaleActions.changeLocale('ja_JP');
-    expect(LocaleStore.getLocale()).toEqual('ja_JP');
+    expect(LocaleStore.getLocale()).toEqual('en_US');
   });
 
-  it('changes locales from headers', function() {
-    var headerLocaleMap = LocaleStore.getHeaderLocaleMap();
-    Object.keys(headerLocaleMap).forEach(function(header) {
-      LocaleActions.changeLocaleFromHeader(header);
-      expect(LocaleStore.getLocale()).toEqual(
-        headerLocaleMap[header]
-      );
-    });
+  it('stays on English when browser language headers are provided', function() {
+    LocaleActions.changeLocaleFromHeader('ja,en-US;q=0.9');
+    expect(LocaleStore.getLocale()).toEqual('en_US');
   });
 
-  it('changes locales from languages', function() {
-    var langLocaleMap = LocaleStore.getLangLocaleMap();
-    Object.keys(langLocaleMap).forEach(function(lang) {
-      LocaleActions.changeLocaleFromHeader(lang);
-      expect(LocaleStore.getLocale()).toEqual(
-        langLocaleMap[lang]
-      );
-    });
+  it('only reports English as supported', function() {
+    expect(LocaleStore.getSupportedLocales()).toEqual(['en_US']);
+    expect(LocaleStore.getLangLocaleMap()).toEqual({ en: 'en_US' });
+    expect(LocaleStore.getHeaderLocaleMap()).toEqual({});
   });
 });

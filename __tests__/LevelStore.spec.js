@@ -15,6 +15,17 @@ describe('this store', function() {
     }.bind(this));
   });
 
+  it('only exposes lessons and exercises sequences', function() {
+    expect(LevelStore.getSequences()).toEqual([
+      'local',
+      'branchMerge',
+      'mistakes',
+      'team',
+      'advancedTopics',
+      'practiceExercises'
+    ]);
+  });
+
   it('can solve a level and then reset', function() {
     var sequenceMap = LevelStore.getSequenceToLevels();
     var firstLevel = sequenceMap[
