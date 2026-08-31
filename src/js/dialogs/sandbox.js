@@ -5,22 +5,25 @@ exports.dialog = {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## Welcome to Learn Git Branching',
+        '## Welcome to CSC207 - Git Learning',
         '',
-        'Interested in learning Git? Well you\'ve come to the right place! ',
-        '"Learn Git Branching" is the most visual and interactive way to learn Git ',
-        'on the web; you\'ll be challenged with exciting levels, given step-by-step ',
-        'demonstrations of powerful features, and maybe even have a bit of fun along the way.',
+        'Welcome to CSC207\'s Git learning platform.',
         '',
-        'After this dialog you\'ll see the variety of levels we have to offer. If you\'re a ',
-        'beginner, just go ahead and start with the first. If you already know some Git basics, ',
-        'try some of our later more challenging levels.',
+        'This platform helps you practice Git through an interactive terminal and commit graph.',
+        'As you enter commands, the visualization updates so you can see how Git history, branches,',
+        'staging, remotes, and collaboration workflows change.',
         '',
-        'You can see all the commands available with `show commands` at the terminal.',
+        'The main student path has two areas: Lessons and Exercises.',
         '',
-        'PS: Want to go straight to a sandbox next time?',
-        'Try out ',
-        '[this special link](https://pcottle.github.io/learnGitBranching/?NODEMO).'
+        'Lessons introduce Git concepts step by step. Each lesson focuses on a specific idea, such as',
+        'cloning a repository, configuring your Git identity, creating commits, working with branches,',
+        'merging, undoing mistakes, syncing with teammates, and publishing your work.',
+        '',
+        'Exercises are standalone practice scenarios. They combine multiple commands from the lessons',
+        'and ask you to solve common development situations, such as making your first contribution,',
+        'cleaning up before a commit, rebuilding a local commit, or catching up with remote work.',
+        '',
+        'You can see all the commands available with `show commands` at the terminal.'
       ]
     }
   }],

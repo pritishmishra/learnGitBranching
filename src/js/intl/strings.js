@@ -1068,7 +1068,7 @@ exports.strings = {
   },
   "learn-git-branching": {
     "__desc__": "The title of the app, with spaces",
-    "en_US": "Learn Git Branching",
+    "en_US": "CSC207 - Git Learning",
     "bg": "Learn Git Branching",
     "fa": "آموزش Git Branching",
     "de_DE": "Lerne Git Branching",

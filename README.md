@@ -1,6 +1,6 @@
 # LearnGitBranching Fork
 
-This project is a teaching-focused fork of the original
+CSC207 - Git Learning is a teaching-focused fork of the original
 [Learn Git Branching](https://github.com/pcottle/learnGitBranching) project.
 
 The original README has been preserved at
@@ -224,6 +224,8 @@ Autocomplete filtering is wired through
 
 Notable fork-specific UI behavior:
 
+- The browser title, terminal title, and launch dialog are branded as
+  **CSC207 - Git Learning**.
 - The level picker uses **Lessons**, **Exercises**, and **Legacy** tabs.
 - The Exercises tab renders practice placeholders as one exercise per row with
   numbered buttons.
