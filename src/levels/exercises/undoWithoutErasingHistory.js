@@ -203,7 +203,13 @@ exports.level = {
               "",
               "Undo the unwanted change without deleting any existing commits or affecting the work committed afterward.",
               "",
-              "Then push the correction."
+              "Then push the correction.",
+              "",
+              "### Relevant lessons",
+              "",
+              "- Basic Git Workflow: Checking the commit history",
+              "- Basic Git Workflow: Publishing your work",
+              "- Correcting Mistakes: Undo Commits Safely"
             ]
           }
         },

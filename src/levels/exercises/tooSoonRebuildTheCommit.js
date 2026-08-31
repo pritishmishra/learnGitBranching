@@ -170,7 +170,13 @@ exports.level = {
               "",
               "Undo that local commit, keep its file changes staged, add the missing follow-up file, and create one replacement commit that contains both files.",
               "",
-              "In this exercise, the early file is `draft.txt` and the follow-up file is `review.txt`."
+              "In this exercise, the early file is `draft.txt` and the follow-up file is `review.txt`.",
+              "",
+              "### Relevant lessons",
+              "",
+              "- Basic Git Workflow: Your First Snapshot",
+              "- Basic Git Workflow: Checking the commit history",
+              "- Correcting Mistakes: Rewind Local History"
             ]
           }
         },

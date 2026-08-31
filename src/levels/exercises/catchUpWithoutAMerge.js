@@ -214,7 +214,14 @@ exports.level = {
               "",
               "Download the updated `main`, replay your feature work after the teammate's commit, and publish your feature branch without creating a merge commit.",
               "",
-              "In this exercise, the feature branch is `feature-notifications`, your feature file is `notifications.txt`, and the teammate's file is `api.txt`."
+              "In this exercise, the feature branch is `feature-notifications`, your feature file is `notifications.txt`, and the teammate's file is `api.txt`.",
+              "",
+              "### Relevant lessons",
+              "",
+              "- Branching & Merging: Work on a Separate Timeline",
+              "- Branching & Merging: Publishing a branch",
+              "- Working with a Team: Download without Changing",
+              "- Working with a Team: Replay Your Work on the Latest Main"
             ]
           }
         },

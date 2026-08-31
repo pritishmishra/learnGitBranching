@@ -108,7 +108,14 @@ exports.level = {
               "",
               "You have joined a project and need to make your first contribution.",
               "",
-              "Get a local copy of the repository, identify yourself to Git, create the requested file, record it in history, and publish your work."
+              "Get a local copy of the repository, identify yourself to Git, create the requested file, record it in history, and publish your work.",
+              "",
+              "### Relevant lessons",
+              "",
+              "- Basic Git Workflow: Clone the repo",
+              "- Basic Git Workflow: Set up your git identity",
+              "- Basic Git Workflow: Your First Snapshot",
+              "- Basic Git Workflow: Publishing your work"
             ]
           }
         },

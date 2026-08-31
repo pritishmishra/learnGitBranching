@@ -165,7 +165,14 @@ exports.level = {
               "",
               "Develop a profile feature away from `main`, then create an independent hotfix on `main`.",
               "",
-              "Bring the two diverging lines of work together when both are ready."
+              "Bring the two diverging lines of work together when both are ready.",
+              "",
+              "### Relevant lessons",
+              "",
+              "- Basic Git Workflow: Your First Snapshot",
+              "- Basic Git Workflow: Checking the commit history",
+              "- Branching & Merging: Work on a Separate Timeline",
+              "- Branching & Merging: Merging with Diverging"
             ]
           }
         },

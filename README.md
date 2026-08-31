@@ -227,6 +227,8 @@ Notable fork-specific UI behavior:
   supports English only.
 - The Exercises tab renders practice placeholders as one exercise per row with
   numbered buttons.
+- Practice exercise opening screens list the relevant lessons that prepare
+  students for the scenario.
 - The success dialog was simplified and no longer shows command-count
   calculations.
 - Practice exercises do not show hints automatically and do not allow the

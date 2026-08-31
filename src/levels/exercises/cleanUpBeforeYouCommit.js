@@ -170,7 +170,13 @@ exports.level = {
               "",
               "Your working directory was left in a messy state.",
               "",
-              "Recover a tracked file that was accidentally removed, take an unrelated new file out of the staging area without deleting it, and then commit only the intended submission file."
+              "Recover a tracked file that was accidentally removed, take an unrelated new file out of the staging area without deleting it, and then commit only the intended submission file.",
+              "",
+              "### Relevant lessons",
+              "",
+              "- Basic Git Workflow: Your First Snapshot",
+              "- Basic Git Workflow: What did I change?",
+              "- Correcting Mistakes: Undo Local Changes"
             ]
           }
         },
