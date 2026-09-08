@@ -42,9 +42,9 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "In this exercise, you will create a file, inspect the unstaged change, stage it, and then inspect the staged change.",
+              "In this lesson, you will create a file, inspect the unstaged change, stage it, and then inspect the staged change.",
               "",
-              "The commit graph will not change in this exercise because you are not creating a commit yet. You are learning how to check what Git sees before you save a snapshot."
+              "The commit graph will not change in this lesson because you are not creating a commit yet. You are learning how to check what Git sees before you save a snapshot."
             ]
           }
         },

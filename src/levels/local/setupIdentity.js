@@ -26,7 +26,7 @@ exports.level = {
               "",
               "Before Git can create commits, it needs to know who you are. Git stores this identity in configuration values.",
               "",
-              "In this exercise, set your name and email address with `git config`. These values will be used as the author information on commits you create later."
+              "In this lesson, set your name and email address with `git config`. These values will be used as the author information on commits you create later."
             ]
           }
         },
@@ -34,7 +34,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Configuration changes do not create commits, so the repository graph will not change in this exercise. You are setting metadata Git will use when you commit later."
+              "Configuration changes do not create commits, so the repository graph will not change in this lesson. You are setting metadata Git will use when you commit later."
             ]
           }
         },

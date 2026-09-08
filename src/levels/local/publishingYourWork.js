@@ -35,7 +35,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "In this exercise, you will start by cloning so the visualization shows both copies of the project.",
+              "In this lesson, you will start by cloning so the visualization shows both copies of the project.",
               "",
               "Then you will create a file, stage it, commit it locally, and push that commit to the remote.",
               "",

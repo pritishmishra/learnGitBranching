@@ -79,7 +79,7 @@ exports.level = {
               "",
               "You have learned how to create a branch and publish a branch. Now you will bring branch work back into `main`.",
               "",
-              "`git merge` combines work from another branch into your current branch. In this exercise, `main` has not moved since you created `feature`, so Git can do a straightforward fast-forward merge."
+              "`git merge` combines work from another branch into your current branch. In this lesson, `main` has not moved since you created `feature`, so Git can do a straightforward fast-forward merge."
             ]
           }
         },

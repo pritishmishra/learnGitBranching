@@ -25,7 +25,7 @@ exports.level = {
             "markdowns": [
               "## Sync Your Local Copy",
               "",
-              "In the last exercise, `git fetch` downloaded remote commits without changing your local branch.",
+              "In the last lesson, `git fetch` downloaded remote commits without changing your local branch.",
               "",
               "Most of the time, after you download your teammates' commits, you also want your local branch to include that work.",
               "",

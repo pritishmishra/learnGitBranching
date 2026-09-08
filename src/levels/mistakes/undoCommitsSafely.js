@@ -32,11 +32,11 @@ exports.level = {
               "",
               "That makes revert the safer choice when a commit may already have been pushed to a remote branch, or when another person may already have pulled it.",
               "",
-              "In this exercise, you will push the commit first to make it shared. Then you will revert it and push the revert commit too.",
+              "In this lesson, you will push the commit first to make it shared. Then you will revert it and push the revert commit too.",
               "",
               "The important real-world habit is: if the commit is already shared, prefer `git revert` over rewriting history with `git reset`.",
               "",
-              "In this exercise, you will use `git revert HEAD` to keep the task simple. `HEAD` means the current commit, so this reverts the latest commit on the current branch."
+              "In this lesson, you will use `git revert HEAD` to keep the task simple. `HEAD` means the current commit, so this reverts the latest commit on the current branch."
             ]
           }
         },

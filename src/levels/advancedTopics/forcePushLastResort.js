@@ -226,7 +226,7 @@ exports.level = {
               "git reset --hard HEAD~1",
               "```",
               "",
-              "`git reset --soft HEAD~1` would also move the branch back, but it would keep the old file change staged. In this exercise, use `--hard` so the replacement starts clean.",
+              "`git reset --soft HEAD~1` would also move the branch back, but it would keep the old file change staged. In this lesson, use `--hard` so the replacement starts clean.",
               "",
               "**3. Create, stage, and commit the replacement version**",
               "",

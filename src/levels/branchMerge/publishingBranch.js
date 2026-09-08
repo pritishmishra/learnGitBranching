@@ -27,9 +27,9 @@ exports.level = {
               "",
               "The GitHub repository has already been cloned for you.",
               "",
-              "In the last exercise, you created a branch locally. A local branch is private to your copy until you publish it to the remote repository.",
+              "In the last lesson, you created a branch locally. A local branch is private to your copy until you publish it to the remote repository.",
               "",
-              "In this exercise, you will create a new branch, make one commit on it, and publish that branch to `origin`."
+              "In this lesson, you will create a new branch, make one commit on it, and publish that branch to `origin`."
             ]
           }
         },

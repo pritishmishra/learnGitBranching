@@ -82,7 +82,7 @@ exports.level = {
               "",
               "In real projects, `git clone` creates a local copy of a remote repository, such as one hosted on GitHub. After cloning, you have your own local repository to work in, while the remote repository still exists separately.",
               "",
-              "In this exercise, you'll see both copies at the same time: your local repository and the remote repository it came from. For most exercises after this, the clone step will already be done for you so you can focus on the next Git concept.",
+              "In this lesson, you'll see both copies at the same time: your local repository and the remote repository it came from. For most lessons after this, the clone step will already be done for you so you can focus on the next Git concept.",
               ""
             ]
           }

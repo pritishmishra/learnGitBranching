@@ -154,7 +154,7 @@ Common fields used by this fork:
   start.
 - `initialStagedChanges`: seed staged file changes at level start.
 - `initialGitConfig`: seed repository-local Git config, such as `user.name` and
-  `user.email`, when an exercise starts after identity setup has already been
+  `user.email`, when a level starts after identity setup has already been
   completed.
 - `initialRepoLabel`: label the initial single-repository visualization before
   commands such as `git clone` create the usual local/remote split.

@@ -34,7 +34,7 @@ exports.level = {
               "",
               "The commit message helps explain what changed, and the commit id is how Git can refer to that exact snapshot later.",
               "",
-              "In this exercise, you will create a new commit and then use `git log` to inspect it."
+              "In this lesson, you will create a new commit and then use `git log` to inspect it."
             ]
           }
         },
