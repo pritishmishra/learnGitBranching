@@ -44,7 +44,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you. Complete these steps in the terminal on the right:",
+              "The GitHub repository has already been cloned for you. Complete the following steps to finish this lesson:",
               "",
               "**1. Create a file**",
               "```",
