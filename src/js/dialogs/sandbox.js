@@ -23,6 +23,8 @@ exports.dialog = {
         'and ask you to solve common development situations, such as making your first contribution,',
         'cleaning up before a commit, rebuilding a local commit, or catching up with remote work.',
         '',
+        'For lessons, if you are stuck at any point, use `show solution` to view the lesson solution.',
+        '',
         'You can see all the commands available with `show commands` at the terminal.'
       ]
     }
