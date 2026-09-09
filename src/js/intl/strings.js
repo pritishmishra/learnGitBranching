@@ -344,7 +344,7 @@ exports.strings = {
   },
   "git-dummy-msg": {
     "__desc__": "The dummy commit message for all commits. Feel free to put in a shoutout to your school / city / whatever!",
-    "en_US": "Quick commit. Go Bears!",
+    "en_US": "Initial setup",
     "bg": "Бърз комит. Давай!",
     "fa": "یک کامیت سریع. برو که بریم!",
     "de_DE": "Schneller Commit. Eff-Zeh!",

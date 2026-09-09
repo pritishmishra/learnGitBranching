@@ -1675,7 +1675,7 @@ GitEngine.prototype.commit = function(options) {
   }
 
   // Build author from git config
-  var author = 'Peter Cottle';  // default
+  var author = 'CSC207 Staff';  // default
   var userName = this.getConfig('user.name');
   var userEmail = this.getConfig('user.email');
   if (userName && userEmail) {
@@ -1694,7 +1694,7 @@ GitEngine.prototype.commit = function(options) {
   }
 
   var newCommit = this.makeCommit(commitParents, id, {
-    commitMessage: options.commitMessage || 'Commit message not provided',
+    commitMessage: options.commitMessage || intl.str('git-dummy-msg'),
     author: author,
     fileChanges: JSON.parse(JSON.stringify(this.stagedChanges || {}))
   });
@@ -3526,7 +3526,7 @@ class Commit {
       type: 'commit',
       children: null,
       parents: null,
-      author: 'Peter Cottle',
+      author: 'CSC207 Staff',
       createTime: null,
       commitMessage: null,
       visNode: null,
