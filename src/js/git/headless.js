@@ -42,6 +42,8 @@ function getMockFactory() {
 
 function getMockVisualization() {
   return {
+    tearDown: function() {},
+    clearOrigin: function() {},
     makeOrigin: function(options) {
       var localRepo = options.localRepo;
       var treeString = options.treeString;
