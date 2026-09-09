@@ -114,10 +114,10 @@ exports.level = {
               "",
               "### Relevant lessons",
               "",
-              "- Basic Git Workflow: Clone the repo",
-              "- Basic Git Workflow: Set up your git identity",
+              "- Basic Git Workflow: Clone The Repo",
+              "- Basic Git Workflow: Set Up Your Git Identity",
               "- Basic Git Workflow: Your First Snapshot",
-              "- Basic Git Workflow: Publishing your work"
+              "- Basic Git Workflow: Publishing Your Work"
             ]
           }
         },

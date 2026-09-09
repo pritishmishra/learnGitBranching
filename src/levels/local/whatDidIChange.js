@@ -1,6 +1,6 @@
 exports.level = {
   "name": {
-    "en_US": "What did I change?"
+    "en_US": "What Did I Change?"
   },
   "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "solutionCommand": "touch notes.txt;git status;git diff;git add notes.txt;git status;git diff --staged",
@@ -24,7 +24,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## What did I change?",
+              "## What Did I Change?",
               "",
               "The remote repository has already been cloned for you, so you can focus on inspecting local changes.",
               "",

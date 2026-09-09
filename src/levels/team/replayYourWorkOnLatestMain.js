@@ -114,7 +114,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "name": {
-    "en_US": "Replay Your Work on the Latest Main"
+    "en_US": "Replay Your Work On The Latest Main"
   },
   "goalTreeString": goalTree,
   "solutionCommand": "git fakeTeamwork 1;touch replay.txt;git add replay.txt;git commit -m 'Update replay.txt';git fetch;git rebase o/main;git push",
@@ -140,7 +140,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Replay Your Work on the Latest Main",
+              "## Replay Your Work On The Latest Main",
               "",
               "You have already learned that `git pull` fetches remote work and merges it into your local branch.",
               "",

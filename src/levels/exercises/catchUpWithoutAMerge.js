@@ -218,10 +218,10 @@ exports.level = {
               "",
               "### Relevant lessons",
               "",
-              "- Branching & Merging: Work on a Separate Timeline",
-              "- Branching & Merging: Publishing a branch",
-              "- Working with a Team: Download without Changing",
-              "- Working with a Team: Replay Your Work on the Latest Main"
+              "- Branching & Merging: Work On A Separate Timeline",
+              "- Branching & Merging: Publishing A Branch",
+              "- Working With A Team: Download Without Changing",
+              "- Working With A Team: Replay Your Work On The Latest Main"
             ]
           }
         },

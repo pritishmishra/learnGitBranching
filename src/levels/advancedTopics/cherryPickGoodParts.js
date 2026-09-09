@@ -166,7 +166,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "name": {
-    "en_US": "Pick the Good Parts"
+    "en_US": "Pick The Good Parts"
   },
   "goalTreeString": goalTree,
   "solutionCommand": "git cherry-pick C3 C5",
@@ -188,7 +188,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Pick the Good Parts",
+              "## Pick The Good Parts",
               "",
               "Sometimes a branch contains several commits, but you only want one specific change from it.",
               "",

@@ -177,7 +177,7 @@ exports.level = {
               "### Relevant lessons",
               "",
               "- Basic Git Workflow: Your First Snapshot",
-              "- Basic Git Workflow: What did I change?",
+              "- Basic Git Workflow: What Did I Change?",
               "- Correcting Mistakes: Undo Local Changes"
             ]
           }

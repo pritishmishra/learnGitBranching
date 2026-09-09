@@ -206,8 +206,8 @@ exports.level = {
               "",
               "### Relevant lessons",
               "",
-              "- Basic Git Workflow: Checking the commit history",
-              "- Basic Git Workflow: Publishing your work",
+              "- Basic Git Workflow: Checking The Commit History",
+              "- Basic Git Workflow: Publishing Your Work",
               "- Correcting Mistakes: Undo Commits Safely"
             ]
           }

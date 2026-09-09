@@ -29,33 +29,33 @@ language picker or accepts locale changes through the terminal.
 The current Lessons tab contains:
 
 - **Basic Git Workflow**
-  - Clone the repo
-  - Set up your git identity
+  - Clone The Repo
+  - Set Up Your Git Identity
   - Your First Snapshot
-  - What did I change?
-  - Checking the commit history
-  - Publishing your work
+  - What Did I Change?
+  - Checking The Commit History
+  - Publishing Your Work
 
 - **Branching & Merging**
-  - Work on a Separate Timeline
-  - Publishing a branch
+  - Work On A Separate Timeline
+  - Publishing A Branch
   - Bringing Work Back Together
-  - Merging with Diverging
+  - Merging With Diverging
 
 - **Correcting Mistakes**
   - Undo Local Changes
   - Undo Commits Safely
   - Rewind Local History
 
-- **Working with a Team**
-  - Download without Changing
+- **Working With A Team**
+  - Download Without Changing
   - Sync Your Local Copy
   - Collaborating Without Conflicting
-  - Replay Your Work on the Latest Main
+  - Replay Your Work On The Latest Main
 
 - **Advanced Topics**
   - The Emergency Override
-  - Pick the Good Parts
+  - Pick The Good Parts
 
 ### Exercises
 

@@ -72,7 +72,7 @@ var sequenceInfo = exports.sequenceInfo = {
   team: {
     tab: 'lessons',
     displayName: {
-      'en_US': 'Working with a Team'
+      'en_US': 'Working With A Team'
     },
     about: {
       'en_US': 'Learn how to safely download, integrate, resolve, and publish team work'

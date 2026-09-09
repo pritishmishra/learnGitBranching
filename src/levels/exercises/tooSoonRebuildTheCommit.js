@@ -175,7 +175,7 @@ exports.level = {
               "### Relevant lessons",
               "",
               "- Basic Git Workflow: Your First Snapshot",
-              "- Basic Git Workflow: Checking the commit history",
+              "- Basic Git Workflow: Checking The Commit History",
               "- Correcting Mistakes: Rewind Local History"
             ]
           }
