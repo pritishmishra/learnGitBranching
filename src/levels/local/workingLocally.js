@@ -34,9 +34,9 @@ exports.level = {
               "In this lesson you'll practice the complete local workflow:",
               "",
               "1. `touch` — create a new file in your working directory",
-              "2. `git status` — inspect what Git sees in your working directory",
+              "2. `git status` — check that Git sees the new file as untracked",
               "3. `git add` — move it to the staging area",
-              "4. `git status` — confirm the change is staged",
+              "4. `git status` — confirm the file is staged and ready to commit",
               "5. `git commit -m` — save a permanent snapshot"
             ]
           }
@@ -83,6 +83,7 @@ exports.level = {
               "```",
               "git status",
               "```",
+              "Git should show `hello.txt` as an untracked file because you created it but have not staged it yet.",
               "",
               "**3. Stage it**",
               "```",
@@ -93,6 +94,7 @@ exports.level = {
               "```",
               "git status",
               "```",
+              "Git should now show `hello.txt` as a change to be committed because it is in the staging area.",
               "",
               "**5. Commit it**",
               "```",
