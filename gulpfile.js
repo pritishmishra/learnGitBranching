@@ -195,6 +195,10 @@ var exerciseJasmine = function() {
   return runJasmine('__tests__/exercises/**/*.spec.js');
 };
 
+var lessonJasmine = function() {
+  return runJasmine('__tests__/lessons/**/*.spec.js');
+};
+
 var gitAdd = function(done) {
   execSync('git add build/');
   done();
@@ -323,6 +327,7 @@ module.exports = {
   build,
   test: jasmine,
   testExercises: exerciseJasmine,
+  testLessons: lessonJasmine,
   deploy,
   generateLevelDocs,
 };

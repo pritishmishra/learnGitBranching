@@ -172,8 +172,7 @@ exercise.
 The same tests check that lessons outside the Exercises tab can still use both
 commands.
 
-## Future Lesson Tests
+## Related Lesson Tests
 
-This document covers only the standalone Exercises tab. When we add a similar
-targeted suite for the Lessons tab, document those tests separately so lesson
-coverage and exercise coverage stay easy to scan.
+This document covers only the standalone Exercises tab. The guided Lessons tab
+has a separate focused suite documented in [lesson-tests.md](lesson-tests.md).

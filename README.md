@@ -90,8 +90,15 @@ Useful package scripts are defined in [package.json](package.json):
 - `yarn dev`: start the local development server.
 - `yarn prepare`: run `gulp fastBuild`.
 - `yarn test`: run the test suite through Gulp.
+- `yarn test:lessons`: run only the guided Lessons tab tests.
 - `yarn test:exercises`: run only the standalone practice exercise tests.
 - `yarn test:coverage`: run tests with coverage.
+
+Guided lesson validation tests live in
+[__tests__/lessons](__tests__/lessons).
+They run each lesson's guided solution and check that the lesson reaches its
+goal state. The behavior covered by those tests is documented in
+[docs/lesson-tests.md](docs/lesson-tests.md).
 
 Practice exercise validation tests live in
 [__tests__/exercises](__tests__/exercises).

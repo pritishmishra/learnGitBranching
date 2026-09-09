@@ -139,6 +139,7 @@ var runLevelCommands = function(levelBlob, command) {
 
   headless.gitEngine.requireStagedChanges = !!levelBlob.requireStagedChanges;
   headless.gitEngine.requireCloneBeforeGitCommands = !!levelBlob.requireCloneBeforeGitCommands;
+  headless.gitEngine.mockConflictOnPull = levelBlob.mockConflictOnPull;
   if (levelBlob.initialGitConfig) {
     headless.gitEngine.setConfigState(levelBlob.initialGitConfig);
   }
