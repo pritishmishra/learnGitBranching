@@ -35,7 +35,11 @@ exports.level = {
               "",
               "`git diff` shows the actual line-by-line changes in your working directory.",
               "",
-              "`git diff --staged` shows the line-by-line changes that are already staged for the next commit."
+              "For example, after `echo \"New file content\" > notes.txt`, `git diff` will show that `notes.txt` now has a new line: `New file content`.",
+              "",
+              "`git diff --staged` shows the line-by-line changes that are already staged for the next commit.",
+              "",
+              "After you stage the file, `git diff` will be empty and `git diff --staged` will show that same change in the staging area."
             ]
           }
         },
@@ -46,19 +50,6 @@ exports.level = {
               "In this lesson, you will create a file, write text into it, inspect the unstaged change, stage it, and then inspect the staged change.",
               "",
               "`touch notes.txt` creates the file. `echo \"New file content\" > notes.txt` writes the text `New file content` into that file.",
-              "",
-              "After that, `git diff` will show the new line Git sees:",
-              "",
-              "```diff",
-              "diff --git a/notes.txt b/notes.txt",
-              "new file mode 100644",
-              "--- /dev/null",
-              "+++ b/notes.txt",
-              "@@ -0,0 +1 @@",
-              "+ New file content",
-              "```",
-              "",
-              "The `+` line is the content you added. After you stage the file, `git diff` will be empty and `git diff --staged` will show that same change in the staging area.",
               "",
               "The commit graph will not change in this lesson because you are not creating a commit yet. You are learning how to check what Git sees before you save a snapshot."
             ]
