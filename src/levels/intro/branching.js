@@ -97,29 +97,16 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Let's try to put some work on this new branch. Hit the button below."
-            ],
-            "afterMarkdowns": [
-              "Oh no! The `main` branch moved but the `newImage` branch didn't! That's because we weren't \"on\" the new branch, which is why the asterisk (*) was on `main`."
-            ],
-            "command": "git commit",
-            "beforeCommand": "git branch newImage"
-          }
-        },
-        {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "Let's tell git we want to checkout the branch with",
+              "Creating a branch does not switch to it automatically. To work on the new branch, check it out with",
               "",
               "```",
               "git checkout <name>",
               "```",
               "",
-              "This will put us on the new branch before committing our changes."
+              "Once you are on that branch, new commits are recorded there and the branch pointer moves forward."
             ],
             "afterMarkdowns": [
-              "There we go! Our changes were recorded on the new branch."
+              "There we go! Git switched to `newImage`, then recorded the new commit on that branch."
             ],
             "command": "git checkout newImage; git commit",
             "beforeCommand": "git branch newImage"
