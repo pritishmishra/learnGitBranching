@@ -61,8 +61,6 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "Your tasks:",
-              "",
               "**1. Create a file**",
               "```",
               "touch notes.txt",
