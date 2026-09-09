@@ -80,7 +80,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you, and the remote repository has commits that your local remote-tracking branches do not know about yet.",
+              "The remote repository has already been cloned for you, and the remote has commits that your local remote-tracking branches do not know about yet.",
               "",
               "Download the remote commits without changing your local branch:",
               "",

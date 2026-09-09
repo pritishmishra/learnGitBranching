@@ -207,7 +207,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "You will push one commit, rewrite your local branch with a hard reset and a replacement commit, then force-push that replacement to the remote.",
               "",

@@ -185,7 +185,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "You will simulate a teammate pushing one commit, make your own local commit, fetch the latest remote work, replay your work on top of `o/main`, and then push.",
               "",

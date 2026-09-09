@@ -75,7 +75,7 @@ exports.level = {
             "markdowns": [
               "## Bringing Work Back Together",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "You have learned how to create a branch and publish a branch. Now you will bring branch work back into `main`.",
               "",

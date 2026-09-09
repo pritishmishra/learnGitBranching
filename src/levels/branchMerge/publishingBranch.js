@@ -25,7 +25,7 @@ exports.level = {
             "markdowns": [
               "## Publishing a branch",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "In the last lesson, you created a branch locally. A local branch is private to your copy until you publish it to the remote repository.",
               "",

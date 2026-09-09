@@ -66,7 +66,7 @@ exports.level = {
             "markdowns": [
               "## Git Branches",
               "",
-              "The GitHub repository has already been cloned for you, so you can focus on creating a branch in your local copy.",
+              "The remote repository has already been cloned for you, so you can focus on creating a branch in your local copy.",
               "",
               "Branches in Git are incredibly lightweight as well. They are simply pointers to a specific commit -- nothing more. This is why many Git enthusiasts chant the mantra:",
               "",
@@ -143,7 +143,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "Ok! You are all ready to get branching. Once this window closes,",
               "make a new branch named `bugFix` and switch to that branch.",

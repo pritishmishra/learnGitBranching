@@ -237,7 +237,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "`main` is checked out. The `feature` branch contains commits `C2` and `C3`, and the `experiment` branch contains commits `C4` and `C5`.",
               "",

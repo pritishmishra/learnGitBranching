@@ -22,7 +22,7 @@ exports.level = {
             "markdowns": [
               "## Set up your git identity",
               "",
-              "The GitHub repository has already been cloned for you, so you can start by configuring Git.",
+              "The remote repository has already been cloned for you, so you can start by configuring Git.",
               "",
               "Before Git can create commits, it needs to know who you are. Git stores this identity in configuration values.",
               "",
@@ -44,7 +44,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you. Configure your Git identity in the terminal:",
+              "The remote repository has already been cloned for you. Configure your Git identity in the terminal:",
               "",
               "**1. Set your name**",
               "```",

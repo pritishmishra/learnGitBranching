@@ -26,7 +26,7 @@ exports.level = {
             "markdowns": [
               "## What did I change?",
               "",
-              "The GitHub repository has already been cloned for you, so you can focus on inspecting local changes.",
+              "The remote repository has already been cloned for you, so you can focus on inspecting local changes.",
               "",
               "Before you commit, Git gives you tools to inspect your work.",
               "",
@@ -54,7 +54,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you. Complete the following steps to finish this lesson:",
+              "The remote repository has already been cloned for you. Complete the following steps to finish this lesson:",
               "",
               "**1. Create a file**",
               "```",

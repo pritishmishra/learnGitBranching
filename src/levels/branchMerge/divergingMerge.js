@@ -29,7 +29,7 @@ exports.level = {
             "markdowns": [
               "## Merging with Diverging",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "A fast-forward merge works when `main` has not moved since the feature branch started.",
               "",

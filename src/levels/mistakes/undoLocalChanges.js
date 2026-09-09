@@ -71,7 +71,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "Two files have already been created in your working directory: `scratch.txt` and `staged.txt`. Neither file has been committed.",
               "",

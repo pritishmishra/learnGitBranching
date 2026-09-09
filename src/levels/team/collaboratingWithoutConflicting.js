@@ -197,7 +197,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The GitHub repository has already been cloned for you.",
+              "The remote repository has already been cloned for you.",
               "",
               "You will simulate a teammate changing `shared.txt`, make your own local change to the same file, pull the teammate's work, resolve the conflict, and push the final merge.",
               "",
