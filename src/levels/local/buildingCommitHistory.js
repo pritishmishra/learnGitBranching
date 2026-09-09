@@ -24,8 +24,6 @@ exports.level = {
             "markdowns": [
               "## Checking The Commit History",
               "",
-              "The remote repository has already been cloned for you, so you can focus on creating and reading commits.",
-              "",
               "Every commit you create becomes part of the repository history.",
               "",
               "`git log` lets you read that history from newest commit to older commits. It shows details like the commit id, author, date, and commit message.",
@@ -33,6 +31,7 @@ exports.level = {
               "The newest commit appears first in `git log`.",
               "",
               "The commit message helps explain what changed, and the commit id is how Git can refer to that exact snapshot later.",
+              "A clear and meaningful commit message makes it easier for you and your teammates to understand the project history later.",
               "",
               "In this lesson, you will create a new commit and then use `git log` to inspect it."
             ]
@@ -43,10 +42,6 @@ exports.level = {
           "options": {
             "markdowns": [
               "## Your Task",
-              "",
-              "The remote repository has already been cloned for you.",
-              "",
-              "Your tasks:",
               "",
               "**1. Create a file**",
               "```",
