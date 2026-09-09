@@ -887,8 +887,9 @@ div.modalView.box.inFront.show {
 }
 
 .modalView .terminal-window {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  max-height: 94vh;
   -webkit-transform: translate3d(0, -100%, 0);
   -moz-transform: translate3d(0, -100%, 0);
   -o-transform: translate3d(0, -100%, 0);
@@ -1156,14 +1157,8 @@ div.gitDemonstrationView {
 
 .gitDemonstrationView > div.demonstrationText {
   margin-right: 10px;
-  max-height: 400px;
   max-width: 450px;
-  overflow-y: scroll;
   overflow-x: hidden;
-}
-
-.gitDemonstrationView > div.demonstrationText.noLongText {
-  overflow-y: hidden;
 }
 
 .markdownGrabber div.markdownGrabberPreview,
