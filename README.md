@@ -254,7 +254,38 @@ Notable fork-specific UI behavior:
 
 ### Deployment Scripts
 
-The repository still includes deployment helper scripts such as
-[apache.sh](apache.sh) and [nginx.sh](nginx.sh). These are project-specific
-deployment wrappers around the built static app. Review them before running on a
-server, especially user permissions and dependency assumptions.
+The repository includes deployment helper scripts for the static Apache-hosted
+app:
+
+- [rebuildProductionWebsite.sh](rebuildProductionWebsite.sh): rebuilds the app
+  and replaces the production Apache document root at `/var/www/html`.
+- [rebuildDevWebsite.sh](rebuildDevWebsite.sh): rebuilds the app and publishes
+  a separate dev copy, defaulting to `/var/www/learngit-dev` on port `8080`.
+- [apache.sh](apache.sh): compatibility wrapper for production deploys.
+- [nginx.sh](nginx.sh): older nginx-oriented helper retained for reference.
+
+The dev script prints a URL like `http://<vm-public-ip>:8080/` after deployment.
+You can override its defaults with environment variables:
+
+```bash
+DEV_PORT=8081 DEV_WEB_DIR=/var/www/learngit-dev ./rebuildDevWebsite.sh
+```
+
+On the VM, useful commands for finding and checking the externally reachable IP
+are:
+
+```bash
+curl -4 ifconfig.me
+hostname -I
+sudo ss -ltnp | grep -E ':80|:443|:8080'
+```
+
+From your laptop, verify the dev site with:
+
+```bash
+curl -I http://<vm-public-ip>:8080/
+nc -vz <vm-public-ip> 8080
+```
+
+Review these scripts before running on a server, especially user permissions,
+Apache configuration, open firewall ports, and dependency assumptions.
