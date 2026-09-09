@@ -240,6 +240,13 @@ describe('Lesson section validation', function() {
     );
   });
 
+  it('solves "Publishing Your Work" with any non-empty commit message', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('Publishing Your Work'),
+      withIdentity('git clone;touch publish.txt;git add publish.txt;git commit -m "Publish my first change";git push')
+    );
+  });
+
   lessonSequenceKeys.forEach(function(sequenceKey) {
     describe(levels.sequenceInfo[sequenceKey].displayName.en_US, function() {
       levels.levelSequences[sequenceKey].forEach(function(levelBlob) {
