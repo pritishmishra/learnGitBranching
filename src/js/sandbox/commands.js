@@ -113,12 +113,12 @@ var instantCommands = [
       msg: 'Commands combined!'
     });
   }],
-  [/^echo "(.*?)"$|^echo (.*?)$/, function(bits) {
+  [/^echo +(?!.*(?:>|&gt;))(?:"(.*?)"|(.*?))$/, function(bits) {
     var msg = bits[1] || bits[2];
     throw new CommandResult({
       msg: msg
     });
-  }, 'echo', 'echo out a string to the terminal output'],
+  }, 'echo', 'Print text to the terminal, or write text with `echo "message" > <file>`'],
   [/^show +commands$/, function(bits) {
     var allCommands = Object.assign(
       {},

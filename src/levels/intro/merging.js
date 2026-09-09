@@ -106,7 +106,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "Complete the following steps to finish this lesson:",
+              "Your tasks:",
               "",
               "**1. Create and switch to a feature branch**",
               "",

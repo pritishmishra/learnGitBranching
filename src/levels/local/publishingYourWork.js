@@ -72,7 +72,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "Complete the following steps to finish this lesson:",
+              "Your tasks:",
               "",
               "**1. Clone the repository**",
               "```",

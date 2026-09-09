@@ -77,7 +77,7 @@ exports.level = {
               "",
               "After each command in steps 2-5, run `git status` if you want to check how Git sees the file now.",
               "",
-              "Complete the following steps to finish this lesson:",
+              "Your tasks:",
               "",
               "**1. Check the current changes**",
               "",

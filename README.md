@@ -114,6 +114,9 @@ This is still a client-side JavaScript application. The main app behavior lives
 under [src/js](src/js), and level definitions live under [src/levels](src/levels).
 Default seeded commit metadata is CSC207-branded: commits use `CSC207 Staff` as
 the fallback author and `Initial setup` as the default generated message.
+Teaching file commands include `touch <file>`, `echo "message" > <file>`, and
+`rm <file>` for creating, writing, and deleting files in the simulated working
+directory.
 
 ### Level Organization
 

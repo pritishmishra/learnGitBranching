@@ -74,7 +74,9 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you. Complete the following steps to finish this lesson:",
+              "The remote repository has already been cloned for you.",
+              "",
+              "Your tasks:",
               "",
               "**1. Create, stage, and commit a file**",
               "",

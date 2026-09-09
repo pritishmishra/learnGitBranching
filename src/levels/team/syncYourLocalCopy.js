@@ -128,7 +128,7 @@ exports.level = {
               "",
               "The remote repository has already been cloned for you.",
               "",
-              "Complete the following steps to finish this lesson:",
+              "Your tasks:",
               "",
               "**1. Simulate teammate work on the remote**",
               "",

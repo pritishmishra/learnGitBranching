@@ -3145,6 +3145,67 @@ GitEngine.prototype.addFile = function(filepath, content) {
   };
 };
 
+GitEngine.prototype.hasFileInHistory = function(filepath) {
+  return this.getFileContentInHistory(filepath) !== null;
+};
+
+GitEngine.prototype.getFileContentInHistory = function(filepath) {
+  var current = this.getCommitFromRef('HEAD');
+  var commits = [];
+
+  while (current) {
+    commits.unshift(current);
+    var parents = current.get('parents') || [];
+    current = parents[0];
+  }
+
+  var content = null;
+  commits.forEach(function(commit) {
+    var fileChanges = commit.get('fileChanges') || {};
+    var change = fileChanges[filepath];
+    if (!change) {
+      return;
+    }
+    if (change.type === 'deleted') {
+      content = null;
+      return;
+    }
+    content = change.content || 'file content';
+  });
+
+  return content;
+};
+
+GitEngine.prototype.writeFile = function(filepath, content) {
+  if (!filepath) {
+    throw new GitError({
+      msg: intl.todo('filepath required for writeFile')
+    });
+  }
+
+  var existingWorkingChange = this.workingDirectoryChanges[filepath];
+  var existingStagedChange = this.stagedChanges[filepath];
+  var existingContent = existingWorkingChange && existingWorkingChange.content;
+  if (!existingContent && existingStagedChange) {
+    existingContent = existingStagedChange.content;
+  }
+  if (!existingContent) {
+    existingContent = this.getFileContentInHistory(filepath);
+  }
+  var type = 'modified';
+
+  if ((existingWorkingChange && existingWorkingChange.type === 'added') ||
+      (existingStagedChange && existingStagedChange.type === 'added') ||
+      !this.hasFileInHistory(filepath)) {
+    type = 'added';
+  }
+
+  this.workingDirectoryChanges[filepath] = {
+    type: type,
+    content: existingContent ? existingContent + '\n' + content : content
+  };
+};
+
 GitEngine.prototype.deleteFile = function(filepath) {
   // Mark a file as deleted in the working directory
   if (!filepath) {

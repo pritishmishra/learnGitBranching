@@ -129,6 +129,14 @@ describe('Practice exercise validation', function() {
     );
   });
 
+  it('fails echo before clone in exercise 1', function() {
+    return base.expectLevelCommandToError(
+      getExercise(1),
+      'echo "Hello" > introduction.txt',
+      CLONE_REQUIRED_MESSAGE
+    );
+  });
+
   it('fails git add before clone in exercise 1', function() {
     return base.expectLevelCommandToError(
       getExercise(1),

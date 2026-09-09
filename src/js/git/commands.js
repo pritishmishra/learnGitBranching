@@ -1253,6 +1253,37 @@ var commandConfig = {
     }
   },
 
+  echo: {
+    standalone: true,
+    regex: /^echo($|\s)/,
+    description: 'Write text to a file in the working directory',
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+
+      if (generalArgs.length !== 3 ||
+          (generalArgs[1] !== '>' && generalArgs[1] !== '&gt;')) {
+        throw new GitError({
+          msg: intl.todo('Usage: echo "message" > <filepath>')
+        });
+      }
+
+      var content = generalArgs[0].replace(/^["']|["']$/g, '');
+      var filepath = generalArgs[2];
+
+      if (!content || !filepath) {
+        throw new GitError({
+          msg: intl.todo('Usage: echo "message" > <filepath>')
+        });
+      }
+
+      engine.writeFile(filepath, content);
+
+      throw new CommandResult({
+        msg: ''
+      });
+    }
+  },
+
   rm: {
     standalone: true,
     regex: /^rm($|\s)/,
