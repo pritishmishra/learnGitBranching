@@ -129,26 +129,21 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "*Note: In Git version 2.23, a new command called `git switch` was introduced to eventually replace `git checkout`, ",
-              "which is somewhat overloaded (it does a bunch of different things depending on the arguments). The lessons here will still use ",
-              "`checkout` instead of `switch` because the `switch` command is still considered experimental and the syntax may change in the future. ",
-              "However you can still try out the new `switch` command in this application, and also ",
-              "<a href=\"https://git-scm.com/docs/git-switch\" target=\"_blank\">learn more here</a>.* "
-            ]
-          }
-        },
-        {
-          "type": "ModalAlert",
-          "options": {
-            "markdowns": [
-              "The remote repository has already been cloned for you.",
+              "## Your Task",
               "",
-              "Ok! You are all ready to get branching. Once this window closes,",
-              "make a new branch named `bugFix` and switch to that branch.",
+              "**1. Create a branch named `bugFix`**",
+              "```",
+              "git branch bugFix",
+              "```",
               "",
-              "By the way, here's a shortcut: if you want to create a new ",
-              "branch AND check it out at the same time, you can simply ",
-              "type `git checkout -b [yourbranchname]`."
+              "**2. Switch to the `bugFix` branch**",
+              "```",
+              "git checkout bugFix",
+              "```",
+              "",
+              "Shortcut: you can create and switch to a branch in one step with `git checkout -b <branch-name>`.",
+              "",
+              "To reopen this task screen later, use the command `objective`."
             ]
           }
         }
