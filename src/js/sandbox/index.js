@@ -273,7 +273,7 @@ class Sandbox {
     command.addWarning(
       intl.str('solved-map-reset')
     );
-    command.finishWith(deferred);
+    this.reset(command, deferred);
   }
 
   processSandboxCommand(command, deferred) {

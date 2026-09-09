@@ -134,13 +134,7 @@ class Visualization {
     if (this.treeString) {
       this.gitEngine.loadTreeFromString(this.treeString);
     }
-    if (options.initialGitConfig) {
-      this.gitEngine.setConfigState(options.initialGitConfig);
-    }
-    this.gitEngine.setLocalChangeState(
-      options.initialWorkingDirectoryChanges,
-      options.initialStagedChanges
-    );
+    this.applyInitialLocalState();
     if (this.options.zIndex) {
       this.setTreeIndex(this.options.zIndex);
     }
@@ -277,11 +271,15 @@ class Visualization {
 
   reset(tree) {
     var treeString = tree || this.treeString;
+    var shouldApplyInitialLocalState = !tree;
     this.setTreeOpacity(0);
     if (treeString) {
       this.gitEngine.loadTreeFromString(treeString);
     } else {
       this.gitEngine.defaultInit();
+    }
+    if (shouldApplyInitialLocalState) {
+      this.applyInitialLocalState();
     }
     this.fadeTreeIn();
 
@@ -294,6 +292,18 @@ class Visualization {
         this.originToo('reset', arguments);
       }
     }
+  }
+
+  applyInitialLocalState() {
+    if (this.options.initialGitConfig) {
+      this.gitEngine.setConfigState(this.options.initialGitConfig);
+    }
+    this.gitEngine.setLocalChangeState(
+      this.options.initialWorkingDirectoryChanges,
+      this.options.initialStagedChanges
+    );
+    this.gitEngine.mockPullConflictConsumed = false;
+    this.gitEngine.activeConflict = null;
   }
 
   tearDown(options) {

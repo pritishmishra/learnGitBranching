@@ -99,6 +99,10 @@ They run headless command sequences and check both successful completions and
 intentional failure cases. The behavior covered by those tests is documented in
 [docs/exercise-tests.md](docs/exercise-tests.md).
 
+Reset behavior is covered in [__tests__/resetSolved.spec.js](__tests__/resetSolved.spec.js).
+Those tests check that `reset solved --confirm` resets the current level state
+and that level resets restore the intended starting file state.
+
 This is still a client-side JavaScript application. The main app behavior lives
 under [src/js](src/js), and level definitions live under [src/levels](src/levels).
 
