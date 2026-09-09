@@ -27,6 +27,14 @@ var withIdentity = function(command) {
   return IDENTITY_SETUP + ';' + command;
 };
 
+var commandWithAlternateCommitMessages = function(command) {
+  var commitIndex = 0;
+  return command.replace(/git +commit +-m +(['"])[^'"]*\1/g, function(match, quote) {
+    commitIndex++;
+    return 'git commit -m ' + quote + 'Alternate lesson commit ' + commitIndex + quote;
+  });
+};
+
 var getLessonByName = function(name) {
   var matchingLevel = null;
   lessonSequenceKeys.forEach(function(sequenceKey) {
@@ -240,13 +248,6 @@ describe('Lesson section validation', function() {
     );
   });
 
-  it('solves "Publishing Your Work" with any non-empty commit message', function() {
-    return base.expectLevelCommandsToSolve(
-      getLessonByName('Publishing Your Work'),
-      withIdentity('git clone;touch publish.txt;git add publish.txt;git commit -m "Publish my first change";git push')
-    );
-  });
-
   lessonSequenceKeys.forEach(function(sequenceKey) {
     describe(levels.sequenceInfo[sequenceKey].displayName.en_US, function() {
       levels.levelSequences[sequenceKey].forEach(function(levelBlob) {
@@ -260,6 +261,15 @@ describe('Lesson section validation', function() {
         it('resets lesson "' + levelBlob.name.en_US + '" to its configured start state', function() {
           return expectLevelResetToRestoreLessonStart(levelBlob);
         });
+
+        if (/git +commit/.test(levelBlob.solutionCommand || '')) {
+          it('solves lesson "' + levelBlob.name.en_US + '" with alternate commit messages', function() {
+            return base.expectLevelCommandsToSolve(
+              levelBlob,
+              commandWithAlternateCommitMessages(solutionWithPrerequisites(levelBlob))
+            );
+          });
+        }
 
         (failureCasesByLesson[levelBlob.name.en_US] || []).forEach(function(failureCase) {
           it(failureCase.name, function() {
