@@ -3141,7 +3141,7 @@ GitEngine.prototype.addFile = function(filepath, content) {
   
   this.workingDirectoryChanges[filepath] = {
     type: 'added',
-    content: content || 'New file content'
+    content: content === undefined ? '' : content
   };
 };
 
@@ -3192,11 +3192,15 @@ GitEngine.prototype.writeFile = function(filepath, content) {
   if (!existingContent) {
     existingContent = this.getFileContentInHistory(filepath);
   }
+  if (!existingWorkingChange && !existingStagedChange && existingContent === null) {
+    throw new GitError({
+      msg: intl.todo('File "' + filepath + '" does not exist. Create it first with touch ' + filepath + '.')
+    });
+  }
   var type = 'modified';
 
   if ((existingWorkingChange && existingWorkingChange.type === 'added') ||
-      (existingStagedChange && existingStagedChange.type === 'added') ||
-      !this.hasFileInHistory(filepath)) {
+      (existingStagedChange && existingStagedChange.type === 'added')) {
     type = 'added';
   }
 

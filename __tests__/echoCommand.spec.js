@@ -20,8 +20,8 @@ var runCommands = function(commandText) {
 };
 
 describe('Echo command', function() {
-  it('writes quoted text to a new file in the working directory', function() {
-    return runCommands('echo "Hello CSC207" > notes.txt').then(function(result) {
+  it('writes quoted text to an existing working directory file', function() {
+    return runCommands('touch notes.txt;echo "Hello CSC207" > notes.txt').then(function(result) {
       expect(result.headless.gitEngine.workingDirectoryChanges).toEqual({
         'notes.txt': {
           type: 'added',
@@ -33,6 +33,7 @@ describe('Echo command', function() {
 
   it('stages and commits files created with echo', function() {
     return runCommands(
+      'touch notes.txt;' +
       'echo "Hello CSC207" > notes.txt;' +
       'git config user.name Student;' +
       'git config user.email student@example.com;' +
@@ -51,6 +52,7 @@ describe('Echo command', function() {
 
   it('appends to known local file content', function() {
     return runCommands(
+      'touch notes.txt;' +
       'echo "First line" > notes.txt;' +
       'echo "Second line" > notes.txt'
     ).then(function(result) {
@@ -67,6 +69,7 @@ describe('Echo command', function() {
     return runCommands(
       'git config user.name Student;' +
       'git config user.email student@example.com;' +
+      'touch notes.txt;' +
       'echo "First line" > notes.txt;' +
       'git add notes.txt;' +
       'git commit -m "Add notes";' +
@@ -86,6 +89,15 @@ describe('Echo command', function() {
       var command = result.commands[0];
       expect(command.get('error').get('msg')).toBe(
         'Usage: echo "message" > <filepath>'
+      );
+    });
+  });
+
+  it('fails when the file does not exist yet', function() {
+    return runCommands('echo "Hello CSC207" > notes.txt').then(function(result) {
+      var command = result.commands[0];
+      expect(command.get('error').get('msg')).toBe(
+        'File "notes.txt" does not exist. Create it first with touch notes.txt.'
       );
     });
   });

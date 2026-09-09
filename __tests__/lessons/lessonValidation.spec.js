@@ -27,6 +27,18 @@ var withIdentity = function(command) {
   return IDENTITY_SETUP + ';' + command;
 };
 
+var getLessonByName = function(name) {
+  var matchingLevel = null;
+  lessonSequenceKeys.forEach(function(sequenceKey) {
+    levels.levelSequences[sequenceKey].forEach(function(levelBlob) {
+      if (levelBlob.name.en_US === name) {
+        matchingLevel = levelBlob;
+      }
+    });
+  });
+  return matchingLevel;
+};
+
 var expectLevelResetToRestoreLessonStart = function(levelBlob) {
   return base.runLevelCommands(levelBlob, solutionWithPrerequisites(levelBlob))
     .then(function(result) {
@@ -121,7 +133,7 @@ var failureCasesByLesson = {
   'What Did I Change?': [
     {
       name: 'does not solve without inspecting the staged diff',
-      command: 'touch notes.txt;git status;git diff;git add notes.txt;git status'
+      command: 'touch notes.txt;echo "New file content" > notes.txt;git status;git diff;git add notes.txt;git status'
     }
   ],
   'Checking The Commit History': [
@@ -219,6 +231,13 @@ var failureCasesByLesson = {
 describe('Lesson section validation', function() {
   it('keeps practice exercises out of the lesson suite', function() {
     expect(lessonSequenceKeys).not.toContain('practiceExercises');
+  });
+
+  it('solves "What Did I Change?" with any non-empty echo message', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('What Did I Change?'),
+      'touch notes.txt;echo "A different note" > notes.txt;git status;git diff;git add notes.txt;git status;git diff --staged'
+    );
   });
 
   lessonSequenceKeys.forEach(function(sequenceKey) {

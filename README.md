@@ -115,8 +115,8 @@ under [src/js](src/js), and level definitions live under [src/levels](src/levels
 Default seeded commit metadata is CSC207-branded: commits use `CSC207 Staff` as
 the fallback author and `Initial setup` as the default generated message.
 Teaching file commands include `touch <file>`, `echo "message" > <file>`, and
-`rm <file>` for creating, writing, and deleting files in the simulated working
-directory.
+`rm <file>` for creating files, writing to existing files, and deleting files in
+the simulated working directory.
 
 ### Level Organization
 
