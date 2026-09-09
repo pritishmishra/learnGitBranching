@@ -156,7 +156,7 @@ var failureCasesByLesson = {
       command: withIdentity('git clone;touch publish.txt;git add publish.txt;git commit -m "Add publish.txt"')
     }
   ],
-  'Work On A Separate Timeline': [
+  'Git Branches': [
     {
       name: 'does not solve when the new branch is not checked out',
       command: 'git branch bugFix'

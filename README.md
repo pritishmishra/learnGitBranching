@@ -37,7 +37,7 @@ The current Lessons tab contains:
   - Publishing Your Work
 
 - **Branching & Merging**
-  - Work On A Separate Timeline
+  - Git Branches
   - Publishing A Branch
   - Bringing Work Back Together
   - Merging With Diverging

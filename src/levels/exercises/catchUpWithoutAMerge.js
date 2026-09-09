@@ -218,7 +218,7 @@ exports.level = {
               "",
               "### Relevant lessons",
               "",
-              "- Branching & Merging: Work On A Separate Timeline",
+              "- Branching & Merging: Git Branches",
               "- Branching & Merging: Publishing A Branch",
               "- Working With A Team: Download Without Changing",
               "- Working With A Team: Replay Your Work On The Latest Main"

@@ -3,7 +3,7 @@ exports.level = {
   "solutionCommand": "git branch bugFix;git checkout bugFix",
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C1\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "name": {
-    "en_US": "Work On A Separate Timeline",
+    "en_US": "Git Branches",
     "fa": "ایجاد شاخه (Branch) در Git",
     "de_DE": "Branches in Git",
     "ja": "Gitのブランチ",
@@ -66,13 +66,15 @@ exports.level = {
             "markdowns": [
               "## Git Branches",
               "",
-              "The remote repository has already been cloned for you, so you can focus on creating a branch in your local copy.",
+              "In the previous lessons, you've already encountered a branch: <code>main</code>. Every repository has at least one branch, and <code>main</code> is usually where development begins.",
               "",
-              "So far, you have mostly worked on `main`, the default line of project history.",
+              "Branches are incredibly lightweight. A branch is simply a pointer to a commit, which is why Git users often say:",
               "",
-              "A branch is a named pointer to a line of work. In the graph, it appears as a label attached to a commit. When new commits are created on that branch, the label moves forward.",
+              "<code>branch early, branch often</code>",
               "",
-              "Branches are lightweight, so developers often use them to separate different tasks without mixing all work directly into `main`."
+              "Because commits remember their parents, a branch represents a commit and all of the history behind it. As new commits are created, the branch pointer moves forward.",
+              "",
+              "In this lesson, you'll create your first branch and see how Git keeps track of it."
             ]
           }
         },

@@ -175,7 +175,7 @@ exports.level = {
               "",
               "- Basic Git Workflow: Your First Snapshot",
               "- Basic Git Workflow: Checking The Commit History",
-              "- Branching & Merging: Work On A Separate Timeline",
+              "- Branching & Merging: Git Branches",
               "- Branching & Merging: Merging With Diverging"
             ]
           }
