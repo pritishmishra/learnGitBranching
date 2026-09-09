@@ -68,15 +68,11 @@ exports.level = {
               "",
               "The remote repository has already been cloned for you, so you can focus on creating a branch in your local copy.",
               "",
-              "Branches in Git are incredibly lightweight as well. They are simply pointers to a specific commit -- nothing more. This is why many Git enthusiasts chant the mantra:",
+              "So far, you have mostly worked on `main`, the default line of project history.",
               "",
-              "```",
-              "branch early, and branch often",
-              "```",
+              "A branch is a named pointer to a line of work. In the graph, it appears as a label attached to a commit. When new commits are created on that branch, the label moves forward.",
               "",
-              "Because there is no storage / memory overhead with making many branches, it's easier to logically divide up your work than have big beefy branches.",
-              "",
-              "When we start mixing branches and commits, we will see how these two features combine. For now though, just remember that a branch essentially says \"I want to include the work of this commit and all parent commits.\""
+              "Branches are lightweight, so developers often use them to separate different tasks without mixing all work directly into `main`."
             ]
           }
         },

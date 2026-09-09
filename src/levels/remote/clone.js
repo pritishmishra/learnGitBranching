@@ -60,11 +60,13 @@ exports.level = {
             "markdowns": [
               "## Git Remotes",
               "",
-              "Remote repositories aren't actually that complicated. In today's world of cloud computing it's easy to think that there's a lot of magic behind git remotes, but they are actually just copies of your repository on another computer. You can typically talk to this other computer through the Internet, which allows you to transfer commits back and forth.",
+              "A remote repository is a copy of a project stored somewhere outside your own machine. In today's world of cloud computing it is easy to think there is a lot of magic behind Git remotes, but they are still repositories that Git can talk to over the Internet.",
+              "",
+              "Git uses saved project snapshots, called commits, to remember the history of a project. A remote lets you transfer those commits back and forth.",
               "",
               "That being said, remote repositories have a bunch of great properties:",
               "",
-              "- First and foremost, remotes serve as a great backup! Local git repositories have the ability to restore files to a previous state (as you know), but all that information is stored locally. By having copies of your git repository on other computers, you can lose all your local data and still pick up where you left off.",
+              "- First and foremost, remotes serve as a great backup! Git repositories can remember earlier saved states of a project, but local repository data lives on your own machine. By having copies of your Git repository on other computers, you can lose all your local data and still pick up where you left off.",
               "",
               "- More importantly, remotes make coding social! Now that a copy of your project is hosted elsewhere, your friends can contribute to your project (or pull in your latest changes) very easily.",
               "",
@@ -76,13 +78,15 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Our Command to create remotes",
+              "## Cloning a Remote Repository",
               "",
               "This first lesson starts with one of the most common ways developers begin working on a project: `git clone`.",
               "",
               "In real projects, `git clone` creates a local copy of a remote repository, such as one hosted on GitHub. After cloning, you have your own local repository to work in, while the remote repository still exists separately.",
               "",
-              "In this lesson, you'll see both copies at the same time: your local repository and the remote repository it came from. For most lessons after this, the clone step will already be done for you so you can focus on the next Git concept.",
+              "Before cloning in this lesson, the project exists as a remote repository. After cloning, you will see two views: your local copy on the left and the remote copy on the right.",
+              "",
+              "For most lessons after this, the clone step will already be done for you so you can focus on the next Git concept.",
               ""
             ]
           }
@@ -91,11 +95,11 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Lets start slow and just look at what a remote repository looks like (in our visualization).",
+              "Let's start slow and look at how the visualization changes when you clone a remote repository.",
               ""
             ],
             "afterMarkdowns": [
-              "There it is! The visualization now shows two copies of the repository. The tree on the left is your local version, and the tree on the right is the remote version. They look similar right now because cloning starts by copying the same commits locally."
+              "There it is! The visualization now shows two copies of the repository. The tree on the left is your local version, and the tree on the right is the remote version. They look similar right now because cloning starts by copying the same saved snapshots locally."
             ],
             "command": "git clone",
             "beforeCommand": ""
@@ -107,7 +111,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "To finish this level, simply `git clone` your existing repository. The real learning will come in following lessons.",
+              "To finish this lesson, simply `git clone` the existing remote repository. The real learning will come in following lessons.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]

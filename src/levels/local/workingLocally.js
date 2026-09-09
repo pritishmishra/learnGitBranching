@@ -31,7 +31,7 @@ exports.level = {
               "| **Staging area** | Changes you've selected for the next commit |",
               "| **Repository** | Permanent snapshots (commits) |",
               "",
-              "In this level you'll practice the complete local workflow:",
+              "In this lesson you'll practice the complete local workflow:",
               "",
               "1. `touch` — create a new file in your working directory",
               "2. `git status` — inspect what Git sees in your working directory",
@@ -57,6 +57,8 @@ exports.level = {
               "A new commit `C1` has been created on `main`!",
               "",
               "Each circle in the graph is a snapshot. The arrow points to the commit it was built on top of.",
+              "",
+              "File changes before the commit may show up in `git status` or `git diff`, but they do not create a new circle in the graph until you commit them.",
               "",
               "Now try it yourself — create a file, stage it, and commit it with a message."
             ],
@@ -97,7 +99,7 @@ exports.level = {
               "git commit -m \"Add hello.txt\"",
               "```",
               "",
-              "The level is complete once `main` points to a new commit.",
+              "The lesson is complete once `main` points to a new commit.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]

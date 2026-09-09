@@ -249,6 +249,8 @@ Notable fork-specific UI behavior:
 - Practice exercises do not show hints automatically and do not allow the
   explicit `hint` command.
 - Practice exercises do not show or allow the `show solution` option.
+- The welcome and early lesson text introduce the terminal, commit graph,
+  commits, remotes, and branches before relying on those terms.
 - The local/remote visualization can label the two repository views.
 - Some promotional links and old external links were removed from the page.
 
