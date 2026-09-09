@@ -99,7 +99,9 @@ exports.level = {
               ""
             ],
             "afterMarkdowns": [
-              "There it is! The visualization now shows two copies of the repository. The tree on the left is your local version, and the tree on the right is the remote version. They look similar right now because cloning starts by copying the same saved snapshots locally."
+              "There it is! The visualization now shows two copies of the repository. The tree on the left is your local version, and the tree on the right is the remote version. They look similar right now because cloning starts by copying the same saved snapshots locally.",
+              "",
+              "On the left tree, `main` is your local branch and `o/main` is the matching remote-tracking branch that records the copied position of `origin`'s `main` branch after the clone."
             ],
             "command": "git clone",
             "beforeCommand": ""
