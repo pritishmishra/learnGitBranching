@@ -38,7 +38,7 @@ exports.level = {
     "hu_HU": "Merge Gitben"
   },
   "hint": {
-    "en_US": "Create work on feature, return to main, make one main commit, then run git merge feature",
+    "en_US": "Create and switch to the feature branch, create and commit feature.txt there, return to main, then run git merge feature.",
     "fa": "به یاد داشته باشید که به ترتیب مشخص شده کامیت کنید (bugFix قبل از main)",
     "de_DE": "Denk dran in der angegebenen Reihenfolge zu committen (erst bugFix, dann main)",
     "ja": "指示された順番でコミットすること（mainの前にbugFixで）",
@@ -75,11 +75,9 @@ exports.level = {
             "markdowns": [
               "## Bringing Work Back Together",
               "",
-              "The remote repository has already been cloned for you.",
-              "",
               "You have learned how to create a branch and publish a branch. Now you will bring branch work back into `main`.",
               "",
-              "`git merge` combines work from another branch into your current branch. In this lesson, `main` has not moved since you created `feature`, so Git can do a straightforward fast-forward merge."
+              "`git merge` combines work from another branch into your current branch."
             ]
           }
         },
@@ -112,13 +110,7 @@ exports.level = {
               "git checkout -b feature",
               "```",
               "",
-              "**2. Create and commit work on `feature`**",
-              "",
-              "```",
-              "touch feature.txt",
-              "git add feature.txt",
-              "git commit -m \"Add feature.txt\"",
-              "```",
+              "**2. Create `feature.txt` and commit it on the new branch**",
               "",
               "**3. Return to `main`**",
               "",
@@ -131,8 +123,6 @@ exports.level = {
               "```",
               "git merge feature",
               "```",
-              "",
-              "The level is complete once `main` points to the same commit as `feature`.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]

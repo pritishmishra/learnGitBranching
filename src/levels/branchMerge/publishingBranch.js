@@ -85,15 +85,13 @@ exports.level = {
               "git checkout -b feature",
               "```",
               "",
-              "**2. Create a file and commit it on the new branch**",
+              "**2. Create `feature.txt` and commit it on the new branch**",
               "",
               "**3. Publish the branch and set upstream tracking**",
               "",
               "```",
               "git push -u origin feature",
               "```",
-              "",
-              "The level is complete once `feature` exists locally and on the remote, and both point to the new commit.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]
