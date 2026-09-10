@@ -52,6 +52,7 @@ class GitDemonstrationView extends ContainedBase {
 
     this.JSON.beforeHTML = convert(this.JSON.beforeMarkdowns);
     this.JSON.afterHTML = convert(this.JSON.afterMarkdowns);
+    this.JSON.buttonCommand = this.JSON.buttonCommand || this.JSON.command;
 
     this.container = new ModalTerminal({
       title: options.title || intl.str('git-demonstration-title')

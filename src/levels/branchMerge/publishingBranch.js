@@ -37,26 +37,14 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "In the last lesson, you learned how to create a branch and switch to it.",
-              "",
-              "```",
-              "git checkout -b feature",
-              "```",
-              "",
-              "After you commit on that branch, publish it with:",
+              "After you commit on a branch, publish it with:",
               "",
               "```",
               "git push -u origin feature",
               "```",
               "",
-              "`origin` is the remote repository. `feature` is the branch you want to publish."
-            ]
-          }
-        },
-        {
-          "type": "ModalAlert",
-          "options": {
-            "markdowns": [
+              "`origin` is the remote repository. `feature` is the branch you want to publish.",
+              "",
               "The `-u` flag sets the upstream relationship for your local branch.",
               "",
               "That means your local `feature` branch will track the remote branch `origin/feature` after the push.",
@@ -81,6 +69,7 @@ exports.level = {
               "Now run the full workflow yourself."
             ],
             "command": "touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt';git push -u origin feature",
+            "buttonCommand": "git push -u origin feature",
             "beforeCommand": "git checkout -b feature"
           }
         },
