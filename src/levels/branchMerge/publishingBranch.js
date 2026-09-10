@@ -37,7 +37,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "You can create a branch and switch to it in one command:",
+              "In the last lesson, you learned how to create a branch and switch to it.",
               "",
               "```",
               "git checkout -b feature",
@@ -80,8 +80,8 @@ exports.level = {
               "",
               "Now run the full workflow yourself."
             ],
-            "command": "git push -u origin feature",
-            "beforeCommand": "git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt'"
+            "command": "touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt';git push -u origin feature",
+            "beforeCommand": "git checkout -b feature"
           }
         },
         {
