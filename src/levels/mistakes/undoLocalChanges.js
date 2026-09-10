@@ -3,28 +3,22 @@ exports.level = {
     "en_US": "Undo Local Changes"
   },
   "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
-  "solutionCommand": "git status;git restore scratch.txt;git add staged.txt;git unstage staged.txt;git restore staged.txt",
+  "solutionCommand": "git unstage draft.txt;git restore draft.txt",
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
-  "initialWorkingDirectoryChanges": {
-    "scratch.txt": {
+  "startCommand": "git status",
+  "initialStagedChanges": {
+    "draft.txt": {
       "type": "added",
-      "content": "Scratch notes"
-    },
-    "staged.txt": {
-      "type": "added",
-      "content": "Staged draft"
+      "content": "Draft notes"
     }
   },
   "hint": {
-    "en_US": "Use git restore to discard unstaged changes, and git unstage before restoring staged changes"
+    "en_US": "Use git unstage draft.txt to move the file out of the staging area, then git restore draft.txt to discard it."
   },
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
-    "^git +status *$",
-    "^git +restore +scratch\\.txt *$",
-    "^git +add +staged\\.txt *$",
-    "^git +unstage +staged\\.txt *$",
-    "^git +restore +staged\\.txt *$"
+    "^git +unstage +draft\\.txt *$",
+    "^git +restore +draft\\.txt *$"
   ],
   "startDialog": {
     "en_US": {
@@ -37,31 +31,17 @@ exports.level = {
               "",
               "Before you save a snapshot with a commit, Git lets you correct mistakes in two places: the working directory and the staging area.",
               "",
-              "Suppose you edit or create a file, then run `git status`. Git shows that file under \"Changes not staged for commit.\" That means the change is unstaged.",
+              "Suppose you edit or create a file, then run `git add <file>`. Git moves that change into the staging area, which means it is ready to be included in the next commit.",
               "",
-              "If you decide that unstaged change was a mistake, use `git restore <file>` to discard it. For example:",
-              "",
-              "```",
-              "git restore scratch.txt",
-              "```"
-            ]
-          }
-        },
-        {
-          "type": "ModalAlert",
-          "options": {
-            "markdowns": [
-              "Now suppose you made a change and then ran `git add <file>`. Git moves that change into the staging area, which means it is ready to be included in the next commit.",
-              "",
-              "If you realize that staged change should not be committed yet, use `git unstage <file>`. For example:",
+              "If you realize that staged change should not be committed, use `git unstage <file>` to move it back out of the staging area. For example:",
               "",
               "```",
-              "git unstage staged.txt",
+              "git unstage draft.txt",
               "```",
               "",
               "`git unstage` does not delete the change. It moves the file back to \"Changes not staged for commit.\"",
               "",
-              "After that, you can use `git restore staged.txt` if you also want to discard the file change."
+              "After that, use `git restore <file>` if you also want to discard the file change."
             ]
           }
         },
@@ -71,45 +51,30 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you.",
+              "`draft.txt` has already been created and staged for commit.",
               "",
-              "Two files have already been created in your working directory: `scratch.txt` and `staged.txt`. Neither file has been committed.",
+              "The lesson starts by running `git status` so you can see that `draft.txt` is staged.",
               "",
-              "After each command in steps 2-5, run `git status` if you want to check how Git sees the file now.",
+              "You can run `git status` after each step to check how Git sees the file.",
               "",
-              "Your tasks:",
-              "",
-              "**1. Check the current changes**",
+              "**1. Unstage `draft.txt`**",
               "",
               "```",
-              "git status",
+              "git unstage draft.txt",
               "```",
               "",
-              "**2. Discard the unstaged scratch file**",
+              "**2. Restore `draft.txt`**",
               "",
               "```",
-              "git restore scratch.txt",
+              "git restore draft.txt",
               "```",
               "",
-              "**3. Stage the second file**",
+              "Target state: when you are done, `git status` should show:",
               "",
               "```",
-              "git add staged.txt",
+              "# On branch main",
+              "# nothing to commit, working tree clean",
               "```",
-              "",
-              "**4. Unstage it**",
-              "",
-              "```",
-              "git unstage staged.txt",
-              "```",
-              "",
-              "**5. Discard the unstaged change**",
-              "",
-              "```",
-              "git restore staged.txt",
-              "```",
-              "",
-              "The level is complete once both the staging area and working directory are clean.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]

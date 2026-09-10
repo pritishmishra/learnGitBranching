@@ -186,6 +186,10 @@ class Level extends Sandbox {
       'delay 2000; show goal' :
       'hint; delay 2000; show goal';
 
+    if (this.level.startCommand) {
+      startCommand = this.level.startCommand;
+    }
+
     if (GlobalStateStore.getShouldDisableLevelInstructions()) {
       Main.getEventBaton().trigger(
         'commandSubmitted',

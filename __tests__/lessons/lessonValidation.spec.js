@@ -186,8 +186,8 @@ var failureCasesByLesson = {
   ],
   'Undo Local Changes': [
     {
-      name: 'does not solve when staged.txt is left dirty',
-      command: 'git status;git restore scratch.txt;git add staged.txt;git unstage staged.txt'
+      name: 'does not solve when draft.txt is left dirty',
+      command: 'git unstage draft.txt'
     }
   ],
   'Undo Commits Safely': [
