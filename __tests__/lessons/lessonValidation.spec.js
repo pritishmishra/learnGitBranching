@@ -166,6 +166,10 @@ var failureCasesByLesson = {
     {
       name: 'does not solve when the branch is pushed without upstream tracking',
       command: withIdentity('git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m "Add feature.txt";git push origin feature')
+    },
+    {
+      name: 'does not solve when plain git push is used without setting upstream tracking',
+      command: withIdentity('git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m "Add feature.txt";git push')
     }
   ],
   'Bringing Work Back Together': [
@@ -245,6 +249,14 @@ describe('Lesson section validation', function() {
     return base.expectLevelCommandsToSolve(
       getLessonByName('What Did I Change?'),
       'touch notes.txt;echo "A different note" > notes.txt;git status;git diff;git add notes.txt;git status;git diff --staged'
+    );
+  });
+
+  it('errors in "Publishing A Branch" when plain git push is used before upstream tracking exists', function() {
+    return base.expectLevelCommandToError(
+      getLessonByName('Publishing A Branch'),
+      withIdentity('git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m "Add feature.txt";git push'),
+      'The current branch has no upstream branch. Use git push -u origin feature to publish it and set upstream tracking.'
     );
   });
 

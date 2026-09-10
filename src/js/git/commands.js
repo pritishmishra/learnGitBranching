@@ -1028,6 +1028,13 @@ var commandConfig = {
           var remoteBranch = sourceObj.getRemoteTrackingBranchID();
           destination = engine.resolveID(remoteBranch).getBaseID();
         } else {
+          if (!firstArg) {
+            throw new GitError({
+              msg: intl.todo(
+                'The current branch has no upstream branch. Use git push -u origin ' + source + ' to publish it and set upstream tracking.'
+              )
+            });
+          }
           destination = validateBranchName(engine, source);
         }
       }
