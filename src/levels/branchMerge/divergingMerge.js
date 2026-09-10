@@ -30,7 +30,9 @@ exports.level = {
               "",
               "A fast-forward merge works when `main` has not moved since the feature branch started.",
               "",
-              "Now you will try the other common case: both branches have new commits. Git needs to create a merge commit to bring those timelines back together."
+              "Now you will try the other common case: both branches have new commits. Git needs to create a merge commit to bring those timelines back together.",
+              "",
+              "In real projects, an automatic merge can fail if both branches changed the same part of a file. When that happens, Git reports a conflict and you need to resolve it manually before completing the merge."
             ]
           }
         },
