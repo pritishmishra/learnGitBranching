@@ -181,7 +181,7 @@ var failureCasesByLesson = {
   'Merging With Diverging': [
     {
       name: 'does not solve when main has no independent commit before merging',
-      command: withIdentity('git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m "Add feature.txt";git checkout main;git merge feature')
+      command: withIdentity('touch feature.txt;git add feature.txt;git commit -m "Add feature.txt";git checkout main;git merge feature')
     }
   ],
   'Undo Local Changes': [
