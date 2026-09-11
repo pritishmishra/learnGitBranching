@@ -396,9 +396,9 @@ describe('Lesson section validation', function() {
         var originBranches = tree.originTree.branches;
 
         expect(branches.main.target).toBe("C2'");
-        expect(branches.feature.target).toBe('C2');
-        expect(branches['o/feature'].target).toBe('C2');
-        expect(originBranches.feature.target).toBe('C2');
+        expect(branches.feature.target).toBe('C3');
+        expect(branches['o/feature'].target).toBe('C3');
+        expect(originBranches.feature.target).toBe('C3');
       });
   });
 

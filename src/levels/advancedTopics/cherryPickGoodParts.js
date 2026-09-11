@@ -220,15 +220,15 @@ exports.level = {
             "beforeMarkdowns": [
               "Watch `git cherry-pick C2` copy one selected commit onto `main`.",
               "",
-              "That commit already exists on the remote feature branch, and the source branches stay where they are."
+              "The feature branch has two commits, `C2` and `C3`, and both are already on the remote feature branch."
             ],
             "afterMarkdowns": [
-              "`main` now has a copy of the selected commit.",
+              "`main` now points to `C2'`, a copy of the selected commit.",
               "",
-              "The original commit still exists on the local and remote feature branches."
+              "That visual split is expected. Cherry-pick does not move the original `C2`; it creates a new commit on the branch you have checked out, so `main` advances to the copied commit while `feature` stays at `C3`."
             ],
             "command": "git cherry-pick C2",
-            "beforeCommand": "git clone;git config user.name Student;git config user.email student@example.com;git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt';git push -u origin feature;git checkout main"
+            "beforeCommand": "git clone;git config user.name Student;git config user.email student@example.com;git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt';touch polish.txt;git add polish.txt;git commit -m 'Polish feature';git push -u origin feature;git checkout main"
           }
         },
         {
