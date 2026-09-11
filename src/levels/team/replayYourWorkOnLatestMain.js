@@ -252,8 +252,6 @@ exports.level = {
               "git push",
               "```",
               "",
-              "The level is complete once the remote repository has the teammate's commit followed by your replayed commit.",
-              "",
               "To reopen this task screen later, use the command `objective`."
             ]
           }

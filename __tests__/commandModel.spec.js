@@ -1,4 +1,5 @@
 var Command = require('../src/js/models/commandModel').Command;
+var HeadlessGit = require('../src/js/git/headless').HeadlessGit;
 
 describe('Command Model', function() {
   describe('initialization', function() {
@@ -179,6 +180,25 @@ describe('Command Model', function() {
       var cmd = new Command({rawStr: 'ls'});
       expect(cmd.get('status')).toBe('error');
       expect(cmd.get('error')).toBeTruthy();
+    });
+
+    it('should show filename usage for resolve-conflict without an argument', function() {
+      var headless = new HeadlessGit();
+      var commandPromise = {};
+      commandPromise.promise = new Promise(function(resolve) {
+        commandPromise.resolve = resolve;
+      });
+
+      return headless.sendCommand('git resolve-conflict', commandPromise)
+        .then(function() {
+          return commandPromise.promise;
+        })
+        .then(function(commands) {
+          var command = commands[0];
+          expect(command.get('error').get('msg')).toBe(
+            'Usage: git resolve-conflict <filename>'
+          );
+        });
     });
   });
 });

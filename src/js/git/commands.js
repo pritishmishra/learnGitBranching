@@ -1383,7 +1383,7 @@ var commandConfig = {
 
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git resolve-conflict <filepath>')
+          msg: intl.todo('Usage: git resolve-conflict <filename>')
         });
       }
 
