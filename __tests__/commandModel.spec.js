@@ -168,5 +168,17 @@ describe('Command Model', function() {
       expect(cmd.get('status')).toBe('error');
       expect(cmd.get('error')).toBeTruthy();
     });
+
+    it('should not support undo commands', function() {
+      var cmd = new Command({rawStr: 'undo'});
+      expect(cmd.get('status')).toBe('error');
+      expect(cmd.get('error')).toBeTruthy();
+    });
+
+    it('should not support ls commands', function() {
+      var cmd = new Command({rawStr: 'ls'});
+      expect(cmd.get('status')).toBe('error');
+      expect(cmd.get('error')).toBeTruthy();
+    });
   });
 });

@@ -281,7 +281,6 @@ class Sandbox {
     // some exceptions to the rule
     var commandMap = {
       'reset solved': this.resetSolved,
-      'undo': this.undo,
       'help general': this.helpDialog,
       'help': this.helpDialog,
       'reset': this.reset,

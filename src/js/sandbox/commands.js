@@ -43,11 +43,6 @@ var isCommandHidden = function(command) {
 var instantCommands = [
   // Add a third and fourth item in the tuple if you want this to show
   // up in the `show commands` function
-  [/^ls( |$)/, function() {
-    throw new CommandResult({
-      msg: intl.str('ls-command')
-    });
-  }],
   [/^cd( |$)/, function() {
     throw new CommandResult({
       msg: intl.str('cd-command')
@@ -224,7 +219,6 @@ var regexMap = {
   'importLevelNow': /^importLevelNow($|\s)/,
   'import tree': /^import +tree$/,
   'import level': /^import +level$/,
-  'undo': /^undo($|\s)/,
   'share permalink': /^share( +permalink)?$/
 };
 
@@ -255,6 +249,9 @@ var getAllCommands = function() {
   return allCommands;
 };
 
+exports.getSandboxCommandNames = function() {
+  return Object.keys(regexMap);
+};
 exports.getAllCommands = getAllCommands;
 exports.hiddenCommands = hiddenCommands;
 exports.hiddenGitCommands = hiddenGitCommands;

@@ -67,11 +67,6 @@ class CommandsHelperBarView extends React.Component {
         this.fireCommand('reset');
       }.bind(this),
     }, {
-      text: intl.str('command-helper-bar-undo'),
-      onClick: function() {
-        this.fireCommand('undo');
-      }.bind(this),
-    }, {
       text: intl.str('command-helper-bar-objective'),
       onClick: function() {
         this.fireCommand('objective');
