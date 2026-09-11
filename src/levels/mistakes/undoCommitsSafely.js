@@ -83,6 +83,7 @@ exports.level = {
               "Your tasks:",
               "",
               "**1. Identify the commit to revert**",
+              "",
               "**2. Revert that commit**",
               "",
               "Use `git revert` with the right commit reference.",
@@ -90,7 +91,7 @@ exports.level = {
               "**3. Push the revert commit**",
               "",
               "",
-              "The lesson is complete once local `main` and the remote both point to the new revert commit shown in the goal picture.",
+              "The final history should match the goal picture.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]
