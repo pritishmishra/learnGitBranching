@@ -1,4 +1,5 @@
 var base = require('../base');
+var HeadlessGit = require('../../src/js/git/headless').HeadlessGit;
 var TreeCompare = require('../../src/js/graph/treeCompare.js');
 var Visualization = require('../../src/js/visuals/visualization').Visualization;
 var levels = require('../../src/levels/index');
@@ -45,6 +46,33 @@ var getLessonByName = function(name) {
     });
   });
   return matchingLevel;
+};
+
+var runCommands = function(commandText) {
+  var headless = new HeadlessGit();
+  var commandPromise = {};
+  commandPromise.promise = new Promise(function(resolve) {
+    commandPromise.resolve = resolve;
+  });
+
+  return headless.sendCommand(commandText, commandPromise)
+    .then(function() {
+      return commandPromise.promise;
+    })
+    .then(function(commands) {
+      return {
+        headless: headless,
+        commands: commands
+      };
+    });
+};
+
+var getFirstDemoOptions = function(levelBlob) {
+  var childViews = levelBlob.startDialog.en_US.childViews;
+  var demo = childViews.find(function(view) {
+    return view.type === 'GitDemonstrationView';
+  });
+  return demo && demo.options;
 };
 
 var expectLevelResetToRestoreLessonStart = function(levelBlob) {
@@ -356,6 +384,19 @@ describe('Lesson section validation', function() {
       expect(diffOutput).not.toContain('Teammate update');
       expect(diffOutput).not.toContain('<<<<<<< HEAD');
     });
+  });
+
+  it('runs the "Pick The Good Parts" demo setup and cherry-pick command', function() {
+    var demoOptions = getFirstDemoOptions(getLessonByName('Pick The Good Parts'));
+
+    return runCommands(demoOptions.beforeCommand + ';' + demoOptions.command)
+      .then(function(result) {
+        var branches = result.headless.gitEngine.exportTree().branches;
+
+        expect(branches.main.target).toBe("C5'");
+        expect(branches.feature.target).toBe('C3');
+        expect(branches.experiment.target).toBe('C5');
+      });
   });
 
   lessonSequenceKeys.forEach(function(sequenceKey) {

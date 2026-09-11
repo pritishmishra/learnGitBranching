@@ -228,7 +228,7 @@ exports.level = {
               "The original commits still exist on their original branches."
             ],
             "command": "git cherry-pick C3 C5",
-            "beforeCommand": "git clone;git commit;git branch feature;git checkout feature;git commit;git commit;git checkout main;git branch experiment;git checkout experiment;git commit;git commit;git checkout main"
+            "beforeCommand": "git clone;git config user.name Student;git config user.email student@example.com;git branch feature;git checkout feature;touch feature-setup.txt;git add feature-setup.txt;git commit -m 'Feature setup';touch feature-good.txt;git add feature-good.txt;git commit -m 'Feature good';git checkout main;git branch experiment;git checkout experiment;touch experiment-setup.txt;git add experiment-setup.txt;git commit -m 'Experiment setup';touch experiment-good.txt;git add experiment-good.txt;git commit -m 'Experiment good';git checkout main"
           }
         },
         {
