@@ -146,7 +146,7 @@ exports.level = {
               "",
               "`git rebase` is another way to combine work. Instead of making a merge commit, rebase takes your local commits and replays them on top of a new base.",
               "",
-              "In this lesson, that new base will be the latest downloaded `main`, shown as `o/main`."
+              "Conflicts can happen during a rebase too. If your commit and the newer remote commit changed the same part of a file, Git may stop and ask you to resolve the conflict before the rebase can continue.",
             ]
           }
         },
@@ -171,11 +171,13 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Rebase is useful when your local commit has not been pushed yet and you want a cleaner, straight-line history.",
+              "Rebase is useful when you want a cleaner, straight-line history.",
               "",
-              "Use it carefully: rebasing creates new copies of your commits. It is best for commits that are still local and have not been pushed.",
+              "The important caution is that rebase rewrites commit history. In the demo, your original local commit is copied to a new commit id after the teammate's commit.",
               "",
-              "If your commit has already been pushed and other people may have based work on it, prefer merging unless your team has agreed on a rebase workflow."
+              "That is usually fine for commits that only exist on your machine. It becomes risky if those commits have already been pushed and another person has based work on them, because their history still points to the old commit ids.",
+              "",
+              "For pushed commits that teammates may already have, prefer merging unless your team has explicitly agreed to rewrite that history."
             ]
           }
         },
