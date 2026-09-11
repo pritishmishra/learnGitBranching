@@ -44,6 +44,25 @@ exports.level = {
           }
         },
         {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "### Fetch One Branch",
+              "",
+              "You can also fetch updates for one branch at a time.",
+              "",
+              "`git fetch origin bugFix` downloads updates from the remote `bugFix` branch without updating every remote-tracking branch."
+            ],
+            "afterMarkdowns": [
+              "`o/bugFix` moved forward because that was the branch you fetched.",
+              "",
+              "`o/main` did not move, even though the remote `main` branch also has commits your local repository has not downloaded yet."
+            ],
+            "command": "git fetch origin bugFix",
+            "beforeCommand": "git clone;git checkout -b bugFix;git push -u origin bugFix;git fakeTeamwork main 2;git fakeTeamwork bugFix 2"
+          }
+        },
+        {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
@@ -56,25 +75,6 @@ exports.level = {
               "",
               "`git fetch` brings your local view of the remote repository up to date with what the actual remote repository looks like right now."
             ]
-          }
-        },
-        {
-          "type": "GitDemonstrationView",
-          "options": {
-            "beforeMarkdowns": [
-              "### Fetch One Branch",
-              "",
-              "You can also fetch updates for one branch at a time.",
-              "",
-              "`git fetch origin main` downloads updates from the remote `main` branch without updating every remote-tracking branch."
-            ],
-            "afterMarkdowns": [
-              "`o/main` moved forward because that was the branch you fetched.",
-              "",
-              "`o/bugFix` did not move, even though the remote `bugFix` branch also has commits your local repository has not downloaded yet."
-            ],
-            "command": "git fetch origin main",
-            "beforeCommand": "git clone;git checkout -b bugFix;git push -u origin bugFix;git fakeTeamwork main 2;git fakeTeamwork bugFix 2"
           }
         },
         {
