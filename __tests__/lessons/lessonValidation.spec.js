@@ -268,12 +268,6 @@ var failureCasesByLesson = {
       command: 'git pull;git push'
     }
   ],
-  'The Emergency Override': [
-    {
-      name: 'does not solve when the rewritten history is pushed without force',
-      command: withIdentity('touch first.txt;git add first.txt;git commit -m "Add first version";git push;git reset --hard HEAD~1;touch replacement.txt;git add replacement.txt;git commit -m "Add replacement version";git push')
-    }
-  ],
   'Pick The Good Parts': [
     {
       name: 'does not solve when only one selected commit is cherry-picked',
@@ -400,6 +394,13 @@ describe('Lesson section validation', function() {
         expect(branches['o/feature'].target).toBe('C3');
         expect(originBranches.feature.target).toBe('C3');
       });
+  });
+
+  it('solves "Pick The Good Parts" with separate cherry-pick commands', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('Pick The Good Parts'),
+      'git cherry-pick C3;git cherry-pick C5'
+    );
   });
 
   lessonSequenceKeys.forEach(function(sequenceKey) {

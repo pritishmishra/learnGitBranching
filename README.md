@@ -53,9 +53,6 @@ The current Lessons tab contains:
   - Sync Your Local Copy
   - Collaborating Without Conflicting
   - Replay Your Work On The Latest Main
-
-- **Advanced Topics**
-  - The Emergency Override
   - Pick The Good Parts
 
 ### Exercises

@@ -21,7 +21,6 @@ describe('this store', function() {
       'branchMerge',
       'mistakes',
       'team',
-      'advancedTopics',
       'practiceExercises'
     ]);
   });

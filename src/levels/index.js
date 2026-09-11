@@ -25,11 +25,8 @@ exports.levelSequences = {
     require('./team/downloadWithoutChanging').level,
     require('./team/syncYourLocalCopy').level,
     require('./team/collaboratingWithoutConflicting').level,
-    require('./team/replayYourWorkOnLatestMain').level
-  ],
-  advancedTopics: [
-    require('./advancedTopics/forcePushLastResort').level,
-    require('./advancedTopics/cherryPickGoodParts').level
+    require('./team/replayYourWorkOnLatestMain').level,
+    require('./team/cherryPickGoodParts').level
   ],
   practiceExercises: [
     require('./exercises/firstDayOnTheRepo').level,
@@ -77,15 +74,6 @@ var sequenceInfo = exports.sequenceInfo = {
     },
     about: {
       'en_US': 'Learn how to safely download, integrate, resolve, and publish team work'
-    }
-  },
-  advancedTopics: {
-    tab: 'lessons',
-    displayName: {
-      'en_US': 'Advanced Topics'
-    },
-    about: {
-      'en_US': 'Learn advanced Git tools for rewriting and moving selected work'
     }
   },
   practiceExercises: {

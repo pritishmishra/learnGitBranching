@@ -174,9 +174,6 @@ exports.level = {
   "hint": {
     "en_US": "Copy only commits C3 and C5 onto main with git cherry-pick"
   },
-  "requiredCommandPatterns": [
-    "^git +cherry-pick +C3 +C5 *$"
-  ],
   "disabledMap": {
     "git rebase": true,
     "git merge": true
@@ -237,17 +234,13 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you.",
-              "",
-              "`main` is checked out. The `feature` branch contains commits `C2` and `C3`, and the `experiment` branch contains commits `C4` and `C5`.",
+              "The `feature` branch contains commits `C2` and `C3`, and the `experiment` branch contains commits `C4` and `C5`.",
               "",
               "Copy only `C3` and `C5` onto `main`:",
               "",
               "```",
               "git cherry-pick C3 C5",
               "```",
-              "",
-              "The level is complete once `main` contains copied versions of `C3` and `C5` without merging the full source branches.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]
