@@ -281,6 +281,13 @@ describe('Lesson section validation', function() {
     );
   });
 
+  it('solves "Download Without Changing" when fetching both branches separately', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('Download Without Changing'),
+      'git fetch origin main;git fetch origin bugFix'
+    );
+  });
+
   lessonSequenceKeys.forEach(function(sequenceKey) {
     describe(levels.sequenceInfo[sequenceKey].displayName.en_US, function() {
       levels.levelSequences[sequenceKey].forEach(function(levelBlob) {

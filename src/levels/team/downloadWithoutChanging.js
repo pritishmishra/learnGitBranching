@@ -9,7 +9,7 @@ exports.level = {
     "en_US": "Run git fetch to download remote commits without moving your local branches"
   },
   "requiredCommandPatterns": [
-    "^git +fetch *$"
+    "^git +fetch( +origin( +(main|bugFix))?)? *$"
   ],
   "startDialog": {
     "en_US": {
@@ -22,9 +22,7 @@ exports.level = {
               "",
               "When you work with a team, other people may push commits to the remote repository while you continue working locally.",
               "",
-              "`git fetch` downloads commits from the remote repository and updates your local view of the remote branches.",
-              "",
-              "In this visualization, remote-tracking branches use the short `o/` prefix. For example, `o/main` represents `origin/main`."
+              "`git fetch` downloads commits from the remote repository and updates your local view of the remote branches."
             ]
           }
         },
@@ -61,6 +59,25 @@ exports.level = {
           }
         },
         {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "### Fetch One Branch",
+              "",
+              "You can also fetch updates for one branch at a time.",
+              "",
+              "`git fetch origin main` downloads updates from the remote `main` branch without updating every remote-tracking branch."
+            ],
+            "afterMarkdowns": [
+              "`o/main` moved forward because that was the branch you fetched.",
+              "",
+              "`o/bugFix` did not move, even though the remote `bugFix` branch also has commits your local repository has not downloaded yet."
+            ],
+            "command": "git fetch origin main",
+            "beforeCommand": "git clone;git checkout -b bugFix;git push -u origin bugFix;git fakeTeamwork main 2;git fakeTeamwork bugFix 2"
+          }
+        },
+        {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
@@ -80,15 +97,13 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you, and the remote has commits that your local remote-tracking branches do not know about yet.",
+              "The remote has commits that your local remote-tracking branches do not know about yet.",
               "",
               "Download the remote commits without changing your local branch:",
               "",
               "```",
               "git fetch",
               "```",
-              "",
-              "The level is complete once the missing remote commits are downloaded and the `o/` branches are updated.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]
