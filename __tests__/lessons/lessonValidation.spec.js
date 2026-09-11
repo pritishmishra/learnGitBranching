@@ -274,6 +274,13 @@ describe('Lesson section validation', function() {
     );
   });
 
+  it('solves "Rewind Local History" without requiring git status checks', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('Rewind Local History'),
+      withIdentity('git reset --soft HEAD~1;git commit -m "Recommit rewind";git reset --hard HEAD~1')
+    );
+  });
+
   lessonSequenceKeys.forEach(function(sequenceKey) {
     describe(levels.sequenceInfo[sequenceKey].displayName.en_US, function() {
       levels.levelSequences[sequenceKey].forEach(function(levelBlob) {

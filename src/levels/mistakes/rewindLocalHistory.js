@@ -12,10 +12,8 @@ exports.level = {
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
     "^git +reset +--soft +HEAD~1 *$",
-    "^git +status *$",
     "^git +commit +.*$",
-    "^git +reset +--hard +HEAD~1 *$",
-    "^git +status *$"
+    "^git +reset +--hard +HEAD~1 *$"
   ],
   "startDialog": {
     "en_US": {
@@ -40,7 +38,7 @@ exports.level = {
               "",
               "After a soft reset, run `git status` to confirm that the file changes are in the staging area.",
               "",
-              "That is useful when the commit was too early or had the wrong message, but the file changes are still worth keeping.",
+              "Soft reset is useful when the commit was too early or had the wrong message, but the file changes are still worth keeping.",
               "",
               "`git reset --hard HEAD~1` moves `main` back one commit and discards the file changes too.",
               "",
@@ -73,9 +71,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you, and `rewind.txt` has already been committed locally.",
-              "",
-              "Your tasks:",
+              "Commit `C1` added `rewind.txt`, but has not been pushed to `main` yet.",
               "",
               "**1. Rewind the commit but keep the change staged**",
               "",
@@ -107,7 +103,6 @@ exports.level = {
               "git status",
               "```",
               "",
-              "The level is complete once `main` is rewound and the working tree is clean.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]
