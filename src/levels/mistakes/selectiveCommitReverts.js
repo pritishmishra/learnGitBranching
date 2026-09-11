@@ -25,7 +25,7 @@ exports.level = {
               "",
               "Sometimes a pushed history contains several commits that should be undone, but other commits in between should stay.",
               "",
-              "For example, a team might discover that credentials, debug-only changes, and temporary configuration were all pushed, while documentation in the same history is still valid.",
+              "For example, a team might review four pushed commits and decide that three of them introduced files that should not stay in the project, while one documentation commit is still useful.",
               "",
               "Use separate revert commits so the original history remains visible and the remote receives an explicit record of each undo."
             ]
@@ -37,15 +37,13 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you, and commits `C1` through `C4` have already been pushed to `main`.",
+              "Commits `C1` through `C4` have already been pushed to `main`:",
               "",
-              "Keep the documentation commit. Revert the commits that added files that should not remain:",
+              "* `C1` added `credentials.txt`, which should go.",
               "",
-              "* `C1` added `credentials.txt`.",
+              "* `C2` added `debug.txt`, which should go.",
               "",
-              "* `C2` added `debug.txt`.",
-              "",
-              "* `C3` added `temp-config.txt`.",
+              "* `C3` added `temp-config.txt`, which should go.",
               "",
               "* `C4` added `docs.txt`, which should stay.",
               "",
