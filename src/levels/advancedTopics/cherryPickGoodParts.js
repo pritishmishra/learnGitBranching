@@ -218,17 +218,17 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Watch `git cherry-pick C3 C5` copy two selected commits onto `main`.",
+              "Watch `git cherry-pick C2` copy one selected commit onto `main`.",
               "",
-              "The source branches stay where they are."
+              "That commit already exists on the remote feature branch, and the source branches stay where they are."
             ],
             "afterMarkdowns": [
-              "`main` now has copies of the selected commits.",
+              "`main` now has a copy of the selected commit.",
               "",
-              "The original commits still exist on their original branches."
+              "The original commit still exists on the local and remote feature branches."
             ],
-            "command": "git cherry-pick C3 C5",
-            "beforeCommand": "git clone;git config user.name Student;git config user.email student@example.com;git branch feature;git checkout feature;touch feature-setup.txt;git add feature-setup.txt;git commit -m 'Feature setup';touch feature-good.txt;git add feature-good.txt;git commit -m 'Feature good';git checkout main;git branch experiment;git checkout experiment;touch experiment-setup.txt;git add experiment-setup.txt;git commit -m 'Experiment setup';touch experiment-good.txt;git add experiment-good.txt;git commit -m 'Experiment good';git checkout main"
+            "command": "git cherry-pick C2",
+            "beforeCommand": "git clone;git config user.name Student;git config user.email student@example.com;git checkout -b feature;touch feature.txt;git add feature.txt;git commit -m 'Add feature.txt';git push -u origin feature;git checkout main"
           }
         },
         {

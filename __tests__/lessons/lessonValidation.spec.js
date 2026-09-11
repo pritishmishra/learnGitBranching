@@ -391,11 +391,14 @@ describe('Lesson section validation', function() {
 
     return runCommands(demoOptions.beforeCommand + ';' + demoOptions.command)
       .then(function(result) {
-        var branches = result.headless.gitEngine.exportTree().branches;
+        var tree = result.headless.gitEngine.exportTree();
+        var branches = tree.branches;
+        var originBranches = tree.originTree.branches;
 
-        expect(branches.main.target).toBe("C5'");
-        expect(branches.feature.target).toBe('C3');
-        expect(branches.experiment.target).toBe('C5');
+        expect(branches.main.target).toBe("C2'");
+        expect(branches.feature.target).toBe('C2');
+        expect(branches['o/feature'].target).toBe('C2');
+        expect(originBranches.feature.target).toBe('C2');
       });
   });
 
