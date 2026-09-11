@@ -30,13 +30,9 @@ exports.level = {
               "",
               "`git revert <commit>` creates a new commit that undoes the changes from an older commit. It does not erase the old commit from history.",
               "",
-              "That makes revert the safer choice when a commit may already have been pushed to a remote branch, or when another person may already have pulled it.",
+              "That makes revert the safer choice when a commit has been pushed to a remote branch and another person may already have a local copy.",
               "",
-              "In this lesson, you will push the commit first to make it shared. Then you will revert it and push the revert commit too.",
-              "",
-              "The important real-world habit is: if the commit is already shared, prefer `git revert` over rewriting history with `git reset`.",
-              "",
-              "In this lesson, you will use `git revert HEAD` to keep the task simple. `HEAD` means the current commit, so this reverts the latest commit on the current branch."
+              "In this lesson, you will push the commit first to make it shared. Then you will revert it and push the revert commit too."
             ]
           }
         },
@@ -45,6 +41,8 @@ exports.level = {
           "options": {
             "markdowns": [
               "In real projects, you will often choose a specific commit to revert.",
+              "",
+              "In this lesson, you will use `git revert HEAD` to keep the task simple. `HEAD` means the current commit, so this reverts the latest commit on the current branch.",
               "",
               "Common forms are:",
               "",
@@ -70,7 +68,7 @@ exports.level = {
               "The original commit is still in history locally and on the remote, and the new commit records the undo operation."
             ],
             "command": "git revert HEAD;git push",
-            "beforeCommand": "touch revert.txt;git add revert.txt;git commit -m 'Add revert.txt';git push"
+            "beforeCommand": "git clone;touch revert.txt;git add revert.txt;git commit -m 'Add revert.txt';git push"
           }
         },
         {
