@@ -1,7 +1,7 @@
 var startTree = JSON.stringify({
   "branches": {
     "main": {
-      "target": "C0",
+      "target": "C2",
       "id": "main",
       "remoteTrackingBranchID": "o/main"
     },
@@ -17,6 +17,16 @@ var startTree = JSON.stringify({
       "parents": [],
       "id": "C0",
       "rootCommit": true
+    },
+    "C2": {
+      "parents": ["C0"],
+      "id": "C2",
+      "fileChanges": {
+        "replay.txt": {
+          "type": "added",
+          "content": ""
+        }
+      }
     }
   },
   "HEAD": {
@@ -26,7 +36,7 @@ var startTree = JSON.stringify({
   "originTree": {
     "branches": {
       "main": {
-        "target": "C0",
+        "target": "C1",
         "id": "main",
         "remoteTrackingBranchID": null
       }
@@ -36,6 +46,16 @@ var startTree = JSON.stringify({
         "parents": [],
         "id": "C0",
         "rootCommit": true
+      },
+      "C1": {
+        "parents": ["C0"],
+        "id": "C1",
+        "fileChanges": {
+          "teammate.txt": {
+            "type": "added",
+            "content": ""
+          }
+        }
       }
     },
     "HEAD": {
@@ -67,15 +87,33 @@ var goalTree = JSON.stringify({
     },
     "C1": {
       "parents": ["C0"],
-      "id": "C1"
+      "id": "C1",
+      "fileChanges": {
+        "teammate.txt": {
+          "type": "added",
+          "content": ""
+        }
+      }
     },
     "C2": {
       "parents": ["C0"],
-      "id": "C2"
+      "id": "C2",
+      "fileChanges": {
+        "replay.txt": {
+          "type": "added",
+          "content": ""
+        }
+      }
     },
     "C2'": {
       "parents": ["C1"],
-      "id": "C2'"
+      "id": "C2'",
+      "fileChanges": {
+        "replay.txt": {
+          "type": "added",
+          "content": ""
+        }
+      }
     }
   },
   "HEAD": {
@@ -98,11 +136,23 @@ var goalTree = JSON.stringify({
       },
       "C1": {
         "parents": ["C0"],
-        "id": "C1"
+        "id": "C1",
+        "fileChanges": {
+          "teammate.txt": {
+            "type": "added",
+            "content": ""
+          }
+        }
       },
       "C2'": {
         "parents": ["C1"],
-        "id": "C2'"
+        "id": "C2'",
+        "fileChanges": {
+          "replay.txt": {
+            "type": "added",
+            "content": ""
+          }
+        }
       }
     },
     "HEAD": {
@@ -117,18 +167,13 @@ exports.level = {
     "en_US": "Replay Your Work On The Latest Main"
   },
   "goalTreeString": goalTree,
-  "solutionCommand": "git fakeTeamwork 1;touch replay.txt;git add replay.txt;git commit -m 'Update replay.txt';git fetch;git rebase o/main;git push",
+  "solutionCommand": "git fetch;git rebase o/main;git push",
   "startTree": startTree,
   "hint": {
-    "en_US": "Make a local commit, fetch the teammate commit, rebase on o/main, then push"
+    "en_US": "Fetch the teammate commit, rebase on o/main, then push"
   },
-  "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
-    "^git +fakeTeamwork +1 *$",
-    "^touch +\\S+ *$",
-    "^git +add +\\S+ *$",
-    "^git +commit +.*$",
     "^git +fetch *$",
     "^git +rebase +o/main *$",
     "^git +push *$"
@@ -187,37 +232,21 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you.",
+              "You start with one local commit on `main`. A teammate has already pushed one newer commit to remote `main`, but your local repository has not downloaded it yet.",
               "",
-              "You will simulate a teammate pushing one commit, make your own local commit, fetch the latest remote work, replay your work on top of `o/main`, and then push.",
-              "",
-              "**1. Simulate a teammate pushing work**",
-              "",
-              "```",
-              "git fakeTeamwork 1",
-              "```",
-              "",
-              "**2. Create, stage, and commit your own local file**",
-              "",
-              "```",
-              "touch replay.txt;",
-              "git add replay.txt;",
-              "git commit -m \"Update replay.txt\"",
-              "```",
-              "",
-              "**3. Download the teammate's latest commit**",
+              "**1. Download the teammate's latest commit**",
               "",
               "```",
               "git fetch",
               "```",
               "",
-              "**4. Replay your local commit on top of the latest main**",
+              "**2. Replay your local commit on top of the latest main**",
               "",
               "```",
               "git rebase o/main",
               "```",
               "",
-              "**5. Push the updated history**",
+              "**3. Push the updated history**",
               "",
               "```",
               "git push",

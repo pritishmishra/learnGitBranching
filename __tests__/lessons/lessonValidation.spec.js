@@ -237,7 +237,7 @@ var failureCasesByLesson = {
   'Replay Your Work On The Latest Main': [
     {
       name: 'does not solve when pull creates a merge instead of replaying work',
-      command: withIdentity('git fakeTeamwork 1;touch replay.txt;git add replay.txt;git commit -m "Update replay.txt";git pull;git push')
+      command: 'git pull;git push'
     }
   ],
   'The Emergency Override': [
