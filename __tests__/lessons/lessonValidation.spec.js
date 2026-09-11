@@ -225,7 +225,7 @@ var failureCasesByLesson = {
   'Sync Your Local Copy': [
     {
       name: 'does not solve when teammate work is fetched but not pulled into main',
-      command: withIdentity('git fakeTeamwork 2;touch local.txt;git add local.txt;git commit -m "Add local.txt";git fetch')
+      command: 'git fakeTeamwork 2;git fetch'
     }
   ],
   'Collaborating Without Conflicting': [
@@ -285,6 +285,20 @@ describe('Lesson section validation', function() {
     return base.expectLevelCommandsToSolve(
       getLessonByName('Download Without Changing'),
       'git fetch origin main;git fetch origin bugFix'
+    );
+  });
+
+  it('solves "Sync Your Local Copy" with fetch followed by merge', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('Sync Your Local Copy'),
+      'git fakeTeamwork 2;git fetch;git merge o/main'
+    );
+  });
+
+  it('solves "Sync Your Local Copy" when teammate work is created in two steps', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('Sync Your Local Copy'),
+      'git fakeTeamwork;git fakeTeamwork;git pull'
     );
   });
 

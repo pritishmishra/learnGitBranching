@@ -2,20 +2,13 @@ exports.level = {
   "name": {
     "en_US": "Sync Your Local Copy"
   },
-  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C4\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C2\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C0\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C3\",\"C2\"],\"id\":\"C4\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C2\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
-  "solutionCommand": "git fakeTeamwork 2;touch local.txt;git add local.txt;git commit -m 'Add local.txt';git pull",
-  "startTree": "{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
+  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C4\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C3\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\",\"fileChanges\":{\"local.txt\":{\"type\":\"added\",\"content\":\"\"}}},\"C2\":{\"parents\":[\"C0\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C1\",\"C3\"],\"id\":\"C4\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C3\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C2\":{\"parents\":[\"C0\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
+  "solutionCommand": "git fakeTeamwork 2;git pull",
+  "startTree": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C0\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\",\"fileChanges\":{\"local.txt\":{\"type\":\"added\",\"content\":\"\"}}}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C0\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "hint": {
-    "en_US": "Simulate teammate commits with git fakeTeamwork 2, make one local commit, then run git pull"
+    "en_US": "Simulate teammate commits with git fakeTeamwork 2, then run git pull"
   },
   "requireStagedChanges": true,
-  "requiredCommandPatterns": [
-    "^git +fakeTeamwork +2 *$",
-    "^touch +\\S+($| +)",
-    "^git +add +\\S+ *$",
-    "^git +commit +.*$",
-    "^git +pull *$"
-  ],
   "startDialog": {
     "en_US": {
       "childViews": [
@@ -126,9 +119,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you.",
-              "",
-              "Your tasks:",
+              "A local commit adding `local.txt` has already been created for you.",
               "",
               "**1. Simulate teammate work on the remote**",
               "",
@@ -136,21 +127,13 @@ exports.level = {
               "git fakeTeamwork 2",
               "```",
               "",
-              "**2. Create, stage, and commit your own local file**",
-              "",
-              "```",
-              "touch local.txt;",
-              "git add local.txt;",
-              "git commit -m \"Add local.txt\"",
-              "```",
-              "",
-              "**3. Sync your local branch with the remote**",
+              "**2. Sync your local branch with the remote**",
               "",
               "```",
               "git pull",
               "```",
               "",
-              "The level is complete once local `main` includes both your local commit and the remote commits.",
+              "P.S.: You can also try `git fetch` followed by `git merge o/main` to see how that behaves instead of `git pull`.",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]

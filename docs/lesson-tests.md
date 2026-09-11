@@ -30,6 +30,12 @@ defined by that lesson.
 The suite also checks that the practice exercises are not included in the
 lesson-only run.
 
+For lessons that intentionally allow more than one natural workflow, the suite
+includes those variants directly. For example, `Sync Your Local Copy` passes
+with `git pull`, with `git fetch` followed by `git merge o/main`, and when the
+simulated teammate work is created using two separate `git fakeTeamwork`
+commands.
+
 ## Difference From Exercise Tests
 
 Lesson tests validate the guided teaching path. They answer: does each lesson's
