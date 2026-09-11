@@ -213,7 +213,7 @@ var failureCasesByLesson = {
   'Rewind Local History': [
     {
       name: 'does not solve when the soft reset is skipped',
-      command: withIdentity('touch rewind.txt;git add rewind.txt;git commit -m "Add rewind.txt";git reset --hard HEAD~1;git status')
+      command: 'git reset --hard HEAD~1;git status'
     }
   ],
   'Download Without Changing': [
