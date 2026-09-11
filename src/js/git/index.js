@@ -3304,7 +3304,7 @@ GitEngine.prototype.status = function() {
 
   if (this.activeConflict && !this.activeConflict.resolved) {
     lines.push('You have unmerged paths.');
-    lines.push(TAB + '(fix conflicts and run "git resolve-conflict <file>")');
+    lines.push(TAB + '(fix conflicts and run "git resolve-conflict &lt;file&gt;")');
     lines.push('');
     lines.push('Unmerged paths:');
     lines.push(TAB + 'both modified: ' + this.activeConflict.filepath);
@@ -3313,7 +3313,7 @@ GitEngine.prototype.status = function() {
   
   if (hasStagedChanges) {
     lines.push('Changes to be committed:');
-    lines.push(TAB + '(use "git unstage <file>..." to unstage)');
+    lines.push(TAB + '(use "git unstage &lt;file&gt;..." to unstage)');
     lines.push('');
     
     var self = this;
@@ -3332,8 +3332,8 @@ GitEngine.prototype.status = function() {
   
   if (hasUnstagedChanges) {
     lines.push('Changes not staged for commit:');
-    lines.push(TAB + '(use "git add <file>..." to update what will be committed)');
-    lines.push(TAB + '(use "git restore <file>..." to discard changes in working directory)');
+    lines.push(TAB + '(use "git add &lt;file&gt;..." to update what will be committed)');
+    lines.push(TAB + '(use "git restore &lt;file&gt;..." to discard changes in working directory)');
     lines.push('');
     
     var self = this;

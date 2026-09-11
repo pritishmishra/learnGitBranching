@@ -196,7 +196,7 @@ describe('Command Model', function() {
         .then(function(commands) {
           var command = commands[0];
           expect(command.get('error').get('msg')).toBe(
-            'Usage: git resolve-conflict <filename>'
+            'Usage: git resolve-conflict &lt;filename&gt;'
           );
         });
     });

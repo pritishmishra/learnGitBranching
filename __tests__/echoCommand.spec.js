@@ -88,7 +88,7 @@ describe('Echo command', function() {
     return runCommands('echo "Hello CSC207" >').then(function(result) {
       var command = result.commands[0];
       expect(command.get('error').get('msg')).toBe(
-        'Usage: echo "message" > <filepath>'
+        'Usage: echo "message" &gt; &lt;filepath&gt;'
       );
     });
   });

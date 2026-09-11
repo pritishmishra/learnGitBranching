@@ -200,14 +200,14 @@ var commandConfig = {
             throw new GitError({
               msg: intl.todo(
                 'no changes added to commit\n\n' +
-                'Use "git add <file>" to stage your changes before committing.'
+                'Use "git add &lt;file&gt;" to stage your changes before committing.'
               )
             });
           } else {
             throw new GitError({
               msg: intl.todo(
                 'nothing to commit, working tree clean\n\n' +
-                'Use "touch <file>" to create a file, then "git add <file>" to stage it.'
+                'Use "touch &lt;file&gt;" to create a file, then "git add &lt;file&gt;" to stage it.'
               )
             });
           }
@@ -1206,7 +1206,7 @@ var commandConfig = {
       
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git modify <filepath> [content]')
+          msg: intl.todo('Usage: git modify &lt;filepath&gt; [content]')
         });
       }
       
@@ -1229,7 +1229,7 @@ var commandConfig = {
       
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git add <filepath>')
+          msg: intl.todo('Usage: git add &lt;filepath&gt;')
         });
       }
       
@@ -1251,7 +1251,7 @@ var commandConfig = {
       
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: touch <filepath> [content]')
+          msg: intl.todo('Usage: touch &lt;filepath&gt; [content]')
         });
       }
       
@@ -1276,7 +1276,7 @@ var commandConfig = {
       if (generalArgs.length !== 3 ||
           (generalArgs[1] !== '>' && generalArgs[1] !== '&gt;')) {
         throw new GitError({
-          msg: intl.todo('Usage: echo "message" > <filepath>')
+          msg: intl.todo('Usage: echo "message" &gt; &lt;filepath&gt;')
         });
       }
 
@@ -1285,7 +1285,7 @@ var commandConfig = {
 
       if (!content || !filepath) {
         throw new GitError({
-          msg: intl.todo('Usage: echo "message" > <filepath>')
+          msg: intl.todo('Usage: echo "message" &gt; &lt;filepath&gt;')
         });
       }
 
@@ -1306,7 +1306,7 @@ var commandConfig = {
       
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: rm <filepath>')
+          msg: intl.todo('Usage: rm &lt;filepath&gt;')
         });
       }
       
@@ -1337,7 +1337,7 @@ var commandConfig = {
 
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git restore <filepath>')
+          msg: intl.todo('Usage: git restore &lt;filepath&gt;')
         });
       }
 
@@ -1362,7 +1362,7 @@ var commandConfig = {
 
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git unstage <filepath>')
+          msg: intl.todo('Usage: git unstage &lt;filepath&gt;')
         });
       }
 
@@ -1383,7 +1383,7 @@ var commandConfig = {
 
       if (generalArgs.length === 0) {
         throw new GitError({
-          msg: intl.todo('Usage: git resolve-conflict <filename>')
+          msg: intl.todo('Usage: git resolve-conflict &lt;filename&gt;')
         });
       }
 
@@ -1403,7 +1403,7 @@ var commandConfig = {
       
       if (generalArgs.length < 2) {
         throw new GitError({
-          msg: intl.todo('Usage: git config <key> <value>\nExample: git config user.name "Your Name"')
+          msg: intl.todo('Usage: git config &lt;key&gt; &lt;value&gt;\nExample: git config user.name "Your Name"')
         });
       }
       

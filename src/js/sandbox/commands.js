@@ -113,7 +113,7 @@ var instantCommands = [
     throw new CommandResult({
       msg: msg
     });
-  }, 'echo', 'Print text to the terminal, or write text with `echo "message" > <file>`'],
+  }, 'echo', 'Print text to the terminal, or write text with `echo "message" &gt; &lt;file&gt;`'],
   [/^show +commands$/, function(bits) {
     var allCommands = Object.assign(
       {},
