@@ -169,7 +169,7 @@ exports.level = {
               "",
               "It means Git needs a person to decide what the final file should contain.",
               "",
-              "In a real team, this is the moment to talk to your teammate, understand why they changed the file, and combine the two ideas without overwriting or rejecting either version blindly."
+              "In a real team, this is the moment to talk to your teammate, understand why they changed the file, and decide together how the final version should look, rather than accepting one version or the other without discussion."
             ]
           }
         },
