@@ -359,6 +359,7 @@ var commandConfig = {
       command.validateArgBounds(generalArgs, 0, 2);
       var branch;
       var numToMake;
+      var filepath;
 
       // allow formats of: git fakeTeamwork 2 or git fakeTeamwork side 3
       switch (generalArgs.length) {
@@ -371,7 +372,12 @@ var commandConfig = {
         // git fakeTeamwork 10 or git fakeTeamwork foo
         case 1:
           if (isNaN(parseInt(generalArgs[0], 10))) {
-            branch = validateOriginBranchName(engine, generalArgs[0]);
+            if (engine.origin.refs[generalArgs[0]]) {
+              branch = validateOriginBranchName(engine, generalArgs[0]);
+            } else {
+              branch = 'main';
+              filepath = generalArgs[0];
+            }
             numToMake = 1;
           } else {
             numToMake = parseInt(generalArgs[0], 10);
@@ -399,7 +405,7 @@ var commandConfig = {
         });
       }
 
-      engine.fakeTeamwork(numToMake, branch);
+      engine.fakeTeamwork(numToMake, branch, filepath);
     }
   },
 

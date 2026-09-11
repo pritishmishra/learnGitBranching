@@ -36,6 +36,12 @@ with `git pull`, with `git fetch` followed by `git merge o/main`, and when the
 simulated teammate work is created using two separate `git fakeTeamwork`
 commands.
 
+The suite also covers lesson-specific simulator behavior. For
+`Collaborating Without Conflicting`, it checks that a pull conflict writes
+conflict markers into `shared.txt`, that the local and teammate lines are both
+visible, and that the lesson can still be completed without running optional
+`git diff` inspection commands.
+
 ## Difference From Exercise Tests
 
 Lesson tests validate the guided teaching path. They answer: does each lesson's

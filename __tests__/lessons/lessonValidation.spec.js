@@ -231,7 +231,7 @@ var failureCasesByLesson = {
   'Collaborating Without Conflicting': [
     {
       name: 'does not solve when the conflict is not resolved before pushing',
-      command: withIdentity('git fakeTeamwork 1;touch shared.txt;git add shared.txt;git commit -m "Update shared.txt";git pull;git push')
+      command: withIdentity('git fakeTeamwork shared.txt;git pull;git push')
     }
   ],
   'Replay Your Work On The Latest Main': [
@@ -300,6 +300,28 @@ describe('Lesson section validation', function() {
       getLessonByName('Sync Your Local Copy'),
       'git fakeTeamwork;git fakeTeamwork;git pull'
     );
+  });
+
+  it('solves "Collaborating Without Conflicting" without requiring git diff', function() {
+    return base.expectLevelCommandsToSolve(
+      getLessonByName('Collaborating Without Conflicting'),
+      withIdentity('git fakeTeamwork shared.txt;git pull;git resolve-conflict shared.txt;git add shared.txt;git commit -m "Resolve shared.txt conflict";git push')
+    );
+  });
+
+  it('shows conflict markers for "Collaborating Without Conflicting" after pull', function() {
+    return base.runLevelCommands(
+      getLessonByName('Collaborating Without Conflicting'),
+      'git fakeTeamwork shared.txt;git pull'
+    ).then(function(result) {
+      var change = result.headless.gitEngine.workingDirectoryChanges['shared.txt'];
+
+      expect(change).toBeTruthy();
+      expect(change.content).toContain('<<<<<<< HEAD');
+      expect(change.content).toContain('My local update');
+      expect(change.content).toContain('Teammate update');
+      expect(change.content).toContain('>>>>>>> o/main');
+    });
   });
 
   lessonSequenceKeys.forEach(function(sequenceKey) {

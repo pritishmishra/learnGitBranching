@@ -1,7 +1,7 @@
 var startTree = JSON.stringify({
   "branches": {
     "main": {
-      "target": "C0",
+      "target": "C1",
       "id": "main",
       "remoteTrackingBranchID": "o/main"
     },
@@ -16,7 +16,23 @@ var startTree = JSON.stringify({
     "C0": {
       "parents": [],
       "id": "C0",
-      "rootCommit": true
+      "rootCommit": true,
+      "fileChanges": {
+        "shared.txt": {
+          "type": "added",
+          "content": "Project plan"
+        }
+      }
+    },
+    "C1": {
+      "parents": ["C0"],
+      "id": "C1",
+      "fileChanges": {
+        "shared.txt": {
+          "type": "modified",
+          "content": "Project plan\nMy local update"
+        }
+      }
     }
   },
   "HEAD": {
@@ -35,7 +51,13 @@ var startTree = JSON.stringify({
       "C0": {
         "parents": [],
         "id": "C0",
-        "rootCommit": true
+        "rootCommit": true,
+        "fileChanges": {
+          "shared.txt": {
+            "type": "added",
+            "content": "Project plan"
+          }
+        }
       }
     },
     "HEAD": {
@@ -63,19 +85,43 @@ var goalTree = JSON.stringify({
     "C0": {
       "parents": [],
       "id": "C0",
-      "rootCommit": true
+      "rootCommit": true,
+      "fileChanges": {
+        "shared.txt": {
+          "type": "added",
+          "content": "Project plan"
+        }
+      }
     },
     "C1": {
       "parents": ["C0"],
-      "id": "C1"
+      "id": "C1",
+      "fileChanges": {
+        "shared.txt": {
+          "type": "modified",
+          "content": "Project plan\nMy local update"
+        }
+      }
     },
     "C2": {
       "parents": ["C0"],
-      "id": "C2"
+      "id": "C2",
+      "fileChanges": {
+        "shared.txt": {
+          "type": "modified",
+          "content": "Project plan\nTeammate update"
+        }
+      }
     },
     "C3": {
-      "parents": ["C2", "C1"],
-      "id": "C3"
+      "parents": ["C1", "C2"],
+      "id": "C3",
+      "fileChanges": {
+        "shared.txt": {
+          "type": "modified",
+          "content": "Project plan\nMy local update"
+        }
+      }
     }
   },
   "HEAD": {
@@ -94,19 +140,43 @@ var goalTree = JSON.stringify({
       "C0": {
         "parents": [],
         "id": "C0",
-        "rootCommit": true
+        "rootCommit": true,
+        "fileChanges": {
+          "shared.txt": {
+            "type": "added",
+            "content": "Project plan"
+          }
+        }
       },
       "C1": {
         "parents": ["C0"],
-        "id": "C1"
+        "id": "C1",
+        "fileChanges": {
+          "shared.txt": {
+            "type": "modified",
+            "content": "Project plan\nMy local update"
+          }
+        }
       },
       "C2": {
         "parents": ["C0"],
-        "id": "C2"
+        "id": "C2",
+        "fileChanges": {
+          "shared.txt": {
+            "type": "modified",
+            "content": "Project plan\nTeammate update"
+          }
+        }
       },
       "C3": {
-        "parents": ["C2", "C1"],
-        "id": "C3"
+        "parents": ["C1", "C2"],
+        "id": "C3",
+        "fileChanges": {
+          "shared.txt": {
+            "type": "modified",
+            "content": "Project plan\nMy local update"
+          }
+        }
       }
     },
     "HEAD": {
@@ -121,10 +191,10 @@ exports.level = {
     "en_US": "Collaborating Without Conflicting"
   },
   "goalTreeString": goalTree,
-  "solutionCommand": "git fakeTeamwork 1;touch shared.txt;git add shared.txt;git commit -m 'Update shared.txt';git pull;git resolve-conflict shared.txt;git add shared.txt;git commit -m 'Resolve shared.txt conflict';git push",
+  "solutionCommand": "git fakeTeamwork shared.txt;git pull;git diff;git resolve-conflict shared.txt;git diff;git add shared.txt;git commit -m 'Resolve shared.txt conflict';git push",
   "startTree": startTree,
   "hint": {
-    "en_US": "Simulate teammate work, commit your own change to shared.txt, pull, resolve the conflict, commit the merge, then push"
+    "en_US": "Simulate teammate work on shared.txt, pull, resolve the conflict, commit the merge, then push"
   },
   "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,
@@ -132,10 +202,7 @@ exports.level = {
     "filepath": "shared.txt"
   },
   "requiredCommandPatterns": [
-    "^git +fakeTeamwork +1 *$",
-    "^touch +shared\\.txt *$",
-    "^git +add +shared\\.txt *$",
-    "^git +commit +.*$",
+    "^git +fakeTeamwork +shared\\.txt *$",
     "^git +pull *$",
     "^git +resolve-conflict +shared\\.txt *$",
     "^git +add +shared\\.txt *$",
@@ -187,7 +254,7 @@ exports.level = {
               "git resolve-conflict shared.txt",
               "```",
               "",
-              "That command is only part of this simulator. In real Git, after editing the file yourself, you would still run `git add shared.txt` and then `git commit` to finish the merge."
+              "That command is only part of this simulator. In this lesson it keeps your local change and discards the remote change. In real Git, after editing the file yourself, you would still run `git add shared.txt` and then `git commit` to finish the merge."
             ]
           }
         },
@@ -197,49 +264,49 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "The remote repository has already been cloned for you.",
+              "`shared.txt` already exists. Your local copy has a committed line that is not on the remote yet.",
               "",
-              "You will simulate a teammate changing `shared.txt`, make your own local change to the same file, pull the teammate's work, resolve the conflict, and push the final merge.",
-              "",
-              "**1. Simulate a teammate pushing work**",
+              "**1. Simulate a teammate changing the same file on the remote**",
               "",
               "```",
-              "git fakeTeamwork 1",
+              "git fakeTeamwork shared.txt",
               "```",
               "",
-              "**2. Make and commit your own local change**",
-              "",
-              "```",
-              "touch shared.txt;",
-              "git add shared.txt;",
-              "git commit -m \"Update shared.txt\"",
-              "```",
-              "",
-              "**3. Pull the teammate's change**",
+              "**2. Pull the teammate's change**",
               "",
               "```",
               "git pull",
               "```",
               "",
-              "**4. Resolve the conflict after comparing both versions**",
+              "Git should report a conflict in `shared.txt`. Run `git diff` if you want to inspect the conflict markers before resolving it.",
               "",
-              "In real Git, this step means editing the file manually. In this simulator, use the teaching-only command below to represent that edit.",
+              "**3. Resolve the conflict after comparing both versions**",
+              "",
+              "In real Git, this step means talking to your teammate, editing the file manually, and deciding what the final file should contain. In this simulator, use the teaching-only command below to represent that edit.",
               "",
               "```",
               "git resolve-conflict shared.txt",
               "```",
               "",
-              "**5. Stage and commit the resolved file**",
+              "This teaching command keeps your local change and discards the remote change. Run `git diff` again if you want to see the resolved file change before staging it.",
+              "",
+              "**4. Stage and commit the resolved file**",
               "",
               "```",
               "git add shared.txt;",
               "git commit -m \"Resolve shared.txt conflict\"",
               "```",
               "",
-              "**6. Push the resolved work**",
+              "**5. Push the resolved work**",
               "",
               "```",
               "git push",
+              "```",
+              "",
+              "Optional inspection commands:",
+              "",
+              "```",
+              "git diff",
               "```",
               "",
               "The level is complete once your merge commit is pushed to the remote repository.",

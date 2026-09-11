@@ -1622,10 +1622,10 @@ GitEngine.prototype.pullFinishWithMerge = function(
   this.animationQueue.thenFinish(chain);
 };
 
-GitEngine.prototype.fakeTeamwork = function(numToMake, branch) {
+GitEngine.prototype.fakeTeamwork = function(numToMake, branch, filepath) {
   var makeOriginCommit = function() {
     var id = this.getUniqueID();
-    return this.origin.receiveTeamwork(id, branch, this.animationQueue);
+    return this.origin.receiveTeamwork(id, branch, this.animationQueue, filepath);
   }.bind(this);
 
   var chainStep = function() {
@@ -1644,9 +1644,21 @@ GitEngine.prototype.fakeTeamwork = function(numToMake, branch) {
   this.animationQueue.thenFinish(chain);
 };
 
-GitEngine.prototype.receiveTeamwork = function(id, branch, animationQueue) {
+GitEngine.prototype.receiveTeamwork = function(id, branch, animationQueue, filepath) {
   this.checkout(this.resolveID(branch));
-  var newCommit = this.makeCommit([this.getCommitFromRef('HEAD')], id);
+  var options = {};
+
+  if (filepath) {
+    var existingContent = this.getFileContentInHistory(filepath);
+    var teammateLine = 'Teammate update';
+    options.fileChanges = {};
+    options.fileChanges[filepath] = {
+      type: existingContent === null ? 'added' : 'modified',
+      content: existingContent ? existingContent + '\n' + teammateLine : teammateLine
+    };
+  }
+
+  var newCommit = this.makeCommit([this.getCommitFromRef('HEAD')], id, options);
   this.setTargetLocation(this.HEAD, newCommit);
 
   return newCommit;
@@ -2989,17 +3001,58 @@ GitEngine.prototype.getMockConflictFilepath = function() {
     'shared.txt';
 };
 
+GitEngine.prototype.getFileContentAtCommit = function(filepath, commit) {
+  var commits = [];
+
+  while (commit) {
+    commits.unshift(commit);
+    var parents = commit.get('parents') || [];
+    commit = parents[0];
+  }
+
+  var content = null;
+  commits.forEach(function(historyCommit) {
+    var fileChanges = historyCommit.get('fileChanges') || {};
+    var change = fileChanges[filepath];
+    if (!change) {
+      return;
+    }
+    if (change.type === 'deleted') {
+      content = null;
+      return;
+    }
+    content = change.content || 'file content';
+  });
+
+  return content;
+};
+
 GitEngine.prototype.startMockPullConflict = function(remoteBranch) {
   var filepath = this.getMockConflictFilepath();
+  var localContent = this.getFileContentInHistory(filepath) || '';
+  var remoteContent = this.getFileContentAtCommit(
+    filepath,
+    this.getCommitFromRef(remoteBranch)
+  ) || '';
+  var conflictContent = [
+    '<<<<<<< HEAD',
+    localContent,
+    '=======',
+    remoteContent,
+    '>>>>>>> ' + remoteBranch.get('id')
+  ].join('\n');
+
   this.mockPullConflictConsumed = true;
   this.activeConflict = {
     filepath: filepath,
     remoteBranch: remoteBranch.get('id'),
+    localContent: localContent,
+    remoteContent: remoteContent,
     resolved: false
   };
   this.workingDirectoryChanges[filepath] = {
     type: 'modified',
-    content: 'Conflict markers need to be resolved'
+    content: conflictContent
   };
 
   return [
@@ -3026,7 +3079,7 @@ GitEngine.prototype.resolveConflict = function(filepath) {
 
   this.workingDirectoryChanges[filepath] = {
     type: 'modified',
-    content: 'Resolved conflict by combining teammate and local changes'
+    content: this.activeConflict.localContent
   };
   this.activeConflict.resolved = true;
 };
