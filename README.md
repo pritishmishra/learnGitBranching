@@ -45,6 +45,7 @@ The current Lessons tab contains:
 - **Correcting Mistakes**
   - Undo Local Changes
   - Undo Commits Safely
+  - Selective Commit Reverts
   - Rewind Local History
 
 - **Working With A Team**

@@ -18,6 +18,7 @@ exports.levelSequences = {
   mistakes: [
     require('./mistakes/undoLocalChanges').level,
     require('./mistakes/undoCommitsSafely').level,
+    require('./mistakes/selectiveCommitReverts').level,
     require('./mistakes/rewindLocalHistory').level
   ],
   team: [

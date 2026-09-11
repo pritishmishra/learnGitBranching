@@ -18,8 +18,9 @@ the lesson reaches its expected goal state.
 For each lesson, the suite also checks at least one incorrect command flow that
 should not complete the lesson. These failure checks cover mistakes such as
 skipping required inspection commands, committing without publishing, pushing a
-branch without upstream tracking, merging when rebase is required, and using
-history-rewriting commands where a safe undo command is expected.
+branch without upstream tracking, merging when rebase is required, using
+history-rewriting commands where a safe undo command is expected, and reverting
+the wrong commits in a multi-revert history.
 
 Each lesson also has a reset check. The reset check verifies that resetting a
 lesson returns the commit graph to that lesson's starting tree and restores the

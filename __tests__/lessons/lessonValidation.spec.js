@@ -200,6 +200,16 @@ var failureCasesByLesson = {
       command: 'git revert HEAD;git push'
     }
   ],
+  'Selective Commit Reverts': [
+    {
+      name: 'does not solve when only one unwanted commit is reverted',
+      command: 'git revert HEAD~3;git push'
+    },
+    {
+      name: 'does not solve when the documentation commit is reverted',
+      command: 'git revert HEAD;git revert HEAD~3;git revert HEAD~2;git push'
+    }
+  ],
   'Rewind Local History': [
     {
       name: 'does not solve when the soft reset is skipped',
