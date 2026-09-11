@@ -193,7 +193,11 @@ var failureCasesByLesson = {
   'Undo Commits Safely': [
     {
       name: 'does not solve when reset is used instead of revert',
-      command: withIdentity('touch revert.txt;git add revert.txt;git commit -m "Add revert.txt";git push;git reset --hard HEAD~1;git push --force')
+      command: 'git reset --hard HEAD~2;git push --force'
+    },
+    {
+      name: 'does not solve when the latest commit is reverted instead of the unwanted older commit',
+      command: 'git revert HEAD;git push'
     }
   ],
   'Rewind Local History': [
