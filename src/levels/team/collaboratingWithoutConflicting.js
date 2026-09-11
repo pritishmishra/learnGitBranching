@@ -20,7 +20,7 @@ var startTree = JSON.stringify({
       "fileChanges": {
         "shared.txt": {
           "type": "added",
-          "content": "Project plan"
+	          "content": "Project Plan"
         }
       }
     },
@@ -55,7 +55,7 @@ var startTree = JSON.stringify({
         "fileChanges": {
           "shared.txt": {
             "type": "added",
-            "content": "Project plan"
+	            "content": "Project Plan"
           }
         }
       }
@@ -89,7 +89,7 @@ var goalTree = JSON.stringify({
       "fileChanges": {
         "shared.txt": {
           "type": "added",
-          "content": "Project plan"
+	          "content": "Project Plan"
         }
       }
     },
@@ -144,7 +144,7 @@ var goalTree = JSON.stringify({
         "fileChanges": {
           "shared.txt": {
             "type": "added",
-            "content": "Project plan"
+	            "content": "Project Plan"
           }
         }
       },
@@ -260,7 +260,7 @@ exports.level = {
               "@@ -1 +1 @@",
               "```",
               "```",
-              "- Project plan",
+              "- Project Plan",
               "```",
               "```",
               "+ <<<<<<< HEAD",
@@ -276,6 +276,14 @@ exports.level = {
               "```",
               "```",
               "+ >>>>>>> o/main",
+              "```",
+              "",
+              "For this lesson, the three versions of `shared.txt` are:",
+              "",
+              "```",
+              "base: Project Plan",
+              "local commit added: My local update",
+              "remote commit added: Teammate update",
               "```",
               "",
               "`--- a/shared.txt` is the old committed version, and `+++ b/shared.txt` is your current working copy.",
@@ -335,8 +343,6 @@ exports.level = {
               "```",
               "",
               "This command keeps your local change and discards the remote change. Run `git diff` again to see the resolved file content.",
-              "",
-              "You see same file content twice because the merge resolution still has to be staged and committed.",
               "",
               "**4. Stage, commit, and push the resolved file**",
               "",
