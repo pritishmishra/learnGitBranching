@@ -28,12 +28,12 @@ var startTree = JSON.stringify({
       "parents": ["C0"],
       "id": "C1",
       "fileChanges": {
-        "shared.txt": {
-          "type": "modified",
-          "content": "Project plan\nMy local update"
-        }
-      }
-    }
+	        "shared.txt": {
+	          "type": "modified",
+	          "content": "My local update"
+	        }
+	      }
+	    }
   },
   "HEAD": {
     "target": "main",
@@ -97,32 +97,32 @@ var goalTree = JSON.stringify({
       "parents": ["C0"],
       "id": "C1",
       "fileChanges": {
-        "shared.txt": {
-          "type": "modified",
-          "content": "Project plan\nMy local update"
-        }
-      }
-    },
+	        "shared.txt": {
+	          "type": "modified",
+	          "content": "My local update"
+	        }
+	      }
+	    },
     "C2": {
       "parents": ["C0"],
       "id": "C2",
       "fileChanges": {
-        "shared.txt": {
-          "type": "modified",
-          "content": "Project plan\nTeammate update"
-        }
-      }
-    },
+	        "shared.txt": {
+	          "type": "modified",
+	          "content": "Teammate update"
+	        }
+	      }
+	    },
     "C3": {
       "parents": ["C1", "C2"],
       "id": "C3",
       "fileChanges": {
-        "shared.txt": {
-          "type": "modified",
-          "content": "Project plan\nMy local update"
-        }
-      }
-    }
+	        "shared.txt": {
+	          "type": "modified",
+	          "content": "My local update"
+	        }
+	      }
+	    }
   },
   "HEAD": {
     "target": "main",
@@ -152,32 +152,32 @@ var goalTree = JSON.stringify({
         "parents": ["C0"],
         "id": "C1",
         "fileChanges": {
-          "shared.txt": {
-            "type": "modified",
-            "content": "Project plan\nMy local update"
-          }
-        }
-      },
+	          "shared.txt": {
+	            "type": "modified",
+	            "content": "My local update"
+	          }
+	        }
+	      },
       "C2": {
         "parents": ["C0"],
         "id": "C2",
         "fileChanges": {
-          "shared.txt": {
-            "type": "modified",
-            "content": "Project plan\nTeammate update"
-          }
-        }
-      },
+	          "shared.txt": {
+	            "type": "modified",
+	            "content": "Teammate update"
+	          }
+	        }
+	      },
       "C3": {
         "parents": ["C1", "C2"],
         "id": "C3",
         "fileChanges": {
-          "shared.txt": {
-            "type": "modified",
-            "content": "Project plan\nMy local update"
-          }
-        }
-      }
+	          "shared.txt": {
+	            "type": "modified",
+	            "content": "My local update"
+	          }
+	        }
+	      }
     },
     "HEAD": {
       "target": "main",
@@ -244,6 +244,38 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
+              "## Reading the Conflict Diff",
+              "",
+              "After `git pull` reports a conflict, `git diff` shows how the conflicted working file differs from the last committed version.",
+              "",
+              "You may see output like this:",
+              "",
+              "```",
+              "--- a/shared.txt",
+              "+++ b/shared.txt",
+              "@@ -1 +1 @@",
+              "- Project plan",
+              "+ <<<<<<< HEAD",
+              "+ My local update",
+              "+ =======",
+              "+ Teammate update",
+              "+ >>>>>>> o/main",
+              "```",
+              "",
+              "`--- a/shared.txt` is the old committed version, and `+++ b/shared.txt` is your current working copy.",
+              "",
+              "`@@ -1 +1 @@` is the location of the change. Here, Git is showing a change around line 1.",
+              "",
+              "Lines beginning with `-` are from the old version. Lines beginning with `+` are in the working copy now.",
+              "",
+              "`<<<<<<< HEAD` starts your local version, `=======` separates the two versions, and `>>>>>>> o/main` ends the teammate version from the remote-tracking branch."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "In a real repository, there is no command named `git resolve-conflict`.",
               "",
               "Resolving a conflict means opening the conflicted file in an editor, removing the conflict markers, and keeping the correct combined version.",
@@ -264,7 +296,7 @@ exports.level = {
             "markdowns": [
               "## Your Task",
               "",
-              "`shared.txt` already exists. Your local copy has a committed line that is not on the remote yet.",
+              "You start with a local commit where `shared.txt` contains `My local update`.",
               "",
               "**1. Simulate a teammate changing the same file on the remote**",
               "",
@@ -278,38 +310,17 @@ exports.level = {
               "git pull",
               "```",
               "",
-              "Git should report a conflict in `shared.txt`. Run `git diff` if you want to inspect the conflict markers before resolving it.",
+              "Git should report a conflict in `shared.txt`. Run `git diff` to see the conflict markers before resolving it.",
               "",
-              "**3. Resolve the conflict after comparing both versions**",
-              "",
-              "In real Git, this step means talking to your teammate, editing the file manually, and deciding what the final file should contain. In this simulator, use the teaching-only command below to represent that edit.",
+              "**3. Resolve the conflict**",
               "",
               "```",
               "git resolve-conflict shared.txt",
               "```",
               "",
-              "This teaching command keeps your local change and discards the remote change. Run `git diff` again if you want to see the resolved file change before staging it.",
+              "This command keeps your local change and discards the remote change. If you run `git diff` again, you will see the resolved file content because the merge resolution still has to be staged and committed.",
               "",
-              "**4. Stage and commit the resolved file**",
-              "",
-              "```",
-              "git add shared.txt;",
-              "git commit -m \"Resolve shared.txt conflict\"",
-              "```",
-              "",
-              "**5. Push the resolved work**",
-              "",
-              "```",
-              "git push",
-              "```",
-              "",
-              "Optional inspection commands:",
-              "",
-              "```",
-              "git diff",
-              "```",
-              "",
-              "The level is complete once your merge commit is pushed to the remote repository.",
+              "**4. Stage, commit, and push the resolved file**",
               "",
               "To reopen this task screen later, use the command `objective`."
             ]

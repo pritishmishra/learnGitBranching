@@ -324,6 +324,40 @@ describe('Lesson section validation', function() {
     });
   });
 
+  it('shows real previous content in the "Collaborating Without Conflicting" diff', function() {
+    return base.runLevelCommands(
+      getLessonByName('Collaborating Without Conflicting'),
+      'git fakeTeamwork shared.txt;git pull;git diff'
+    ).then(function(result) {
+      var diffCommand = result.commands[result.commands.length - 1];
+      var diffOutput = diffCommand.get('error').get('msg');
+
+      expect(diffOutput).toContain('- Project plan');
+      expect(diffOutput).toContain('+ <<<<<<< HEAD');
+      expect(diffOutput).toContain('+ My local update');
+      expect(diffOutput).toContain('+ Teammate update');
+      expect(diffOutput).not.toContain('+ Project plan');
+      expect(diffOutput).not.toContain('old file content');
+    });
+  });
+
+  it('shows the resolved local change in the "Collaborating Without Conflicting" diff', function() {
+    return base.runLevelCommands(
+      getLessonByName('Collaborating Without Conflicting'),
+      'git fakeTeamwork shared.txt;git pull;git resolve-conflict shared.txt;git diff'
+    ).then(function(result) {
+      var diffCommand = result.commands[result.commands.length - 1];
+      var diffOutput = diffCommand.get('error').get('msg');
+
+      expect(diffOutput).toContain('- Project plan');
+      expect(diffOutput).toContain('+ My local update');
+      expect(diffOutput).not.toContain('+ Project plan');
+      expect(diffOutput).not.toContain('old file content');
+      expect(diffOutput).not.toContain('Teammate update');
+      expect(diffOutput).not.toContain('<<<<<<< HEAD');
+    });
+  });
+
   lessonSequenceKeys.forEach(function(sequenceKey) {
     describe(levels.sequenceInfo[sequenceKey].displayName.en_US, function() {
       levels.levelSequences[sequenceKey].forEach(function(levelBlob) {

@@ -1654,7 +1654,7 @@ GitEngine.prototype.receiveTeamwork = function(id, branch, animationQueue, filep
     options.fileChanges = {};
     options.fileChanges[filepath] = {
       type: existingContent === null ? 'added' : 'modified',
-      content: existingContent ? existingContent + '\n' + teammateLine : teammateLine
+      content: teammateLine
     };
   }
 
@@ -1708,7 +1708,7 @@ GitEngine.prototype.commit = function(options) {
   var newCommit = this.makeCommit(commitParents, id, {
     commitMessage: options.commitMessage || intl.str('git-dummy-msg'),
     author: author,
-    fileChanges: JSON.parse(JSON.stringify(this.stagedChanges || {}))
+    fileChanges: this.getCommitFileChangesFromStagedChanges()
   });
   if (this.getDetachedHead() && this.mode === 'git') {
     this.command.addWarning(intl.str('git-warning-detached'));
@@ -1722,6 +1722,14 @@ GitEngine.prototype.commit = function(options) {
   this.activeConflict = null;
   
   return newCommit;
+};
+
+GitEngine.prototype.getCommitFileChangesFromStagedChanges = function() {
+  var fileChanges = JSON.parse(JSON.stringify(this.stagedChanges || {}));
+  Object.keys(fileChanges).forEach(function(filepath) {
+    delete fileChanges[filepath].oldContent;
+  });
+  return fileChanges;
 };
 
 GitEngine.prototype.resolveNameNoPrefix = function(someRef) {
@@ -3029,6 +3037,11 @@ GitEngine.prototype.getFileContentAtCommit = function(filepath, commit) {
 
 GitEngine.prototype.startMockPullConflict = function(remoteBranch) {
   var filepath = this.getMockConflictFilepath();
+  var headCommit = this.getCommitFromRef('HEAD');
+  var parentCommits = headCommit.get('parents') || [];
+  var baseContent = parentCommits[0] ?
+    this.getFileContentAtCommit(filepath, parentCommits[0]) :
+    '';
   var localContent = this.getFileContentInHistory(filepath) || '';
   var remoteContent = this.getFileContentAtCommit(
     filepath,
@@ -3046,21 +3059,20 @@ GitEngine.prototype.startMockPullConflict = function(remoteBranch) {
   this.activeConflict = {
     filepath: filepath,
     remoteBranch: remoteBranch.get('id'),
+    baseContent: baseContent,
     localContent: localContent,
     remoteContent: remoteContent,
     resolved: false
   };
   this.workingDirectoryChanges[filepath] = {
     type: 'modified',
+    oldContent: baseContent,
     content: conflictContent
   };
 
   return [
     'CONFLICT (content): Merge conflict in ' + filepath,
-    'Automatic merge failed; fix conflicts and then commit the result.',
-    '',
-    'In this lesson, talk through the teammate change, then use:',
-    'git resolve-conflict ' + filepath
+    'Automatic merge failed; fix conflicts and then commit the result.'
   ].join('\n');
 };
 
@@ -3079,6 +3091,7 @@ GitEngine.prototype.resolveConflict = function(filepath) {
 
   this.workingDirectoryChanges[filepath] = {
     type: 'modified',
+    oldContent: this.activeConflict.baseContent,
     content: this.activeConflict.localContent
   };
   this.activeConflict.resolved = true;
@@ -3384,27 +3397,42 @@ GitEngine.prototype.diff = function(options) {
   });
 };
 
+GitEngine.prototype.getDiffContentLines = function(prefix, content) {
+  var lines = String(content || '').split('\n');
+  if (lines.length === 1 && lines[0] === '') {
+    return [prefix + ' '];
+  }
+  return lines.map(function(line) {
+    return prefix + ' ' + line;
+  });
+};
+
 GitEngine.prototype.getFileDiffLines = function(filepath, change) {
   if (change.type === 'deleted') {
+    var deletedContent = this.getFileContentInHistory(filepath) || 'file content';
     return [
       'diff --git a/' + filepath + ' b/' + filepath,
       'deleted file mode 100644',
       '--- a/' + filepath,
       '+++ /dev/null',
-      '@@ -1 +0,0 @@',
-      '- file content'
-    ];
+      '@@ -1 +0,0 @@'
+    ].concat(this.getDiffContentLines('-', deletedContent));
   }
 
   if (change.type === 'modified') {
+    var oldContent = change.oldContent;
+    if (oldContent === undefined) {
+      oldContent = this.getFileContentInHistory(filepath) || 'file content';
+    }
     return [
       'diff --git a/' + filepath + ' b/' + filepath,
       '--- a/' + filepath,
       '+++ b/' + filepath,
-      '@@ -1 +1 @@',
-      '- old file content',
-      '+ ' + change.content
-    ];
+      '@@ -1 +1 @@'
+    ].concat(
+      this.getDiffContentLines('-', oldContent),
+      this.getDiffContentLines('+', change.content)
+    );
   }
 
   return [
@@ -3412,9 +3440,8 @@ GitEngine.prototype.getFileDiffLines = function(filepath, change) {
     'new file mode 100644',
     '--- /dev/null',
     '+++ b/' + filepath,
-    '@@ -0,0 +1 @@',
-    '+ ' + change.content
-  ];
+    '@@ -0,0 +1 @@'
+  ].concat(this.getDiffContentLines('+', change.content));
 };
 
 GitEngine.prototype.logWithout = function(ref, omitBranch) {
