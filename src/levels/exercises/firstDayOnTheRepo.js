@@ -75,6 +75,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "exerciseNumber": 1,
+  "scoreId": "firstDayOnTheRepo",
   "name": {
     "en_US": "First Day on the Repo"
   },

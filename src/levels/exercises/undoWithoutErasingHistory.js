@@ -162,6 +162,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "exerciseNumber": 5,
+  "scoreId": "undoWithoutErasingHistory",
   "name": {
     "en_US": "Undo Without Erasing History"
   },

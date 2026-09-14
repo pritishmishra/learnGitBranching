@@ -399,7 +399,8 @@ class SeriesView extends BaseView {
     this.template = _.template($('#series-view').html());
     this.events = {
       'click a.levelIcon': 'click',
-      'mouseenter a.levelIcon': 'enterIcon'
+      'mouseenter a.levelIcon': 'enterIcon',
+      'click button.exerciseSubmitButton': 'submitScore'
     };
 
     this.name = options.name || 'intro';
@@ -439,6 +440,7 @@ class SeriesView extends BaseView {
     // Bind events manually
     this.$el.on('click', 'a.levelIcon', this.click.bind(this));
     this.$el.on('mouseenter', 'a.levelIcon', this.enterIcon.bind(this));
+    this.$el.on('click', 'button.exerciseSubmitButton', this.submitScore.bind(this));
 
     this.updateSolvedStatus();
   }
@@ -496,6 +498,71 @@ class SeriesView extends BaseView {
   click(ev) {
     var id = this.getEventID(ev);
     this.navEvents.trigger('clickedID', id);
+  }
+
+  getCompletedScoreIds() {
+    return this.levels
+      .filter(function(level) {
+        return LevelStore.isLevelSolved(level.id);
+      })
+      .map(function(level) {
+        return level.scoreId || level.id;
+      });
+  }
+
+  setSubmitStatus(message, state) {
+    var $status = this.$('p.exerciseSubmitStatus');
+    $status
+      .removeClass('success error pending')
+      .addClass(state || '')
+      .text(message || '');
+  }
+
+  submitScore(ev) {
+    if (ev && ev.preventDefault) {
+      ev.preventDefault();
+    }
+
+    var completed = this.getCompletedScoreIds();
+    var button = this.$('button.exerciseSubmitButton');
+    button.prop('disabled', true);
+    this.setSubmitStatus('Submitting...', 'pending');
+
+    fetch('/st/submit_score.py', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        completed: completed
+      })
+    })
+      .then(function(response) {
+        return response.json()
+          .catch(function() {
+            return {};
+          })
+          .then(function(body) {
+            if (!response.ok || !body.ok) {
+              throw new Error(body.error || 'Could not submit score');
+            }
+            return body;
+          });
+      })
+      .then(function(body) {
+        this.setSubmitStatus(
+          'Submitted ' + body.count + ' completed exercise' +
+            (body.count === 1 ? '.' : 's.'),
+          'success'
+        );
+      }.bind(this))
+      .catch(function(error) {
+        this.setSubmitStatus(error.message || 'Could not submit score', 'error');
+      }.bind(this))
+      .then(function() {
+        button.prop('disabled', false);
+      });
   }
 }
 

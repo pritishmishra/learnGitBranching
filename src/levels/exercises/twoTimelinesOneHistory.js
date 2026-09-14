@@ -126,6 +126,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "exerciseNumber": 2,
+  "scoreId": "twoTimelinesOneHistory",
   "name": {
     "en_US": "Two Timelines, One History"
   },

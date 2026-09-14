@@ -124,6 +124,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "exerciseNumber": 4,
+  "scoreId": "tooSoonRebuildTheCommit",
   "name": {
     "en_US": "Too Soon - Rebuild the Commit"
   },

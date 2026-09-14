@@ -114,6 +114,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "exerciseNumber": 3,
+  "scoreId": "cleanUpBeforeYouCommit",
   "name": {
     "en_US": "Clean Up Before You Commit"
   },

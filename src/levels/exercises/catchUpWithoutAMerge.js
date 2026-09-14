@@ -173,6 +173,7 @@ var goalTree = JSON.stringify({
 
 exports.level = {
   "exerciseNumber": 6,
+  "scoreId": "catchUpWithoutAMerge",
   "name": {
     "en_US": "Catch Up Without a Merge"
   },
