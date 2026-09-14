@@ -19,8 +19,8 @@ cd "$APP_DIR"
 nvm use 14.20.0
 yarn gulp fastBuild
 
-sudo rm -rf "$WEB_DIR"
 sudo mkdir -p "$WEB_DIR"
+sudo rm -rf "$WEB_DIR/index.html" "$WEB_DIR/build" "$WEB_DIR/assets"
 
 sudo cp index.html "$WEB_DIR/"
 sudo cp -a build "$WEB_DIR/"

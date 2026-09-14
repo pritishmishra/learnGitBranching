@@ -263,7 +263,8 @@ The repository includes deployment helper scripts for the static Apache-hosted
 app:
 
 - [rebuildProductionWebsite.sh](rebuildProductionWebsite.sh): rebuilds the app
-  and replaces the production Apache document root at `/var/www/html`.
+  and replaces the static production files under `/var/www/html` while preserving
+  server-managed directories such as `/var/www/html/st`.
 - [rebuildDevWebsite.sh](rebuildDevWebsite.sh): rebuilds the app and publishes
   a separate dev copy, defaulting to `/var/www/learngit-dev` on port `8080`.
 - [apache.sh](apache.sh): compatibility wrapper for production deploys.
