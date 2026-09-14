@@ -109,4 +109,25 @@ describe('Practice exercise score submission', function() {
         done();
       });
   });
+
+  it('includes the HTTP status when the score endpoint fails without JSON error text', function(done) {
+    var fetchImpl = function() {
+      return Promise.resolve({
+        ok: false,
+        status: 500,
+        json: function() {
+          return Promise.resolve({});
+        }
+      });
+    };
+
+    ScoreSubmission.submitScore(fetchImpl, [])
+      .then(function() {
+        done.fail('Expected score submission to fail');
+      })
+      .catch(function(error) {
+        expect(error.message).toBe('Could not submit score (HTTP 500)');
+        done();
+      });
+  });
 });

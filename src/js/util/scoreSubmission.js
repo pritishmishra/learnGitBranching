@@ -30,7 +30,11 @@ function submitScore(fetchImpl, completed) {
         })
         .then(function(body) {
           if (!response.ok) {
-            throw new Error(body.error || 'Could not submit score');
+            throw new Error(
+              body.error ||
+              'Could not submit score' +
+                (response.status ? ' (HTTP ' + response.status + ')' : '')
+            );
           }
           return body;
         });
