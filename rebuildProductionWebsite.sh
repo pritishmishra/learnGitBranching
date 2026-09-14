@@ -26,9 +26,11 @@ sudo cp index.html "$WEB_DIR/"
 sudo cp -a build "$WEB_DIR/"
 sudo cp -a assets "$WEB_DIR/"
 
-sudo chown -R www-data:www-data "$WEB_DIR"
-sudo find "$WEB_DIR" -type d -exec chmod 755 {} \;
-sudo find "$WEB_DIR" -type f -exec chmod 644 {} \;
+sudo chown www-data:www-data "$WEB_DIR/index.html"
+sudo chown -R www-data:www-data "$WEB_DIR/build" "$WEB_DIR/assets"
+sudo chmod 644 "$WEB_DIR/index.html"
+sudo find "$WEB_DIR/build" "$WEB_DIR/assets" -type d -exec chmod 755 {} \;
+sudo find "$WEB_DIR/build" "$WEB_DIR/assets" -type f -exec chmod 644 {} \;
 
 sudo apache2ctl configtest
 sudo systemctl reload apache2
