@@ -69,6 +69,21 @@ describe('Practice exercise validation', function() {
     );
   });
 
+  it('solves exercise 1 with a custom example.com email identity', function() {
+    return base.expectLevelCommandsToSolve(
+      getExercise(1),
+      [
+        'git clone',
+        'git config user.name pritish',
+        'git config user.email abc@example.com',
+        'touch introduction.txt',
+        'git add introduction.txt',
+        'git commit -m "some chang"',
+        'git push'
+      ].join(';')
+    );
+  });
+
   it('does not solve exercise 1 when the configured email is not email-shaped', function() {
     return base.expectLevelCommandsNotToSolve(
       getExercise(1),
