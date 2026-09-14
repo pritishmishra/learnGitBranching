@@ -172,6 +172,21 @@ exercise.
 The same tests check that lessons outside the Exercises tab can still use both
 commands.
 
+## Exercise Score Submission
+
+This test checks that the Exercises panel includes the `Submit Score` button.
+
+This test also checks that solved exercises are submitted using their stable
+score IDs, not just their display titles.
+
+This test also checks that submitting with zero completed exercises still sends
+a valid request and succeeds with a count of `0`.
+
+This test also checks that completed exercise IDs are sent to the score endpoint.
+
+This test also checks that server-side submission errors are surfaced as
+failures instead of being treated as successful submissions.
+
 ## Related Lesson Tests
 
 This document covers only the standalone Exercises tab. The guided Lessons tab

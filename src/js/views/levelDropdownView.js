@@ -9,6 +9,7 @@ var KeyboardListener = require('../util/keyboard').KeyboardListener;
 var Main = require('../app');
 var LevelStore = require('../stores/LevelStore');
 var { createEvents } = require('../util/eventEmitter');
+var ScoreSubmission = require('../util/scoreSubmission');
 
 var ModalTerminal = require('../views').ModalTerminal;
 var ContainedBase = require('../views').ContainedBase;
@@ -501,13 +502,10 @@ class SeriesView extends BaseView {
   }
 
   getCompletedScoreIds() {
-    return this.levels
-      .filter(function(level) {
-        return LevelStore.isLevelSolved(level.id);
-      })
-      .map(function(level) {
-        return level.scoreId || level.id;
-      });
+    return ScoreSubmission.getCompletedScoreIds(
+      this.levels,
+      LevelStore.isLevelSolved
+    );
   }
 
   setSubmitStatus(message, state) {
@@ -528,32 +526,11 @@ class SeriesView extends BaseView {
     button.prop('disabled', true);
     this.setSubmitStatus('Submitting...', 'pending');
 
-    fetch('/st/submit_score.py', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        completed: completed
-      })
-    })
-      .then(function(response) {
-        return response.json()
-          .catch(function() {
-            return {};
-          })
-          .then(function(body) {
-            if (!response.ok || !body.ok) {
-              throw new Error(body.error || 'Could not submit score');
-            }
-            return body;
-          });
-      })
-      .then(function(body) {
+    ScoreSubmission.submitScore(fetch, completed)
+      .then(function(result) {
         this.setSubmitStatus(
-          'Submitted ' + body.count + ' completed exercise' +
-            (body.count === 1 ? '.' : 's.'),
+          'Submitted ' + result.count + ' completed exercise' +
+            (result.count === 1 ? '.' : 's.'),
           'success'
         );
       }.bind(this))
