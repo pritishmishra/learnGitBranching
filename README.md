@@ -108,6 +108,27 @@ Reset behavior is covered in [__tests__/resetSolved.spec.js](__tests__/resetSolv
 Those tests check that `reset solved --confirm` resets the current level state
 and that level resets restore the intended starting file state.
 
+Exercise score submissions can be summarized with
+[scripts/score_report.py](scripts/score_report.py). By default it reads
+`/var/log/learnGitBranching/score_submissions.jsonl` and reports each student's
+best submission:
+
+```bash
+scripts/score_report.py
+```
+
+Use `--mode latest` to report each student's most recent submission instead:
+
+```bash
+scripts/score_report.py --mode latest
+```
+
+Use `-o` to write the CSV to a file:
+
+```bash
+scripts/score_report.py -o scores.csv
+```
+
 This is still a client-side JavaScript application. The main app behavior lives
 under [src/js](src/js), and level definitions live under [src/levels](src/levels).
 Default seeded commit metadata is CSC207-branded: commits use `CSC207 Staff` as
