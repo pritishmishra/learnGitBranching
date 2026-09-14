@@ -296,7 +296,7 @@ class Visualization {
 
   applyInitialLocalState() {
     if (this.options.initialGitConfig) {
-      this.gitEngine.setConfigState(this.options.initialGitConfig);
+      this.gitEngine.applyDefaultConfigState(this.options.initialGitConfig);
     }
     this.gitEngine.setLocalChangeState(
       this.options.initialWorkingDirectoryChanges,

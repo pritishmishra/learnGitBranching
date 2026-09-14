@@ -2993,6 +2993,15 @@ GitEngine.prototype.setConfigState = function(gitConfig) {
   this.gitConfig = Object.assign({}, gitConfig || {});
 };
 
+GitEngine.prototype.applyDefaultConfigState = function(gitConfig) {
+  gitConfig = gitConfig || {};
+  Object.keys(gitConfig).forEach(function(key) {
+    if (!this.gitConfig[key]) {
+      this.gitConfig[key] = gitConfig[key];
+    }
+  }, this);
+};
+
 GitEngine.prototype.shouldMockPullConflict = function(remoteBranch, localBranch) {
   return !!this.mockConflictOnPull &&
     !this.mockPullConflictConsumed &&

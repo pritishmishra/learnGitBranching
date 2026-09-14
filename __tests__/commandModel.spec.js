@@ -182,6 +182,27 @@ describe('Command Model', function() {
       expect(cmd.get('error')).toBeTruthy();
     });
 
+    it('should reject unsupported git config keys', function() {
+      var headless = new HeadlessGit();
+      var commandPromise = {};
+      commandPromise.promise = new Promise(function(resolve) {
+        commandPromise.resolve = resolve;
+      });
+
+      return headless.sendCommand('git config user.emails student@example.com', commandPromise)
+        .then(function() {
+          return commandPromise.promise;
+        })
+        .then(function(commands) {
+          var command = commands[0];
+          expect(command.get('status')).toBe('error');
+          expect(command.get('error').get('msg')).toBe(
+            'The config key "user.emails" is not supported.\n' +
+            'Use user.name or user.email.'
+          );
+        });
+    });
+
     it('should show filename usage for resolve-conflict without an argument', function() {
       var headless = new HeadlessGit();
       var commandPromise = {};

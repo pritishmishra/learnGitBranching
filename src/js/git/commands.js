@@ -1409,6 +1409,15 @@ var commandConfig = {
       
       var key = generalArgs[0];
       var value = generalArgs.slice(1).join(' ');
+
+      if (key !== 'user.name' && key !== 'user.email') {
+        throw new GitError({
+          msg: intl.todo(
+            'The config key "' + key + '" is not supported.\n' +
+            'Use user.name or user.email.'
+          )
+        });
+      }
       
       engine.setConfig(key, value);
       

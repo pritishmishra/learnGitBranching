@@ -91,8 +91,8 @@ exports.level = {
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
     "^git +clone *$",
-    "^git +config +user\\.name +['\"]?Student['\"]? *$",
-    "^git +config +user\\.email +['\"]?student@example\\.com['\"]? *$",
+    "^git +config +user\\.name +(?!['\"]{2})(['\"][^'\"]+['\"]|\\S.*)$",
+    "^git +config +user\\.email +['\"]?[^'\"\\s@]+@[^'\"\\s@]+\\.[^'\"\\s@]+['\"]? *$",
     "^touch +introduction\\.txt *$",
     "^git +add +introduction\\.txt *$",
     "^git +commit +.*-m +(?!['\"]{2})(['\"][^'\"]+['\"]|\\S.*)$",

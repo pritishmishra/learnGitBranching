@@ -54,13 +54,43 @@ describe('Practice exercise validation', function() {
     );
   });
 
-  it('does not solve exercise 1 when the configured identity is wrong', function() {
+  it('solves exercise 1 with any valid configured identity', function() {
+    return base.expectLevelCommandsToSolve(
+      getExercise(1),
+      [
+        'git clone',
+        'git config user.name pritish',
+        'git config user.email abc@gmail.com',
+        'touch introduction.txt',
+        'git add introduction.txt',
+        'git commit -m "Introduce myself"',
+        'git push'
+      ].join(';')
+    );
+  });
+
+  it('does not solve exercise 1 when the configured email is not email-shaped', function() {
     return base.expectLevelCommandsNotToSolve(
       getExercise(1),
       [
         'git clone',
-        'git config user.name Other Student',
-        'git config user.email other@example.com',
+        'git config user.name Student',
+        'git config user.email not-an-email',
+        'touch introduction.txt',
+        'git add introduction.txt',
+        'git commit -m "Introduce myself"',
+        'git push'
+      ].join(';')
+    );
+  });
+
+  it('does not solve exercise 1 when the email key is mistyped', function() {
+    return base.expectLevelCommandsNotToSolve(
+      getExercise(1),
+      [
+        'git clone',
+        'git config user.name Student',
+        'git config user.emails student@example.com',
         'touch introduction.txt',
         'git add introduction.txt',
         'git commit -m "Introduce myself"',

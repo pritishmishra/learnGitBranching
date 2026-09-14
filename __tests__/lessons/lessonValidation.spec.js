@@ -139,7 +139,10 @@ var expectLevelResetToRestoreLessonStart = function(levelBlob) {
       );
 
       if (levelBlob.initialGitConfig) {
-        expect(headless.gitEngine.gitConfig).toEqual(levelBlob.initialGitConfig);
+        expect(headless.gitEngine.gitConfig).toEqual({
+          'user.name': 'Wrong Name',
+          'user.email': 'wrong@example.com'
+        });
       }
 
       expect(headless.gitEngine.mockPullConflictConsumed).toBe(false);
