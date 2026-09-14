@@ -6,7 +6,7 @@ import sys
 from datetime import datetime, timezone
 
 
-DEFAULT_LOGFILE = "/var/log/learnGitBranching/score_submissions.jsonl"
+DEFAULT_LOGFILE = "/var/log/learngit/submissions.jsonl"
 
 
 def parse_timestamp(value):
