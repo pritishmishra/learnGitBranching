@@ -21,6 +21,13 @@ var LevelActions = {
     });
   },
 
+  resetLevelsSolvedByTab: function(tab) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.RESET_LEVELS_SOLVED_BY_TAB,
+      tab: tab
+    });
+  },
+
   setIsSolvingLevel: function(isSolvingLevel) {
     AppDispatcher.handleViewAction({
       type: ActionTypes.SET_IS_SOLVING_LEVEL,

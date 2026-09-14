@@ -56,6 +56,36 @@ describe('this store', function() {
     expect(LevelStore.isLevelBest(firstLevel.id))
       .toEqual(false);
   });
+
+  it('can reset only solved lessons', function() {
+    var sequenceMap = LevelStore.getSequenceToLevels();
+    var lesson = sequenceMap.local[0];
+    var exercise = sequenceMap.practiceExercises[0];
+
+    LevelActions.setLevelSolved(lesson.id, false);
+    LevelActions.setLevelSolved(exercise.id, false);
+    LevelActions.resetLevelsSolvedByTab('lessons');
+
+    expect(LevelStore.isLevelSolved(lesson.id)).toEqual(false);
+    expect(LevelStore.isLevelSolved(exercise.id)).toEqual(true);
+
+    LevelActions.resetLevelsSolved();
+  });
+
+  it('can reset only solved exercises', function() {
+    var sequenceMap = LevelStore.getSequenceToLevels();
+    var lesson = sequenceMap.local[0];
+    var exercise = sequenceMap.practiceExercises[0];
+
+    LevelActions.setLevelSolved(lesson.id, false);
+    LevelActions.setLevelSolved(exercise.id, false);
+    LevelActions.resetLevelsSolvedByTab('exercises');
+
+    expect(LevelStore.isLevelSolved(lesson.id)).toEqual(true);
+    expect(LevelStore.isLevelSolved(exercise.id)).toEqual(false);
+
+    LevelActions.resetLevelsSolved();
+  });
   
 
 });

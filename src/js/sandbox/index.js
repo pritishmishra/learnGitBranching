@@ -260,16 +260,34 @@ class Sandbox {
   }
 
   resetSolved(command, deferred) {
-    if (command.get('regexResults').input !== 'reset solved --confirm') {
+    var input = command.get('regexResults').input;
+    var resetTargets = {
+      'reset solved --confirm': null,
+      'reset lessons --confirm': 'lessons',
+      'reset exercises --confirm': 'exercises'
+    };
+    var resetMessages = {
+      'reset solved': 'each level',
+      'reset lessons': 'each lesson',
+      'reset exercises': 'each exercise'
+    };
+
+    if (!Object.prototype.hasOwnProperty.call(resetTargets, input)) {
+      var commandName = input.replace(/ +--confirm.*$/, '');
+      var target = resetMessages[commandName] || 'each level';
       command.set('error', new Errors.GitError({
-        msg: 'Reset solved will mark each level as not yet solved; because ' +
+        msg: 'Reset solved will mark ' + target + ' as not yet solved; because ' +
              'this is a destructive command, please pass in --confirm to execute',
       }));
       command.finishWith(deferred);
       return;
     }
 
-    LevelActions.resetLevelsSolved();
+    if (resetTargets[input]) {
+      LevelActions.resetLevelsSolvedByTab(resetTargets[input]);
+    } else {
+      LevelActions.resetLevelsSolved();
+    }
     command.addWarning(
       intl.str('solved-map-reset')
     );
@@ -281,6 +299,8 @@ class Sandbox {
     // some exceptions to the rule
     var commandMap = {
       'reset solved': this.resetSolved,
+      'reset lessons': this.resetSolved,
+      'reset exercises': this.resetSolved,
       'help general': this.helpDialog,
       'help': this.helpDialog,
       'reset': this.reset,

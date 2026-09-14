@@ -204,6 +204,8 @@ var instantCommands = [
 
 var regexMap = {
   'reset solved': /^reset solved($|\s)/,
+  'reset lessons': /^reset lessons($|\s)/,
+  'reset exercises': /^reset exercises($|\s)/,
   'help': /^help( +general)?$|^\?$/,
   'reset': /^reset( +--forSolution)?$/,
   'delay': /^delay (\d+)$/,

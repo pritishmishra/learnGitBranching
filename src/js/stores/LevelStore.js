@@ -76,6 +76,19 @@ function removeFromAliasMap(alias) {
   localStorage.setItem(ALIAS_STORAGE_KEY, JSON.stringify(aliasMap));
 }
 
+function resetSolvedByTab(tab) {
+  Object.keys(_solvedMap).forEach(function(levelID) {
+    var level = _levelMap[levelID];
+    var levelTab = level &&
+      sequenceInfo[level.sequenceName] &&
+      sequenceInfo[level.sequenceName].tab;
+
+    if (levelTab === tab) {
+      delete _solvedMap[levelID];
+    }
+  });
+}
+
 var validateLevel = function(level) {
   level = level || {};
   var requiredFields = [
@@ -208,6 +221,11 @@ AppConstants.StoreSubscribePrototype,
     switch (action.type) {
       case ActionTypes.RESET_LEVELS_SOLVED:
         _solvedMap = {};
+        _syncToStorage();
+        shouldInform = true;
+        break;
+      case ActionTypes.RESET_LEVELS_SOLVED_BY_TAB:
+        resetSolvedByTab(action.tab);
         _syncToStorage();
         shouldInform = true;
         break;

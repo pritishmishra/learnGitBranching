@@ -3,14 +3,24 @@ var Visualization = require('../src/js/visuals/visualization').Visualization;
 var HeadlessGit = require('../src/js/git/headless').HeadlessGit;
 
 describe('reset solved command', function() {
-  it('resets the current controller after clearing solved state', function() {
+  function runResetCommand(input) {
     var command = {
+      error: null,
+      warnings: [],
       get: function(key) {
         if (key === 'regexResults') {
-          return { input: 'reset solved --confirm' };
+          return { input: input };
         }
       },
-      addWarning: function() {}
+      set: function(key, value) {
+        this[key] = value;
+      },
+      addWarning: function(warning) {
+        this.warnings.push(warning);
+      },
+      finishWith: function(deferredArg) {
+        this.finishedWith = deferredArg;
+      }
     };
     var deferred = {};
     var resetCommand = null;
@@ -23,8 +33,55 @@ describe('reset solved command', function() {
       }
     }, command, deferred);
 
-    expect(resetCommand).toBe(command);
-    expect(resetDeferred).toBe(deferred);
+    return {
+      command: command,
+      deferred: deferred,
+      resetCommand: resetCommand,
+      resetDeferred: resetDeferred
+    };
+  }
+
+  it('resets the current controller after clearing all solved state', function() {
+    var result = runResetCommand('reset solved --confirm');
+
+    expect(result.resetCommand).toBe(result.command);
+    expect(result.resetDeferred).toBe(result.deferred);
+  });
+
+  it('resets the current controller after clearing solved lessons', function() {
+    var result = runResetCommand('reset lessons --confirm');
+
+    expect(result.resetCommand).toBe(result.command);
+    expect(result.resetDeferred).toBe(result.deferred);
+  });
+
+  it('resets the current controller after clearing solved exercises', function() {
+    var result = runResetCommand('reset exercises --confirm');
+
+    expect(result.resetCommand).toBe(result.command);
+    expect(result.resetDeferred).toBe(result.deferred);
+  });
+
+  it('requires confirmation before resetting lessons', function() {
+    var result = runResetCommand('reset lessons');
+
+    expect(result.resetCommand).toBe(null);
+    expect(result.command.error.get('msg')).toBe(
+      'Reset solved will mark each lesson as not yet solved; because ' +
+      'this is a destructive command, please pass in --confirm to execute'
+    );
+    expect(result.command.finishedWith).toBe(result.deferred);
+  });
+
+  it('requires confirmation before resetting exercises', function() {
+    var result = runResetCommand('reset exercises');
+
+    expect(result.resetCommand).toBe(null);
+    expect(result.command.error.get('msg')).toBe(
+      'Reset solved will mark each exercise as not yet solved; because ' +
+      'this is a destructive command, please pass in --confirm to execute'
+    );
+    expect(result.command.finishedWith).toBe(result.deferred);
   });
 });
 

@@ -21,6 +21,7 @@ module.exports = {
   ActionTypes: keyMirror({
     SET_LEVEL_SOLVED: null,
     RESET_LEVELS_SOLVED: null,
+    RESET_LEVELS_SOLVED_BY_TAB: null,
     CHANGE_IS_ANIMATING: null,
     CHANGE_FLIP_TREE_Y: null,
     SUBMIT_COMMAND: null,
