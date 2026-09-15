@@ -1,6 +1,7 @@
 "use strict";
 
 var SCORE_SUBMISSION_URL = '/st/submit_score.py';
+var LESSON_DATA_SUBMISSION_URL = '/st/submit_lesson_data.py';
 
 function getCompletedScoreIds(levels, isLevelSolved) {
   return levels
@@ -12,8 +13,8 @@ function getCompletedScoreIds(levels, isLevelSolved) {
     });
 }
 
-function submitScore(fetchImpl, completed) {
-  return fetchImpl(SCORE_SUBMISSION_URL, {
+function submitCompleted(fetchImpl, url, completed) {
+  return fetchImpl(url, {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
@@ -47,6 +48,17 @@ function submitScore(fetchImpl, completed) {
     });
 }
 
+function submitScore(fetchImpl, completed) {
+  return submitCompleted(fetchImpl, SCORE_SUBMISSION_URL, completed);
+}
+
+function submitLessonData(fetchImpl, completed) {
+  return submitCompleted(fetchImpl, LESSON_DATA_SUBMISSION_URL, completed);
+}
+
 exports.SCORE_SUBMISSION_URL = SCORE_SUBMISSION_URL;
+exports.LESSON_DATA_SUBMISSION_URL = LESSON_DATA_SUBMISSION_URL;
 exports.getCompletedScoreIds = getCompletedScoreIds;
+exports.submitCompleted = submitCompleted;
 exports.submitScore = submitScore;
+exports.submitLessonData = submitLessonData;

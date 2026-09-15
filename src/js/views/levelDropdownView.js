@@ -26,7 +26,8 @@ class LevelDropdownView extends ContainedBase {
 
     this.template = _.template($('#level-dropdown-view').html());
     this.events = {
-      'click div.levelDropdownTab': 'onTabClick'
+      'click div.levelDropdownTab': 'onTabClick',
+      'click button.lessonSubmitButton': 'submitLessonData'
     };
 
     var queryParams = util.parseQueryString(
@@ -82,6 +83,7 @@ class LevelDropdownView extends ContainedBase {
 
     // Bind events manually
     this.$el.on('click', 'div.levelDropdownTab', this.onTabClick.bind(this));
+    this.$el.on('click', 'button.lessonSubmitButton', this.submitLessonData.bind(this));
 
     // Lol WTF. For some reason we can't use this.render.bind(this) so
     // instead setup a lame callback version. The CasperJS tests
@@ -378,6 +380,55 @@ class LevelDropdownView extends ContainedBase {
     }, this);
   }
 
+  getCompletedLessonIds() {
+    var levels = [];
+    this.sequences.forEach(function(sequenceName) {
+      if (LEVELS.getTabForSequence(sequenceName) !== 'lessons') {
+        return;
+      }
+      levels = levels.concat(LevelStore.getLevelsInSequence(sequenceName));
+    });
+
+    return ScoreSubmission.getCompletedScoreIds(
+      levels,
+      LevelStore.isLevelSolved
+    );
+  }
+
+  setLessonSubmitStatus(message, state) {
+    var $status = this.$('p.lessonSubmitStatus');
+    $status
+      .removeClass('success error pending')
+      .addClass(state || '')
+      .text(message || '');
+  }
+
+  submitLessonData(ev) {
+    if (ev && ev.preventDefault) {
+      ev.preventDefault();
+    }
+
+    var completed = this.getCompletedLessonIds();
+    var button = this.$('button.lessonSubmitButton');
+    button.prop('disabled', true);
+    this.setLessonSubmitStatus('Submitting...', 'pending');
+
+    ScoreSubmission.submitLessonData(fetch, completed)
+      .then(function(result) {
+        this.setLessonSubmitStatus(
+          'Submitted ' + result.count + ' completed lesson' +
+            (result.count === 1 ? '.' : 's.'),
+          'success'
+        );
+      }.bind(this))
+      .catch(function(error) {
+        this.setLessonSubmitStatus(error.message || 'Could not submit score', 'error');
+      }.bind(this))
+      .then(function() {
+        button.prop('disabled', false);
+      });
+  }
+
   buildSequences() {
     this.seriesViews = [];
     this.getSequencesOnTab().forEach(function(sequenceName) {
@@ -387,6 +438,15 @@ class LevelDropdownView extends ContainedBase {
         navEvents: this.navEvents
       }));
     }, this);
+
+    if (this.JSON.selectedTab === 'lessons') {
+      this.$el.append(
+        '<div class="lessonSubmitPanel box vertical center centerAlign">' +
+          '<button class="lessonSubmitButton" type="button">Submit Score</button>' +
+          '<p class="lessonSubmitStatus"></p>' +
+        '</div>'
+      );
+    }
   }
 }
 

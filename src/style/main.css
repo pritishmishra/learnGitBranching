@@ -962,13 +962,15 @@ span.exerciseLevelTitle {
   font-size: 0.9em;
 }
 
-div.exerciseSubmitPanel {
+div.exerciseSubmitPanel,
+div.lessonSubmitPanel {
   margin-top: 8px;
   padding-top: 10px;
   border-top: 1px dashed #555;
 }
 
-button.exerciseSubmitButton {
+button.exerciseSubmitButton,
+button.lessonSubmitButton {
   border: 1px solid #888;
   border-radius: 4px;
   background: #e6e6e6;
@@ -978,31 +980,37 @@ button.exerciseSubmitButton {
   padding: 7px 14px;
 }
 
-button.exerciseSubmitButton:hover {
+button.exerciseSubmitButton:hover,
+button.lessonSubmitButton:hover {
   background: #fff;
 }
 
-button.exerciseSubmitButton:disabled {
+button.exerciseSubmitButton:disabled,
+button.lessonSubmitButton:disabled {
   cursor: default;
   opacity: 0.55;
 }
 
-p.exerciseSubmitStatus {
+p.exerciseSubmitStatus,
+p.lessonSubmitStatus {
   min-height: 18px;
   margin: 6px 0 0;
   font-size: 0.75em;
   color: #CCC;
 }
 
-p.exerciseSubmitStatus.success {
+p.exerciseSubmitStatus.success,
+p.lessonSubmitStatus.success {
   color: #9BE57D;
 }
 
-p.exerciseSubmitStatus.error {
+p.exerciseSubmitStatus.error,
+p.lessonSubmitStatus.error {
   color: #FF9898;
 }
 
-p.exerciseSubmitStatus.pending {
+p.exerciseSubmitStatus.pending,
+p.lessonSubmitStatus.pending {
   color: #DDD;
 }
 

@@ -68,6 +68,38 @@ describe('Practice exercise score submission', function() {
       });
   });
 
+  it('submits completed lesson ids to the lesson data endpoint', function() {
+    var request;
+    var fetchImpl = function(url, options) {
+      request = {
+        url: url,
+        options: options
+      };
+      return response(true, {
+        count: 2,
+        completed: [
+          'local1',
+          'branchMerge1'
+        ]
+      });
+    };
+
+    return ScoreSubmission.submitLessonData(fetchImpl, [
+      'local1',
+      'branchMerge1'
+    ])
+      .then(function(result) {
+        expect(request.url).toBe('/st/submit_lesson_data.py');
+        expect(JSON.parse(request.options.body)).toEqual({
+          completed: [
+            'local1',
+            'branchMerge1'
+          ]
+        });
+        expect(result.count).toBe(2);
+      });
+  });
+
   it('submits completed exercise ids to the score endpoint', function() {
     var requestBody;
     var fetchImpl = function(url, options) {

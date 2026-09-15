@@ -18,7 +18,7 @@ The level picker now has two top-level tabs:
 
 - **Lessons**: the structured teaching path for students.
 - **Exercises**: standalone practice exercises based on common project
-  scenarios, used for course credit.
+scenarios, used for course credit.
 
 The application is English-only for CSC207. The original translation data is
 still present in the source tree from upstream, but the product no longer shows a
@@ -35,19 +35,16 @@ The current Lessons tab contains:
   - What Did I Change?
   - Checking The Commit History
   - Publishing Your Work
-
 - **Branching & Merging**
   - Git Branches
   - Publishing A Branch
   - Bringing Work Back Together
   - Merging With Diverging
-
 - **Correcting Mistakes**
   - Undo Local Changes
   - Undo Commits Safely
   - Selective Commit Reverts
   - Rewind Local History
-
 - **Working With A Team**
   - Download Without Changing
   - Sync Your Local Copy
@@ -93,25 +90,25 @@ Useful package scripts are defined in [package.json](package.json):
 - `yarn test:coverage`: run tests with coverage.
 
 Guided lesson validation tests live in
-[__tests__/lessons](__tests__/lessons).
+**[tests**/lessons](__tests__/lessons).
 They run each lesson's guided solution and check that the lesson reaches its
 goal state. The behavior covered by those tests is documented in
 [docs/lesson-tests.md](docs/lesson-tests.md).
 
 Practice exercise validation tests live in
-[__tests__/exercises](__tests__/exercises).
+**[tests**/exercises](__tests__/exercises).
 They run headless command sequences and check both successful completions and
 intentional failure cases. The behavior covered by those tests is documented in
 [docs/exercise-tests.md](docs/exercise-tests.md).
 
-Reset behavior is covered in [__tests__/resetSolved.spec.js](__tests__/resetSolved.spec.js).
+Reset behavior is covered in **[tests**/resetSolved.spec.js](__tests__/resetSolved.spec.js).
 Those tests check that `reset solved --confirm` resets the current level state
 and that level resets restore the intended starting file state.
 
 Exercise score submissions can be summarized with
 [scripts/score_report.py](scripts/score_report.py). By default it reads
-`/var/log/learnGitBranching/score_submissions.jsonl` and reports each student's
-best submission:
+`/var/log/learngit/submissions.jsonl` and reports each student's best
+submission:
 
 ```bash
 scripts/score_report.py
@@ -127,6 +124,25 @@ Use `-o` to write the CSV to a file:
 
 ```bash
 scripts/score_report.py -o scores.csv
+```
+
+Lesson data submissions are tracked separately for bookkeeping. The Lessons tab
+posts to `/st/submit_lesson_data.py`, which should write JSONL records to
+`/var/log/learngit/lesson_data.jsonl`. The endpoint source is versioned at
+[server/st/submit_lesson_data.py](server/st/submit_lesson_data.py).
+
+Install it on the VM with:
+
+```bash
+sudo chown www-data:www-data /var/www/html/st/submit_lesson_data.py
+sudo chown -R www-data:www-data /var/log/learngit
+sudo chmod 755 /var/www/html/st /var/www/html/st/submit_lesson_data.py
+```
+
+Summarize lesson data with [scripts/lesson_data_report.py](scripts/lesson_data_report.py):
+
+```bash
+scripts/lesson_data_report.py -o lesson-data.csv
 ```
 
 This is still a client-side JavaScript application. The main app behavior lives
@@ -175,44 +191,44 @@ Common fields used by this fork:
 - `goalTreeString`: graph required for completion.
 - `solutionCommand`: reference solution.
 - `requiredCommandPatterns`: ordered command regexes. Extra commands may appear
-  between required commands.
+between required commands.
 - `requiredAnyOrderCommandPatterns`: required command regexes that can appear in
-  any order.
+any order.
 - `requireCloneBeforeGitCommands`: makes `git clone` the only Git/worktree
-  command allowed until the repository has been cloned.
+command allowed until the repository has been cloned.
 - `requireStagedChanges`: makes `git commit` require staged file changes.
 - `requireStagedChangesForCompletion`: level passes only when something is
-  staged.
+staged.
 - `requireCleanWorkingTreeForCompletion`: level passes only when both staged and
-  unstaged changes are clean.
+unstaged changes are clean.
 - `initialWorkingDirectoryChanges`: seed local unstaged file changes at level
-  start.
+start.
 - `initialStagedChanges`: seed staged file changes at level start.
 - `initialGitConfig`: seed repository-local Git config, such as `user.name` and
-  `user.email`, when a level starts after identity setup has already been
-  completed.
+`user.email`, when a level starts after identity setup has already been
+completed.
 - `initialRepoLabel`: label the initial single-repository visualization before
-  commands such as `git clone` create the usual local/remote split.
+commands such as `git clone` create the usual local/remote split.
 - `expectedHeadFileChanges`: require the final `HEAD` commit to contain exactly
-  the listed file changes.
+the listed file changes.
 - `expectedWorkingDirectoryChanges`: require the final unstaged working
-  directory changes to match the listed file changes.
+directory changes to match the listed file changes.
 - `expectedStagedChanges`: require the final staging area to match the listed
-  file changes. Use `{}` to require an empty staging area.
+file changes. Use `{}` to require an empty staging area.
 - `mockConflictOnPull`: lesson-scoped teaching hook that makes `git pull`
-  fetch remote work, pause before the merge, and create a simulated conflict in
-  the configured file.
+fetch remote work, pause before the merge, and create a simulated conflict in
+the configured file.
 
 When adding a new level:
 
 1. Create a file under the appropriate directory in [src/levels](src/levels).
 2. Add it to the right sequence in [src/levels/index.js](src/levels/index.js).
 3. Add focused validation with `requiredCommandPatterns` when graph state alone
-   is not enough.
+  is not enough.
 4. Add or update exercise command-flow tests when changing standalone practice
-   exercises.
+  exercises.
 5. Run at least `git diff --check`; run the app/tests when Node and Yarn are
-   available.
+  available.
 
 ### Command Implementation
 
@@ -224,21 +240,21 @@ Git engine behavior is mostly in [src/js/git/index.js](src/js/git/index.js).
 Examples from this fork:
 
 - `touch <file>` and `rm <file>` are standalone commands used instead of the old
-  `git add-file` and `git delete-file` teaching commands.
+`git add-file` and `git delete-file` teaching commands.
 - `git diff`, `git diff --staged`, and `git diff --cached` inspect simulated
-  working-directory and staged changes.
+working-directory and staged changes.
 - `git restore <file>` discards an unstaged local change.
 - `git restore --staged <file>` and `git unstage <file>` move a staged change
-  back to the working directory.
+back to the working directory.
 - `git resolve-conflict <file>` is a simulator-only teaching command. It marks a
-  mocked merge conflict as resolved so the student can stage and commit the
-  merge in conflict-focused lessons.
+mocked merge conflict as resolved so the student can stage and commit the
+merge in conflict-focused lessons.
 - `git reset --soft <target>` rewinds the branch and keeps rewound changes
-  staged.
+staged.
 - `git reset --hard <target>` rewinds the branch and discards staged/unstaged
-  local changes.
+local changes.
 - `git push -u origin <branch>` is supported for publishing a branch and setting
-  upstream tracking.
+upstream tracking.
 - `git push --force` and `git push -f` are supported for force-push lessons.
 
 ### Hidden Commands And Autocomplete
@@ -260,21 +276,21 @@ Autocomplete filtering is wired through
 Notable fork-specific UI behavior:
 
 - The browser title, terminal title, and launch dialog are branded as
-  **CSC207 - Git Learning**.
+**CSC207 - Git Learning**.
 - The level picker uses **Lessons** and **Exercises** tabs.
 - The language selector and `locale` terminal commands are disabled; this fork
-  supports English only.
+supports English only.
 - The Exercises tab renders practice placeholders as one exercise per row with
-  numbered buttons.
+numbered buttons.
 - Practice exercise opening screens list the relevant lessons that prepare
-  students for the scenario.
+students for the scenario.
 - The success dialog was simplified and no longer shows command-count
-  calculations.
+calculations.
 - Practice exercises do not show hints automatically and do not allow the
-  explicit `hint` command.
+explicit `hint` command.
 - Practice exercises do not show or allow the `show solution` option.
 - The welcome and early lesson text introduce the terminal, commit graph,
-  commits, remotes, and branches before relying on those terms.
+commits, remotes, and branches before relying on those terms.
 - The local/remote visualization can label the two repository views.
 - Some promotional links and old external links were removed from the page.
 
@@ -284,10 +300,10 @@ The repository includes deployment helper scripts for the static Apache-hosted
 app:
 
 - [rebuildProductionWebsite.sh](rebuildProductionWebsite.sh): rebuilds the app
-  and replaces the static production files under `/var/www/html` while preserving
-  server-managed directories and permissions such as `/var/www/html/st`.
+and replaces the static production files under `/var/www/html` while preserving
+server-managed directories and permissions such as `/var/www/html/st`.
 - [rebuildDevWebsite.sh](rebuildDevWebsite.sh): rebuilds the app and publishes
-  a separate dev copy, defaulting to `/var/www/learngit-dev` on port `8080`.
+a separate dev copy, defaulting to `/var/www/learngit-dev` on port `8080`.
 - [apache.sh](apache.sh): compatibility wrapper for production deploys.
 - [nginx.sh](nginx.sh): older nginx-oriented helper retained for reference.
 

@@ -30,6 +30,10 @@ defined by that lesson.
 The suite also checks that the practice exercises are not included in the
 lesson-only run.
 
+The suite checks the lesson data submission hook used by the Lessons tab. It
+verifies that the tab keeps a `Submit Score` button and that completed lesson
+IDs are posted to the separate lesson data endpoint.
+
 For lessons that intentionally allow more than one natural workflow, the suite
 includes those variants directly. For example, `Sync Your Local Copy` passes
 with `git pull`, with `git fetch` followed by `git merge o/main`, and when the
