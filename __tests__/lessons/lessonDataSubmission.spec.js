@@ -2,11 +2,16 @@ var fs = require('fs');
 var ScoreSubmission = require('../../src/js/util/scoreSubmission');
 
 describe('Lesson data submission', function() {
-  it('keeps the submit score button hook on the lessons panel', function() {
+  it('keeps the lesson progress button hook and disclaimer on the lessons panel', function() {
     var view = fs.readFileSync('./src/js/views/levelDropdownView.js', 'utf8');
 
     expect(view).toContain('lessonSubmitButton');
-    expect(view).toContain('Submit Score');
+    expect(view).toContain('Log Lesson Progress');
+    expect(view).toContain('This is for Course Diagnostics; not for course credit');
+    var panelMarkup = view.slice(view.indexOf('<div class="lessonSubmitPanel'));
+    expect(panelMarkup.indexOf('lessonSubmitDisclaimer')).toBeLessThan(
+      panelMarkup.indexOf('lessonSubmitStatus')
+    );
   });
 
   it('submits completed lesson ids to a separate endpoint', function() {

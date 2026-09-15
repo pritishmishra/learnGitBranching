@@ -31,8 +31,9 @@ The suite also checks that the practice exercises are not included in the
 lesson-only run.
 
 The suite checks the lesson data submission hook used by the Lessons tab. It
-verifies that the tab keeps a `Submit Score` button and that completed lesson
-IDs are posted to the separate lesson data endpoint.
+verifies that the tab keeps a `Log Lesson Progress` button, shows the
+diagnostic-use disclaimer before the status message, and posts completed lesson
+IDs to the separate lesson data endpoint.
 
 For lessons that intentionally allow more than one natural workflow, the suite
 includes those variants directly. For example, `Sync Your Local Copy` passes

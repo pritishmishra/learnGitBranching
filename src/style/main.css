@@ -991,6 +991,12 @@ button.lessonSubmitButton:disabled {
   opacity: 0.55;
 }
 
+p.lessonSubmitDisclaimer {
+  margin: 6px 0 0;
+  font-size: 0.72em;
+  color: #AAA;
+}
+
 p.exerciseSubmitStatus,
 p.lessonSubmitStatus {
   min-height: 18px;

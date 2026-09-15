@@ -442,7 +442,8 @@ class LevelDropdownView extends ContainedBase {
     if (this.JSON.selectedTab === 'lessons') {
       this.$el.append(
         '<div class="lessonSubmitPanel box vertical center centerAlign">' +
-          '<button class="lessonSubmitButton" type="button">Submit Score</button>' +
+          '<button class="lessonSubmitButton" type="button">Log Lesson Progress</button>' +
+          '<p class="lessonSubmitDisclaimer">This is for Course Diagnostics; not for course credit</p>' +
           '<p class="lessonSubmitStatus"></p>' +
         '</div>'
       );
