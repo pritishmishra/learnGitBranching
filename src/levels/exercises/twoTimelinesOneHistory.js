@@ -138,12 +138,12 @@ exports.level = {
     "user.email": "student@example.com"
   },
   "hint": {
-    "en_US": "Create and switch branches in one step with git checkout -b. Make sure you are back on main before creating the hotfix and before merging."
+    "en_US": "Create and switch branches in one step with git checkout -b, or use git branch followed by git checkout. Make sure you are back on main before creating the hotfix and before merging."
   },
   "requireStagedChanges": true,
   "requireCleanWorkingTreeForCompletion": true,
   "requiredCommandPatterns": [
-    "^git +checkout +-b +feature-profile *$",
+    "^git +(checkout +-b|branch) +feature-profile *$",
     "^touch +\\S+ *$",
     "^git +add +\\S+ *$",
     "^git +commit +.*-m +(?!['\"]{2})(['\"][^'\"]+['\"]|\\S.*)$",

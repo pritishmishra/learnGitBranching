@@ -223,6 +223,24 @@ describe('Practice exercise validation', function() {
     );
   });
 
+  it('solves exercise 2 when the feature branch is created and checked out in two steps', function() {
+    return base.expectLevelCommandsToSolve(
+      getExercise(2),
+      [
+        'git branch feature-profile',
+        'git checkout feature-profile',
+        'touch profile.txt',
+        'git add profile.txt',
+        'git commit -m "Add profile"',
+        'git checkout main',
+        'touch hotfix.txt',
+        'git add hotfix.txt',
+        'git commit -m "Add hotfix"',
+        'git merge feature-profile'
+      ].join(';')
+    );
+  });
+
   it('does not solve exercise 2 when profile.txt is committed on main', function() {
     return base.expectLevelCommandsNotToSolve(
       getExercise(2),
