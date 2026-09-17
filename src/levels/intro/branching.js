@@ -108,7 +108,8 @@ exports.level = {
             "afterMarkdowns": [
               "There we go! Git switched to `newImage`, then recorded the new commit on that branch."
             ],
-            "command": "git checkout newImage; git commit",
+            "command": "git checkout newImage; git commit -m 'Update image'",
+            "buttonCommand": "git checkout newImage; git commit",
             "beforeCommand": "git branch newImage"
           }
         },

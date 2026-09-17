@@ -75,6 +75,16 @@ var getFirstDemoOptions = function(levelBlob) {
   return demo && demo.options;
 };
 
+var getDemoOptions = function(levelBlob) {
+  return levelBlob.startDialog.en_US.childViews
+    .filter(function(view) {
+      return view.type === 'GitDemonstrationView';
+    })
+    .map(function(view) {
+      return view.options;
+    });
+};
+
 var expectLevelResetToRestoreLessonStart = function(levelBlob) {
   return base.runLevelCommands(levelBlob, solutionWithPrerequisites(levelBlob))
     .then(function(result) {
@@ -397,6 +407,25 @@ describe('Lesson section validation', function() {
         expect(branches['o/feature'].target).toBe('C3');
         expect(originBranches.feature.target).toBe('C3');
       });
+  });
+
+  it('creates a commit on newImage in the second "Git Branches" demo', function() {
+    var demoOptions = getDemoOptions(getLessonByName('Git Branches'))[1];
+
+    expect(demoOptions.buttonCommand).toBe('git checkout newImage; git commit');
+
+    return runCommands(
+      IDENTITY_SETUP + ';' + demoOptions.beforeCommand + ';' + demoOptions.command
+    ).then(function(result) {
+      var tree = result.headless.gitEngine.exportTree();
+      var newImageTarget = tree.branches.newImage.target;
+
+      expect(tree.HEAD.target).toBe('newImage');
+      expect(newImageTarget).not.toBe(tree.branches.main.target);
+      expect(tree.commits[newImageTarget].parents).toEqual([
+        tree.branches.main.target
+      ]);
+    });
   });
 
   it('solves "Pick The Good Parts" with separate cherry-pick commands', function() {

@@ -47,6 +47,9 @@ conflict markers into `shared.txt`, that the local and teammate lines are both
 visible, and that the lesson can still be completed without running optional
 `git diff` inspection commands.
 
+For `Git Branches`, the suite runs the second interactive demo and checks that
+it switches to `newImage` and creates a new commit on that branch.
+
 ## Difference From Exercise Tests
 
 Lesson tests validate the guided teaching path. They answer: does each lesson's
