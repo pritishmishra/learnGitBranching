@@ -241,6 +241,41 @@ describe('Practice exercise validation', function() {
     );
   });
 
+  it('solves exercise 2 when git switch -c creates and switches to the feature branch', function() {
+    return base.expectLevelCommandsToSolve(
+      getExercise(2),
+      [
+        'git switch -c feature-profile',
+        'touch profile.txt',
+        'git add profile.txt',
+        'git commit -m "Add profile"',
+        'git switch main',
+        'touch hotfix.txt',
+        'git add hotfix.txt',
+        'git commit -m "Add hotfix"',
+        'git merge feature-profile'
+      ].join(';')
+    );
+  });
+
+  it('solves exercise 2 when git branch and git switch are used separately', function() {
+    return base.expectLevelCommandsToSolve(
+      getExercise(2),
+      [
+        'git branch feature-profile',
+        'git switch feature-profile',
+        'touch profile.txt',
+        'git add profile.txt',
+        'git commit -m "Add profile"',
+        'git switch main',
+        'touch hotfix.txt',
+        'git add hotfix.txt',
+        'git commit -m "Add hotfix"',
+        'git merge feature-profile'
+      ].join(';')
+    );
+  });
+
   it('does not solve exercise 2 when profile.txt is committed on main', function() {
     return base.expectLevelCommandsNotToSolve(
       getExercise(2),

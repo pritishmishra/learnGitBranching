@@ -52,6 +52,10 @@ This test checks that the exercise passes when the student creates
 `feature-profile`, commits `profile.txt` on that branch, returns to `main`,
 commits `hotfix.txt`, and merges `feature-profile` back into `main`.
 
+This test also checks that the student may create and switch to the feature
+branch with `git checkout -b` or `git switch -c`, or create it with `git branch`
+and then switch with either `git checkout` or `git switch`.
+
 This test also checks that the exercise passes when the student uses different
 filenames for the feature and hotfix commits.
 
