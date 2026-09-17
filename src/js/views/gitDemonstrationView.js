@@ -258,11 +258,11 @@ class GitDemonstrationView extends ContainedBase {
       noKeyboardInput: true,
       noClick: true,
       smallCanvas: true,
-      zIndex: -1
-    });
-    this.mainVis.gitEngine.applyDefaultConfigState({
-      'user.name': 'CSC207 Staff',
-      'user.email': 'csc207@example.com'
+      zIndex: -1,
+      initialGitConfig: {
+        'user.name': 'CSC207 Staff',
+        'user.email': 'csc207@example.com'
+      }
     });
     this.mainVis.customEvents.on('paperReady', function() {
       this.visFinished = true;
