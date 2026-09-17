@@ -17,7 +17,7 @@ fi
 cd "$APP_DIR"
 
 nvm use 14.20.0
-yarn gulp fastBuild
+yarn gulp productionBuild
 
 sudo mkdir -p "$WEB_DIR"
 sudo rm -rf "$WEB_DIR/index.html" "$WEB_DIR/build" "$WEB_DIR/assets"

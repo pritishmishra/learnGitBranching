@@ -123,7 +123,7 @@ var buildIndex = function(done) {
 var getBundle = function() {
   return browserify({
     entries: [...glob.sync('src/**/*.js'), ...glob.sync('src/**/*.jsx')],
-    debug: true,
+    debug: process.env.NODE_ENV !== 'production',
   })
   .transform(babelify, { presets: ['@babel/preset-react'] })
   .bundle()
@@ -289,6 +289,14 @@ var generateLevelDocs = function(done) {
 
 var fastBuild = series(clean, ifyBuild, style, buildIndex, jshint);
 
+var productionBuild = series(
+  clean,
+  miniBuild,
+  style,
+  buildIndex,
+  jshint
+);
+
 var build = series(
   clean,
   miniBuild, style, buildIndex,
@@ -323,6 +331,7 @@ module.exports = {
   default: build,
   lint,
   fastBuild,
+  productionBuild,
   watching,
   build,
   test: jasmine,
